@@ -7,7 +7,7 @@ public static class PrototypeArenaSetupTool
     private const string PrefabFolder = "Assets/_Project/Prefabs";
     private const string SquareSpritePath = PrefabFolder + "/TKCC_Generated_SquareSprite.asset";
     private const string ProjectilePrefabPath = PrefabFolder + "/TKCC_Generated_Projectile.prefab";
-    private const string EnemyPrefabPath = PrefabFolder + "/TKCC_Generated_Enemy.prefab";
+    private const string EnemyDataPath = PrefabFolder + "/TKCC_DefaultEnemyData.asset";
 
     [MenuItem("Tools/TKCC/Create Prototype Arena")]
     public static void CreatePrototypeArena()
@@ -16,12 +16,11 @@ public static class PrototypeArenaSetupTool
 
         Sprite squareSprite = GetOrCreateSquareSprite();
         Projectile2D projectilePrefab = CreateOrUpdateProjectilePrefab(squareSprite);
-        EnemyChaseAI2D enemyPrefab = CreateOrUpdateEnemyPrefab(squareSprite);
 
         Camera mainCamera = CreateOrUpdateMainCamera();
         GameObject arena = CreateOrUpdateArena(squareSprite);
         GameObject player = CreateOrUpdatePlayer(squareSprite, mainCamera, projectilePrefab);
-        GameObject spawner = CreateOrUpdateSpawner(enemyPrefab, player.transform);
+        GameObject spawner = CreateOrUpdateSpawner(player.transform);
 
         Selection.objects = new Object[] { player, spawner, arena };
         EditorUtility.SetDirty(player);
@@ -101,29 +100,29 @@ public static class PrototypeArenaSetupTool
         return prefab.GetComponent<Projectile2D>();
     }
 
-    private static EnemyChaseAI2D CreateOrUpdateEnemyPrefab(Sprite sprite)
+    private static EnemyData CreateOrUpdateEnemyData(Sprite sprite)
     {
-        GameObject enemyObject = new GameObject("TKCC_Generated_Enemy");
+        EnemyData existing = AssetDatabase.LoadAssetAtPath<EnemyData>(EnemyDataPath);
+        if (existing != null)
+        {
+            return existing;
+        }
 
-        SpriteRenderer renderer = enemyObject.AddComponent<SpriteRenderer>();
-        renderer.sprite = sprite;
-        renderer.color = new Color(0.9f, 0.2f, 0.2f);
-        enemyObject.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+        EnemyData data = ScriptableObject.CreateInstance<EnemyData>();
+        data.name = "TKCC_DefaultEnemyData";
+        AssetDatabase.CreateAsset(data, EnemyDataPath);
+        AssetDatabase.SaveAssets();
 
-        Rigidbody2D body = enemyObject.AddComponent<Rigidbody2D>();
-        body.gravityScale = 0f;
-        body.freezeRotation = true;
+        SerializedObject serializedData = new SerializedObject(data);
+        serializedData.FindProperty("sprite").objectReferenceValue = sprite;
+        serializedData.FindProperty("classification").enumValueIndex = (int)EnemyClassification.Triangle;
+        serializedData.FindProperty("maxHealth").floatValue = 3f;
+        serializedData.FindProperty("moveSpeed").floatValue = 3f;
+        serializedData.FindProperty("contactDamage").floatValue = 1f;
+        serializedData.FindProperty("colorTint").colorValue = new Color(0.9f, 0.2f, 0.2f);
+        serializedData.ApplyModifiedProperties();
 
-        CircleCollider2D collider = enemyObject.AddComponent<CircleCollider2D>();
-        collider.radius = 0.5f;
-
-        enemyObject.AddComponent<SimpleHealth>();
-        enemyObject.AddComponent<EnemyChaseAI2D>();
-
-        GameObject prefab = PrefabUtility.SaveAsPrefabAsset(enemyObject, EnemyPrefabPath);
-        Object.DestroyImmediate(enemyObject);
-
-        return prefab.GetComponent<EnemyChaseAI2D>();
+        return data;
     }
 
     private static Camera CreateOrUpdateMainCamera()
@@ -254,7 +253,7 @@ public static class PrototypeArenaSetupTool
         return player;
     }
 
-    private static GameObject CreateOrUpdateSpawner(EnemyChaseAI2D enemyPrefab, Transform player)
+    private static GameObject CreateOrUpdateSpawner(Transform player)
     {
         GameObject spawner = GetOrCreateGeneratedObject("EnemySpawner", "Create Enemy Spawner");
         Undo.RecordObject(spawner.transform, "Configure Enemy Spawner");
@@ -266,8 +265,12 @@ public static class PrototypeArenaSetupTool
             enemySpawner = Undo.AddComponent<EnemySpawner>(spawner);
         }
 
+        Sprite squareSprite = AssetDatabase.LoadAssetAtPath<Sprite>(SquareSpritePath);
+        EnemyData enemyData = CreateOrUpdateEnemyData(squareSprite);
+
         SerializedObject spawnerObject = new SerializedObject(enemySpawner);
-        spawnerObject.FindProperty("enemyPrefab").objectReferenceValue = enemyPrefab;
+        spawnerObject.FindProperty("enemyTypes").arraySize = 1;
+        spawnerObject.FindProperty("enemyTypes").GetArrayElementAtIndex(0).objectReferenceValue = enemyData;
         spawnerObject.FindProperty("player").objectReferenceValue = player;
         spawnerObject.FindProperty("spawnInterval").floatValue = 1.5f;
         spawnerObject.FindProperty("maxAliveEnemies").intValue = 8;

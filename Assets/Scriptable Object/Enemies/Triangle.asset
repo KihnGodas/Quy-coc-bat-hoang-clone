@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b5794bb3d49ad14dbc374fc2cd8154e, type: 3}
+  m_Name: Triangle
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  sprite: {fileID: 7482667652216324306, guid: b699b156921de984995a94c27f1093e2, type: 3}
+  classification: 1
+  maxHealth: 5
+  moveSpeed: 3
+  contactDamage: 1
+  scoreValue: 10
+  colorTint: {r: 0.7830189, g: 0.09972411, b: 0.09972411, a: 1}

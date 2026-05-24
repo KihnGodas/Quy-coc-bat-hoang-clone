@@ -13,6 +13,12 @@ public sealed class SimpleHealth : MonoBehaviour
         CurrentHealth = maxHealth;
     }
 
+    public void SetMaxHealth(float value)
+    {
+        maxHealth = Mathf.Max(1f, value);
+        CurrentHealth = maxHealth;
+    }
+
     public void TakeDamage(float damage)
     {
         if (IsDead || damage <= 0f)

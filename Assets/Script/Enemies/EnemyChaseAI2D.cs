@@ -9,6 +9,11 @@ public sealed class EnemyChaseAI2D : MonoBehaviour
 
     private Rigidbody2D body;
 
+    public void SetMoveSpeed(float speed)
+    {
+        moveSpeed = speed;
+    }
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
