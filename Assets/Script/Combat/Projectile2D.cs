@@ -72,7 +72,7 @@ public sealed class Projectile2D : MonoBehaviour
         SimpleHealth health = other.GetComponentInParent<SimpleHealth>();
         if (health != null)
         {
-            health.TakeDamage(damage);
+            health.TakeDamage(damage, moveDirection);
         }
         else
         {

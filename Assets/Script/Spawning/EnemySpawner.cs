@@ -20,7 +20,7 @@ public sealed class EnemySpawner : MonoBehaviour
     [SerializeField, Min(0f)] private float wallPadding = 0.5f;
 
     private float nextSpawnTime;
-    private readonly List<EnemyChaseAI2D> spawnedEnemies = new();
+    private readonly List<EnemyChaseAI2D> spawnedEnemies = new List<EnemyChaseAI2D>();
 
     private void Start()
     {
@@ -133,7 +133,7 @@ public sealed class EnemySpawner : MonoBehaviour
     private Vector2 GetRandomPointOnArenaEdge(float minX, float maxX, float minY, float maxY)
     {
         float safePadding = Mathf.Max(edgeSpawnPadding, 0f);
-        float edge = Random.Range(0, 4);
+        int edge = Random.Range(0, 4);
 
         if (edge == 0)
         {
@@ -223,7 +223,7 @@ public sealed class EnemySpawner : MonoBehaviour
             return;
         }
 
-        PlayerMovement2D playerMovement = FindFirstObjectByType<PlayerMovement2D>();
+        PlayerMovement2D playerMovement = FindPlayerMovementInScene();
         if (playerMovement != null)
         {
             player = playerMovement.transform;
@@ -252,8 +252,8 @@ public sealed class EnemySpawner : MonoBehaviour
 
         if (TryGetWallBounds(out float minX, out float maxX, out float minY, out float maxY))
         {
-            Vector3 boundsCenter = new((minX + maxX) * 0.5f, (minY + maxY) * 0.5f, 0f);
-            Vector3 boundsSize = new(maxX - minX, maxY - minY, 0f);
+            Vector3 boundsCenter = new Vector3((minX + maxX) * 0.5f, (minY + maxY) * 0.5f, 0f);
+            Vector3 boundsSize = new Vector3(maxX - minX, maxY - minY, 0f);
 
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireCube(boundsCenter, boundsSize);
@@ -261,7 +261,7 @@ public sealed class EnemySpawner : MonoBehaviour
             if (spawnFromArenaEdges)
             {
                 Vector3 edgeBoundsCenter = boundsCenter;
-                Vector3 edgeBoundsSize = new(
+                Vector3 edgeBoundsSize = new Vector3(
                     Mathf.Max(boundsSize.x - edgeSpawnPadding * 2f, 0f),
                     Mathf.Max(boundsSize.y - edgeSpawnPadding * 2f, 0f),
                     0f);
@@ -270,5 +270,14 @@ public sealed class EnemySpawner : MonoBehaviour
                 Gizmos.DrawWireCube(edgeBoundsCenter, edgeBoundsSize);
             }
         }
+    }
+
+    private static PlayerMovement2D FindPlayerMovementInScene()
+    {
+#if UNITY_2023_1_OR_NEWER
+        return FindFirstObjectByType<PlayerMovement2D>();
+#else
+        return FindObjectOfType<PlayerMovement2D>();
+#endif
     }
 }

@@ -8,6 +8,7 @@ public sealed class PlayerCombat2D : MonoBehaviour
     [SerializeField, Min(0.01f)] private float basicFireCooldown = 0.25f;
     [SerializeField] private Projectile2D skillProjectilePrefab;
     [SerializeField, Min(0.01f)] private float skillCooldown = 3f;
+    [SerializeField] private MuzzleFlash2D muzzleFlash;
 
     private float nextBasicFireTime;
     private float nextSkillTime;
@@ -24,6 +25,11 @@ public sealed class PlayerCombat2D : MonoBehaviour
         if (playerAim == null)
         {
             playerAim = GetComponent<PlayerAim2D>();
+        }
+
+        if (muzzleFlash == null)
+        {
+            muzzleFlash = GetComponent<MuzzleFlash2D>();
         }
     }
 
@@ -74,6 +80,11 @@ public sealed class PlayerCombat2D : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(0f, 0f, angle);
         Projectile2D projectile = Instantiate(projectilePrefab, spawnPoint.position, rotation);
         projectile.Launch(shootDirection, transform.root);
+
+        if (muzzleFlash != null)
+        {
+            muzzleFlash.PlayFlash(spawnPoint, shootDirection);
+        }
     }
 
     private Vector2 GetShootDirection()
