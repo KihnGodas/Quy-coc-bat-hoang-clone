@@ -10,6 +10,7 @@ public sealed class EnemySpawner : MonoBehaviour
     [SerializeField, Min(0.1f)] private float spawnRadius = 8f;
     [SerializeField, Min(0f)] private float minDistanceFromPlayer = 2f;
     [SerializeField] private bool spawnAroundPlayer = true;
+    public bool isSpawning = true;
 
     private float nextSpawnTime;
     private readonly List<Enemy> spawnedEnemies = new();
@@ -22,6 +23,8 @@ public sealed class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
+        if (!isSpawning) return;
+
         FindPlayerIfNeeded();
 
         if (Time.time < nextSpawnTime)

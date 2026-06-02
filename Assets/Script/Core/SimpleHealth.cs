@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public sealed class SimpleHealth : MonoBehaviour
 {
@@ -6,7 +7,11 @@ public sealed class SimpleHealth : MonoBehaviour
     [SerializeField] private bool destroyOnDeath = true;
 
     public float CurrentHealth { get; private set; }
+    public float MaxHealth => maxHealth;
+    public float HealthPercent => CurrentHealth / maxHealth;
     public bool IsDead => CurrentHealth <= 0f;
+
+    public UnityEvent OnDeath = new UnityEvent();
 
     private void Awake()
     {
@@ -36,6 +41,7 @@ public sealed class SimpleHealth : MonoBehaviour
 
     private void Die()
     {
+        OnDeath.Invoke();
         if (destroyOnDeath)
         {
             Destroy(gameObject);
