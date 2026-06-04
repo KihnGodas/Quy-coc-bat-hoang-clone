@@ -61,3 +61,5 @@ MonoBehaviour:
   rootDuration: 1
   rootRadius: 1.5
   rootDamage: 0
+  rootTrapDamageMultiplier: 0.5
+  experienceReward: 1

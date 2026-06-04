@@ -9,20 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a30f7b45c9d1423abf7c1f69b7e3cb74, type: 3}
-  m_Name: EnemyData_UngYeu
+  m_Script: {fileID: 11500000, guid: eb214320c7a6b614e8cf2376126fd81c, type: 3}
+  m_Name: EnemyData_DaiLang
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Ung Yeu
-  enemyRole: 6
-  maxHP: 70
-  damage: 11
-  moveSpeed: 9.2
-  attackRange: 9
+  enemyName: Enemy
+  enemyRole: 0
+  maxHP: 100
+  damage: 10
+  moveSpeed: 5
+  attackRange: 1.1
   attackCooldown: 1
   rotateToMoveDirection: 0
   arenaPadding: 0.35
-  visualColor: {r: 0.05, g: 0.38, b: 1, a: 1}
-  visualScale: {x: 0.6, y: 0.9}
+  visualColor: {r: 1, g: 1, b: 1, a: 1}
+  visualScale: {x: 1, y: 1}
   colliderSize: {x: 1, y: 1}
   colliderOffset: {x: 0, y: 0}
   lowHealthThreshold: 0.5
@@ -36,18 +36,18 @@ MonoBehaviour:
   chargeDistance: 6
   chargeSpeed: 18
   chargeDamageMultiplier: 1.5
-  projectilePrefab: {fileID: 3328599918361081148, guid: 6b22e13a84708e94f9bdf42deee13f28, type: 3}
-  projectileRange: 9
-  projectileRetreatRange: 5
-  projectileResumeRange: 7
-  projectileDamage: 11
-  projectileSpeed: 11
-  projectileLifetime: 0.82
-  projectileCooldown: 3
-  projectileSpawnOffset: 0.65
-  projectileChargeTime: 2.5
-  projectileFlashTime: 0.5
-  projectilePiercing: 1
+  projectilePrefab: {fileID: 0}
+  projectileRange: 8
+  projectileRetreatRange: 0
+  projectileResumeRange: 0
+  projectileDamage: 20
+  projectileSpeed: 9
+  projectileLifetime: 2
+  projectileCooldown: 4
+  projectileSpawnOffset: 0.75
+  projectileChargeTime: 0
+  projectileFlashTime: 0
+  projectilePiercing: 0
   projectilePoisonDuration: 0
   projectilePoisonTickDamage: 0
   projectilePoisonTickInterval: 1
@@ -61,3 +61,5 @@ MonoBehaviour:
   rootDuration: 1
   rootRadius: 1.5
   rootDamage: 0
+  rootTrapDamageMultiplier: 0.5
+  experienceReward: 1

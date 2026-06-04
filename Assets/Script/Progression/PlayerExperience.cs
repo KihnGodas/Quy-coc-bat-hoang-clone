@@ -34,10 +34,14 @@ public sealed class PlayerExperience : MonoBehaviour
     {
         if (amount <= 0f)
         {
+            Debug.LogWarning("LỖI: Quả cầu EXP không có giá trị (amount <= 0)!");
             return;
         }
 
         currentExperience += amount;
+
+        Debug.Log($"Nhân vật vừa nhận {amount} EXP! Tổng EXP hiện tại: {currentExperience} / {ExperienceToNextLevel}");
+
         bool leveledUp = false;
 
         while (currentExperience >= ExperienceToNextLevel)

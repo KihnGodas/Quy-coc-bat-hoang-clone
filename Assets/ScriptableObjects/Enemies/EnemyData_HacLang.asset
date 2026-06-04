@@ -9,20 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a30f7b45c9d1423abf7c1f69b7e3cb74, type: 3}
-  m_Name: EnemyData_KhoiLang
+  m_Script: {fileID: 11500000, guid: eb214320c7a6b614e8cf2376126fd81c, type: 3}
+  m_Name: EnemyData_HacLang
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Khoi Lang
+  enemyName: Enemy
   enemyRole: 0
   maxHP: 100
   damage: 10
-  moveSpeed: 8.5
-  attackRange: 1
+  moveSpeed: 5
+  attackRange: 1.1
   attackCooldown: 1
   rotateToMoveDirection: 0
   arenaPadding: 0.35
-  visualColor: {r: 1, g: 0.08, b: 0.08, a: 1}
-  visualScale: {x: 1, y: 0.7}
+  visualColor: {r: 1, g: 1, b: 1, a: 1}
+  visualScale: {x: 1, y: 1}
   colliderSize: {x: 1, y: 1}
   colliderOffset: {x: 0, y: 0}
   lowHealthThreshold: 0.5
@@ -36,7 +36,7 @@ MonoBehaviour:
   chargeDistance: 6
   chargeSpeed: 18
   chargeDamageMultiplier: 1.5
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 3328599918361081148, guid: 8f16f393fb9a30b4abf44207c7ce8bc9, type: 3}
   projectileRange: 8
   projectileRetreatRange: 0
   projectileResumeRange: 0
@@ -61,3 +61,5 @@ MonoBehaviour:
   rootDuration: 1
   rootRadius: 1.5
   rootDamage: 0
+  rootTrapDamageMultiplier: 0.5
+  experienceReward: 2

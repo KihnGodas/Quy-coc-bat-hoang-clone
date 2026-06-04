@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a30f7b45c9d1423abf7c1f69b7e3cb74, type: 3}
-  m_Name: EnemyData_HacLang
+  m_Name: EnemyData_ThietTru
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Hac Lang
-  enemyRole: 1
-  maxHP: 160
-  damage: 11.5
-  moveSpeed: 9.5
+  enemyName: Thiet Tru
+  enemyRole: 3
+  maxHP: 200
+  damage: 11
+  moveSpeed: 6.8
   attackRange: 1
-  attackCooldown: 0.95
+  attackCooldown: 1.1
   rotateToMoveDirection: 0
-  arenaPadding: 0.35
-  visualColor: {r: 0.02, g: 0.02, b: 0.04, a: 1}
-  visualScale: {x: 1.15, y: 0.805}
+  arenaPadding: 0.45
+  visualColor: {r: 0.55, g: 0.62, b: 0.68, a: 1}
+  visualScale: {x: 0.85, y: 0.7}
   colliderSize: {x: 1, y: 1}
   colliderOffset: {x: 0, y: 0}
-  lowHealthThreshold: 0.6
-  lowHealthMoveSpeedMultiplier: 1.24
+  lowHealthThreshold: 0.5
+  lowHealthMoveSpeedMultiplier: 1
   lowHealthDamageMultiplier: 1
   lowHealthAttackRateMultiplier: 1
   lowHealthMaxHealthMultiplier: 1
@@ -61,3 +61,5 @@ MonoBehaviour:
   rootDuration: 1
   rootRadius: 1.5
   rootDamage: 0
+  rootTrapDamageMultiplier: 0.5
+  experienceReward: 3

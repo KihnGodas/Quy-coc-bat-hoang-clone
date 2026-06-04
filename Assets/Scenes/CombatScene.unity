@@ -164,7 +164,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17ff9a25f6937fa47bf0b52db78d991e, type: 3}
+  m_Script: {fileID: 11500000, guid: 898d1a551da347941a2622d895e35d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   enemyPrefab: {fileID: 848361170983661050, guid: df31fc83800c0134f81dd2a176e08e77, type: 3}
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c4a2d2f81e34812a41d2e8939b8a601, type: 3}
+  m_Script: {fileID: 11500000, guid: e8e69c073051f6b46b34c0b8a59da38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatHUD2D
   playerHealth: {fileID: 300008}
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c50bb45477d4f5fa4960a0479fe0121, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b757b83654b3c94a80f41dae5322a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatBootstrap
   arenaBounds: {fileID: 500002}
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e7a38ae02ae48f299fdaff663677d9e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fcf8eabbc6556a42a9c983fd85ddfef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DebugCombatUI
   playerHealth2D: {fileID: 300008}
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70d31d351ef24b6eb7fce1b38a564fc1, type: 3}
+  m_Script: {fileID: 11500000, guid: aad60eab9f69b2e429755fd3f2a8b85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatManager
   combatMode: 0
@@ -419,7 +419,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 200000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bd2af96a3d043e5be63888ea7b28181, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e1f5f9ab83f6ae4e9555bbc2bd58fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow2D
   target: {fileID: 300001}
@@ -606,7 +606,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da8a37a412373db449c76358e47f910c, type: 3}
+  m_Script: {fileID: 11500000, guid: 725dbe9a1be6eab4bb6c5224a381519a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement2D
   moveSpeed: 12
@@ -623,7 +623,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b2f9a6e1d2a4f9fbc3b839473d98620, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a5a1d29bb9c3aa49979221f250e4747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAim2D
   aimCamera: {fileID: 200002}
@@ -638,7 +638,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a43ef97d771b4df29d9874f09d6e8c4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 245d6033c92885344aa5c3d715ca2b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat2D
   playerAim: {fileID: 300006}
@@ -657,7 +657,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f7e31b65a7741a293d25f0f4b78485d, type: 3}
+  m_Script: {fileID: 11500000, guid: 01d5fe4811626f94a8c45fb370bb9812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth2D
   maxHealth: 200
@@ -674,7 +674,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4f7fcb01b946e1b2da47ad1d8a52a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 513d5f7625dc4d54c9a74e4af5dc9eec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDash2D
   playerMovement: {fileID: 300005}
@@ -698,7 +698,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de6c4a8944204fcdb67449a1220ba442, type: 3}
+  m_Script: {fileID: 11500000, guid: a028d4849981bd347972100161b9e27e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MuzzleFlash2D
   playerAim: {fileID: 300006}
@@ -716,7 +716,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dd7c2db09924fda8f91e6f873cbe012, type: 3}
+  m_Script: {fileID: 11500000, guid: e33432bb27c47b04ba6c748e53e35a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   maxHP: 200
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d33742d8a943928dd4efc851cb386f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e04687f4c9e92847aba8099b57ac885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthRegen
   playerStats: {fileID: 300011}
@@ -748,7 +748,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b10465a94ccd4b149ec35c0d344a7513, type: 3}
+  m_Script: {fileID: 11500000, guid: 50a5f43a913f84744b4b9944255f7d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeHitbox
   targetLayers:
@@ -765,7 +765,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a7cb6647a154d1abc2e9f667b7f7db0, type: 3}
+  m_Script: {fileID: 11500000, guid: 23c17f5bd85e5944098305c3819857b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileSpawner
   defaultProjectilePrefab: {fileID: 3328599918361081148, guid: 6b22e13a84708e94f9bdf42deee13f28, type: 3}
@@ -782,7 +782,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8357fd1fe26b47d6b43044d77c40a050, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f9c670c8363f234bb03a75474db5adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponController
   playerStats: {fileID: 300011}
@@ -810,7 +810,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47972c363466426194dce624f00947e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 24c985790a4a33c4c967c3d5eea53ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponVisualEffect2D
   effectLifetime: 0.18
@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 320000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ecf124c75d74d66a9d69eec5757f1a4, type: 3}
+  m_Script: {fileID: 11500000, guid: a3433f34cb324444bb195479da8493c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSpriteVisual2D
   weaponRenderer: {fileID: 320002}
@@ -1626,7 +1626,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 500000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b9fa627ad324a5194f4caf31821044c, type: 3}
+  m_Script: {fileID: 11500000, guid: 23886d1ebfb0864449f07293e307b0bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBounds
   center: {x: 0, y: 0}

@@ -17,11 +17,28 @@ public sealed class CombatHUD2D : MonoBehaviour
     [SerializeField] private Color readyTextColor = new Color(0.45f, 1f, 0.55f, 1f);
     [SerializeField] private Color cooldownTextColor = new Color(1f, 0.82f, 0.35f, 1f);
 
+    [Header("Health Bar")]
+    [SerializeField] private float healthBarWidth = 280f;
+    [SerializeField] private float healthBarHeight = 22f;
+    [SerializeField] private float healthBarBottomOffset = 30f;
+    [SerializeField] private Color healthBarBackgroundColor = new Color(0.12f, 0.12f, 0.12f, 0.85f);
+    [SerializeField] private Color healthBarBorderColor = new Color(0.4f, 0.4f, 0.4f, 1f);
+
+    [Header("Experience Bar")]
+    [SerializeField] private float expBarWidth = 200f;
+    [SerializeField] private float expBarHeight = 22f;
+    [SerializeField] private float expBarGap = 10f;
+    [SerializeField] private Color expBarBackgroundColor = new Color(0.12f, 0.12f, 0.12f, 0.85f);
+    [SerializeField] private Color expBarBorderColor = new Color(0.4f, 0.4f, 0.4f, 1f);
+    [SerializeField] private Color expBarColor = new Color(0.35f, 0.55f, 1f);
+
     private GUIStyle labelStyle;
+    private Texture2D whiteTexture;
 
     private void Awake()
     {
         ResolveMissingReferences();
+        InitializeWhiteTexture();
     }
 
     private void Update()
@@ -34,8 +51,6 @@ public sealed class CombatHUD2D : MonoBehaviour
         EnsureStyle();
 
         float y = screenOffset.y;
-        DrawLine(FormatHealthText(), normalTextColor, y);
-        y += lineHeight;
 
         DrawLine(FormatCombatTimeText(), GetCombatTimeTextColor(), y);
         y += lineHeight;
@@ -47,6 +62,8 @@ public sealed class CombatHUD2D : MonoBehaviour
         y += lineHeight;
 
         DrawLine(FormatUltimateText(), GetUltimateTextColor(), y);
+
+        DrawBottomBars();
     }
 
     private void ResolveMissingReferences()
@@ -117,16 +134,89 @@ public sealed class CombatHUD2D : MonoBehaviour
         GUI.Label(new Rect(screenOffset.x, y, labelWidth, lineHeight), text, labelStyle);
     }
 
-    private string FormatHealthText()
+    private void DrawBottomBars()
     {
-        if (playerHealth == null)
+        float labelHeight = 18f;
+        float spacing = 4f;
+
+        float totalWidth = healthBarWidth + expBarGap + expBarWidth;
+        float startX = (Screen.width - totalWidth) * 0.5f;
+        float barY = Screen.height - healthBarHeight - healthBarBottomOffset;
+        float labelY = barY - spacing - labelHeight;
+
+        // Đã thêm (float) vào trước playerHealth.CurrentHealth
+        DrawSingleBar(
+            startX, barY, labelY, healthBarWidth, healthBarHeight, labelHeight,
+            playerHealth != null ? Mathf.Clamp01((float)playerHealth.CurrentHealth / playerHealth.MaxHealth) : 0f,
+            Color.red, healthBarBackgroundColor, healthBarBorderColor,
+            "Health",
+            playerHealth != null
+                ? $"{Mathf.CeilToInt(playerHealth.CurrentHealth)} / {Mathf.CeilToInt(playerHealth.MaxHealth)}"
+                : ""
+        );
+
+        float expX = startX + healthBarWidth + expBarGap;
+        
+        // Đã thêm (float) vào trước playerExperience.CurrentExperience
+        DrawSingleBar(
+            expX, barY, labelY, expBarWidth, expBarHeight, labelHeight,
+            playerExperience != null ? Mathf.Clamp01((float)playerExperience.CurrentExperience / playerExperience.ExperienceToNextLevel) : 0f,
+            expBarColor, expBarBackgroundColor, expBarBorderColor,
+            "EXP",
+            playerExperience != null
+                ? $"{Mathf.CeilToInt(playerExperience.CurrentExperience)} / {Mathf.CeilToInt(playerExperience.ExperienceToNextLevel)}"
+                : ""
+        );
+    }
+    private void DrawSingleBar(float x, float barY, float labelY, float barWidth, float barHeight, float labelHeight,
+        float fillPercent, Color fillColor, Color bgColor, Color borderColor, string label, string numberText)
+    {
+        Rect barRect = new Rect(x, barY, barWidth, barHeight);
+
+        GUI.color = bgColor;
+        GUI.DrawTexture(barRect, whiteTexture);
+
+        GUI.color = fillColor;
+        float fillWidth = barWidth * fillPercent;
+        if (fillWidth > 0f)
         {
-            return "HP: Missing PlayerHealth2D";
+            GUI.DrawTexture(new Rect(x, barY, fillWidth, barHeight), whiteTexture);
         }
 
-        int currentHealth = Mathf.CeilToInt(playerHealth.CurrentHealth);
-        int maxHealth = Mathf.CeilToInt(playerHealth.MaxHealth);
-        return $"HP: {currentHealth} / {maxHealth}";
+        GUI.color = borderColor;
+        float t = 1f;
+        GUI.DrawTexture(new Rect(x, barY, barWidth, t), whiteTexture);
+        GUI.DrawTexture(new Rect(x, barY + barHeight - t, barWidth, t), whiteTexture);
+        GUI.DrawTexture(new Rect(x, barY, t, barHeight), whiteTexture);
+        GUI.DrawTexture(new Rect(x + barWidth - t, barY, t, barHeight), whiteTexture);
+
+        GUI.color = Color.white;
+        GUIStyle lblStyle = new GUIStyle(GUI.skin.label)
+        {
+            fontSize = Mathf.RoundToInt(14f),
+            fontStyle = FontStyle.Bold,
+            alignment = TextAnchor.LowerCenter,
+            normal = { textColor = Color.white }
+        };
+        GUI.Label(new Rect(x, labelY, barWidth, labelHeight), label, lblStyle);
+
+        GUIStyle numStyle = new GUIStyle(GUI.skin.label)
+        {
+            fontSize = Mathf.RoundToInt(barHeight * 0.5f),
+            fontStyle = FontStyle.Bold,
+            alignment = TextAnchor.MiddleCenter,
+            normal = { textColor = Color.white }
+        };
+        GUI.Label(barRect, numberText, numStyle);
+
+        GUI.color = Color.white;
+    }
+
+    private void InitializeWhiteTexture()
+    {
+        whiteTexture = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+        whiteTexture.SetPixel(0, 0, Color.white);
+        whiteTexture.Apply();
     }
 
     private string FormatSkillText()

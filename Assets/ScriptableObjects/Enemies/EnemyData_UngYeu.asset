@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a30f7b45c9d1423abf7c1f69b7e3cb74, type: 3}
-  m_Name: EnemyData_XaYeu
+  m_Name: EnemyData_UngYeu
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Xa Yeu
+  enemyName: Ung Yeu
   enemyRole: 6
   maxHP: 70
   damage: 11
-  moveSpeed: 6.8
-  attackRange: 8.5
-  attackCooldown: 1.2
+  moveSpeed: 9.2
+  attackRange: 9
+  attackCooldown: 1
   rotateToMoveDirection: 0
   arenaPadding: 0.35
-  visualColor: {r: 0, g: 0.9, b: 0.12, a: 1}
+  visualColor: {r: 0.05, g: 0.38, b: 1, a: 1}
   visualScale: {x: 0.6, y: 0.9}
   colliderSize: {x: 1, y: 1}
   colliderOffset: {x: 0, y: 0}
@@ -37,21 +37,21 @@ MonoBehaviour:
   chargeSpeed: 18
   chargeDamageMultiplier: 1.5
   projectilePrefab: {fileID: 3328599918361081148, guid: 6b22e13a84708e94f9bdf42deee13f28, type: 3}
-  projectileRange: 8.5
-  projectileRetreatRange: 4.5
-  projectileResumeRange: 6.5
+  projectileRange: 9
+  projectileRetreatRange: 5
+  projectileResumeRange: 7
   projectileDamage: 11
-  projectileSpeed: 8.5
-  projectileLifetime: 1
-  projectileCooldown: 4
-  projectileSpawnOffset: 0.7
-  projectileChargeTime: 3.5
+  projectileSpeed: 11
+  projectileLifetime: 0.82
+  projectileCooldown: 3
+  projectileSpawnOffset: 0.65
+  projectileChargeTime: 2.5
   projectileFlashTime: 0.5
-  projectilePiercing: 0
-  projectilePoisonDuration: 5
-  projectilePoisonTickDamage: 3
+  projectilePiercing: 1
+  projectilePoisonDuration: 0
+  projectilePoisonTickDamage: 0
   projectilePoisonTickInterval: 1
-  projectilePoisonTintColor: {r: 0.2, g: 1, b: 0.1, a: 1}
+  projectilePoisonTintColor: {r: 0.25, g: 1, b: 0.15, a: 1}
   rockWarningTime: 0.6
   rockFallTime: 0.45
   rockRadius: 1.25
@@ -61,3 +61,5 @@ MonoBehaviour:
   rootDuration: 1
   rootRadius: 1.5
   rootDamage: 0
+  rootTrapDamageMultiplier: 0.5
+  experienceReward: 1

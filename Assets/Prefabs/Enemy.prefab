@@ -182,7 +182,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8370132824292442968}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7168da36d3794ac458a0d0dd69ba03db, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c06bfc6362236a4a9c9bd992f711453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyChaseAI2D
   moveSpeed: 2.5
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8370132824292442968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdf45cb4d677b804eb8ffb856f3c131c, type: 3}
+  m_Script: {fileID: 11500000, guid: 89a461cf7f61c044192dad47c99c3c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimpleHealth
   maxHealth: 100
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8370132824292442968}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8f778a36c5b45c7b98a9e8d9f0f3b1a, type: 3}
+  m_Script: {fileID: 11500000, guid: e799e3fbce397444fa0a98383aac4a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyContactDamage2D
   contactDamage: 10
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8370132824292442968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3d1fcd85a914c1e9bf02094e736f101, type: 3}
+  m_Script: {fileID: 11500000, guid: ee2801cc916a1b048be738a40d9b4388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHitFeedback2D
   targetRenderer: {fileID: 5273053792194162434}
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8370132824292442968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d83a331af7f046ae86691ee50c5c8749, type: 3}
+  m_Script: {fileID: 11500000, guid: 03ca6edc70a084c4da84c09c5a7ce83f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   enemyData: {fileID: 11400000, guid: 85cb17f55c314f73b9df3f7fd4c6247f, type: 2}
@@ -258,6 +258,7 @@ MonoBehaviour:
   health: {fileID: 0}
   simpleHealth: {fileID: 9039624393698561013}
   roleController: {fileID: 0}
+  enemyStatus: {fileID: 0}
 --- !u!114 &914000000000000002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +268,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8370132824292442968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e4f738f866a4fe2bcdfb6410a2ad177, type: 3}
+  m_Script: {fileID: 11500000, guid: a47573c82a6be1149b50b6f773d867fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
   enemyBase: {fileID: 914000000000000001}
@@ -281,8 +282,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8370132824292442968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45f324df919d46f99075b671b122b81c, type: 3}
+  m_Script: {fileID: 11500000, guid: 50b5e326257ac8344aaac9e3f6d5a8ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMeleeAttack
   enemyBase: {fileID: 914000000000000001}
+  enemyStatus: {fileID: 0}
   targetTag: Player

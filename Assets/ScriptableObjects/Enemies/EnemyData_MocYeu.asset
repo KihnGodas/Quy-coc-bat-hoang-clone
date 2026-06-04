@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a30f7b45c9d1423abf7c1f69b7e3cb74, type: 3}
-  m_Name: EnemyData_KimVien
+  m_Name: EnemyData_MocYeu
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Kim Vien
-  enemyRole: 5
-  maxHP: 170
-  damage: 17
-  moveSpeed: 8
-  attackRange: 1
-  attackCooldown: 1.1
+  enemyName: Moc Yeu
+  enemyRole: 7
+  maxHP: 120
+  damage: 11
+  moveSpeed: 5
+  attackRange: 10
+  attackCooldown: 1.3
   rotateToMoveDirection: 0
-  arenaPadding: 0.4
-  visualColor: {r: 1, g: 0.86, b: 0, a: 1}
-  visualScale: {x: 0.9, y: 1.05}
+  arenaPadding: 0.35
+  visualColor: {r: 0.12, g: 0.42, b: 0.08, a: 1}
+  visualScale: {x: 0.6, y: 1}
   colliderSize: {x: 1, y: 1}
   colliderOffset: {x: 0, y: 0}
   lowHealthThreshold: 0.5
@@ -37,14 +37,14 @@ MonoBehaviour:
   chargeSpeed: 18
   chargeDamageMultiplier: 1.5
   projectilePrefab: {fileID: 0}
-  projectileRange: 7
+  projectileRange: 8
   projectileRetreatRange: 0
   projectileResumeRange: 0
-  projectileDamage: 30
+  projectileDamage: 20
   projectileSpeed: 9
   projectileLifetime: 2
-  projectileCooldown: 2.5
-  projectileSpawnOffset: 0.85
+  projectileCooldown: 4
+  projectileSpawnOffset: 0.75
   projectileChargeTime: 0
   projectileFlashTime: 0
   projectilePiercing: 0
@@ -55,9 +55,11 @@ MonoBehaviour:
   rockWarningTime: 0.6
   rockFallTime: 0.45
   rockRadius: 1.25
-  rootRange: 8
-  rootCooldown: 5
+  rootRange: 10
+  rootCooldown: 1.3
   rootWarningTime: 0.5
   rootDuration: 1
   rootRadius: 1.5
-  rootDamage: 0
+  rootDamage: 11
+  rootTrapDamageMultiplier: 0.5
+  experienceReward: 2

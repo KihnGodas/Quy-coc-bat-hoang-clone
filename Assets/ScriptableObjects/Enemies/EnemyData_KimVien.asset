@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a30f7b45c9d1423abf7c1f69b7e3cb74, type: 3}
-  m_Name: EnemyData_DaiLang
+  m_Name: EnemyData_KimVien
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Dai Lang
-  enemyRole: 2
-  maxHP: 300
-  damage: 20
+  enemyName: Kim Vien
+  enemyRole: 5
+  maxHP: 170
+  damage: 17
   moveSpeed: 8
   attackRange: 1
-  attackCooldown: 1.2
+  attackCooldown: 1.1
   rotateToMoveDirection: 0
-  arenaPadding: 0.35
-  visualColor: {r: 0.92, g: 0.92, b: 0.86, a: 1}
-  visualScale: {x: 1.5, y: 1.05}
+  arenaPadding: 0.4
+  visualColor: {r: 1, g: 0.86, b: 0, a: 1}
+  visualScale: {x: 0.9, y: 1.05}
   colliderSize: {x: 1, y: 1}
   colliderOffset: {x: 0, y: 0}
   lowHealthThreshold: 0.5
@@ -30,21 +30,21 @@ MonoBehaviour:
   lowHealthDamageMultiplier: 1
   lowHealthAttackRateMultiplier: 1
   lowHealthMaxHealthMultiplier: 1
-  chargeRange: 4.5
-  chargeCooldown: 1.2
+  chargeRange: 5
+  chargeCooldown: 4
   chargeWindup: 0.4
-  chargeDistance: 7.5
-  chargeSpeed: 24
-  chargeDamageMultiplier: 1
+  chargeDistance: 6
+  chargeSpeed: 18
+  chargeDamageMultiplier: 1.5
   projectilePrefab: {fileID: 0}
-  projectileRange: 8
+  projectileRange: 7
   projectileRetreatRange: 0
   projectileResumeRange: 0
-  projectileDamage: 20
+  projectileDamage: 30
   projectileSpeed: 9
   projectileLifetime: 2
-  projectileCooldown: 4
-  projectileSpawnOffset: 0.75
+  projectileCooldown: 2.5
+  projectileSpawnOffset: 0.85
   projectileChargeTime: 0
   projectileFlashTime: 0
   projectilePiercing: 0
@@ -61,3 +61,5 @@ MonoBehaviour:
   rootDuration: 1
   rootRadius: 1.5
   rootDamage: 0
+  rootTrapDamageMultiplier: 0.5
+  experienceReward: 4

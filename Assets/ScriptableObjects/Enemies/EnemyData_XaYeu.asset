@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a30f7b45c9d1423abf7c1f69b7e3cb74, type: 3}
-  m_Name: EnemyData_ThietTru
+  m_Name: EnemyData_XaYeu
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Thiet Tru
-  enemyRole: 3
-  maxHP: 200
+  enemyName: Xa Yeu
+  enemyRole: 6
+  maxHP: 70
   damage: 11
   moveSpeed: 6.8
-  attackRange: 1
-  attackCooldown: 1.1
+  attackRange: 8.5
+  attackCooldown: 1.2
   rotateToMoveDirection: 0
-  arenaPadding: 0.45
-  visualColor: {r: 0.55, g: 0.62, b: 0.68, a: 1}
-  visualScale: {x: 0.85, y: 0.7}
+  arenaPadding: 0.35
+  visualColor: {r: 0, g: 0.9, b: 0.12, a: 1}
+  visualScale: {x: 0.6, y: 0.9}
   colliderSize: {x: 1, y: 1}
   colliderOffset: {x: 0, y: 0}
   lowHealthThreshold: 0.5
@@ -36,22 +36,22 @@ MonoBehaviour:
   chargeDistance: 6
   chargeSpeed: 18
   chargeDamageMultiplier: 1.5
-  projectilePrefab: {fileID: 0}
-  projectileRange: 8
-  projectileRetreatRange: 0
-  projectileResumeRange: 0
-  projectileDamage: 20
-  projectileSpeed: 9
-  projectileLifetime: 2
+  projectilePrefab: {fileID: 3328599918361081148, guid: 6b22e13a84708e94f9bdf42deee13f28, type: 3}
+  projectileRange: 8.5
+  projectileRetreatRange: 4.5
+  projectileResumeRange: 6.5
+  projectileDamage: 11
+  projectileSpeed: 8.5
+  projectileLifetime: 1
   projectileCooldown: 4
-  projectileSpawnOffset: 0.75
-  projectileChargeTime: 0
-  projectileFlashTime: 0
+  projectileSpawnOffset: 0.7
+  projectileChargeTime: 3.5
+  projectileFlashTime: 0.5
   projectilePiercing: 0
-  projectilePoisonDuration: 0
-  projectilePoisonTickDamage: 0
+  projectilePoisonDuration: 5
+  projectilePoisonTickDamage: 3
   projectilePoisonTickInterval: 1
-  projectilePoisonTintColor: {r: 0.25, g: 1, b: 0.15, a: 1}
+  projectilePoisonTintColor: {r: 0.2, g: 1, b: 0.1, a: 1}
   rockWarningTime: 0.6
   rockFallTime: 0.45
   rockRadius: 1.25
@@ -61,3 +61,5 @@ MonoBehaviour:
   rootDuration: 1
   rootRadius: 1.5
   rootDamage: 0
+  rootTrapDamageMultiplier: 0.5
+  experienceReward: 4
