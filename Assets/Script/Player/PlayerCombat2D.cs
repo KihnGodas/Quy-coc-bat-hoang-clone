@@ -9,6 +9,7 @@ public sealed class PlayerCombat2D : MonoBehaviour
     [SerializeField] private Projectile2D skillProjectilePrefab;
     [SerializeField, Min(0.01f)] private float skillCooldown = 3f;
     [SerializeField] private MuzzleFlash2D muzzleFlash;
+    [SerializeField] private bool useLegacyCombat = true;
 
     private float nextBasicFireTime;
     private float nextSkillTime;
@@ -35,6 +36,11 @@ public sealed class PlayerCombat2D : MonoBehaviour
 
     private void Update()
     {
+        if (!useLegacyCombat)
+        {
+            return;
+        }
+
         Mouse mouse = Mouse.current;
         if (mouse != null && mouse.leftButton.isPressed)
         {
@@ -85,6 +91,11 @@ public sealed class PlayerCombat2D : MonoBehaviour
         {
             muzzleFlash.PlayFlash(spawnPoint, shootDirection);
         }
+    }
+
+    public void SetLegacyCombatEnabled(bool enabled)
+    {
+        useLegacyCombat = enabled;
     }
 
     private Vector2 GetShootDirection()

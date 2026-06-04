@@ -3,7 +3,18 @@ using UnityEngine;
 
 public sealed class EnemySpawner : MonoBehaviour
 {
+    private enum SpawnMode
+    {
+        MixedTable,
+        SingleTestEnemy,
+        CycleTestEnemies
+    }
+
     [SerializeField] private EnemyChaseAI2D enemyPrefab;
+    [SerializeField] private EnemyBase enemyBasePrefab;
+    [SerializeField] private SpawnMode spawnMode = SpawnMode.SingleTestEnemy;
+    [SerializeField] private EnemyData testEnemyData;
+    [SerializeField] private EnemySpawnEntry[] enemySpawnTable;
     [SerializeField] private Transform player;
     [SerializeField, Min(0.1f)] private float spawnInterval = 2f;
     [SerializeField, Min(1)] private int maxAliveEnemies = 10;
@@ -18,18 +29,79 @@ public sealed class EnemySpawner : MonoBehaviour
     [SerializeField, Min(0f)] private float edgeSpawnPadding = 1f;
     [SerializeField, Min(1)] private int spawnPositionAttempts = 20;
     [SerializeField, Min(0f)] private float wallPadding = 0.5f;
+    [SerializeField] private bool spawningEnabled = true;
+    [SerializeField] private CombatManager combatManager;
+    [SerializeField, Min(0f)] private float spawnLockBeforeCombatEnd = 0.5f;
 
     private float nextSpawnTime;
-    private readonly List<EnemyChaseAI2D> spawnedEnemies = new List<EnemyChaseAI2D>();
+    private float runtimeSpawnInterval = -1f;
+    private int runtimeMaxAliveEnemies = -1;
+    private int nextCycleSpawnIndex;
+    private int totalSpawnedCount;
+    private readonly List<GameObject> spawnedEnemies = new List<GameObject>();
+
+    public int AliveCount
+    {
+        get
+        {
+            CleanupDeadEnemies();
+            return spawnedEnemies.Count;
+        }
+    }
+
+    public bool IsSpawningEnabled => spawningEnabled;
+    public float EffectiveSpawnInterval => runtimeSpawnInterval > 0f ? runtimeSpawnInterval : spawnInterval;
+    public int EffectiveMaxAliveEnemies => runtimeMaxAliveEnemies > 0 ? runtimeMaxAliveEnemies : maxAliveEnemies;
+    public int TotalSpawnedCount => totalSpawnedCount;
+    public int DefeatedEnemyCount
+    {
+        get
+        {
+            CleanupDeadEnemies();
+            return Mathf.Max(0, totalSpawnedCount - spawnedEnemies.Count);
+        }
+    }
+
+    public void SetSpawningEnabled(bool enabled)
+    {
+        spawningEnabled = enabled;
+        if (spawningEnabled)
+        {
+            nextSpawnTime = Time.time + EffectiveSpawnInterval;
+        }
+    }
+
+    public void SetDifficultySpawnSettings(float effectiveSpawnInterval, int effectiveMaxAliveEnemies)
+    {
+        runtimeSpawnInterval = Mathf.Max(0.1f, effectiveSpawnInterval);
+        runtimeMaxAliveEnemies = Mathf.Max(1, effectiveMaxAliveEnemies);
+    }
+
+    public void ClearDifficultySpawnSettings()
+    {
+        runtimeSpawnInterval = -1f;
+        runtimeMaxAliveEnemies = -1;
+    }
 
     private void Start()
     {
         FindPlayerIfNeeded();
-        nextSpawnTime = Time.time + spawnInterval;
+        FindCombatManagerIfNeeded();
+        nextSpawnTime = Time.time + EffectiveSpawnInterval;
     }
 
     private void Update()
     {
+        if (!spawningEnabled)
+        {
+            return;
+        }
+
+        if (!CanSpawnForCombatState())
+        {
+            return;
+        }
+
         FindPlayerIfNeeded();
 
         if (Time.time < nextSpawnTime)
@@ -37,11 +109,11 @@ public sealed class EnemySpawner : MonoBehaviour
             return;
         }
 
-        nextSpawnTime = Time.time + spawnInterval;
+        nextSpawnTime = Time.time + EffectiveSpawnInterval;
 
         CleanupDeadEnemies();
 
-        if (enemyPrefab == null || spawnedEnemies.Count >= maxAliveEnemies)
+        if ((enemyPrefab == null && enemyBasePrefab == null) || spawnedEnemies.Count >= EffectiveMaxAliveEnemies)
         {
             return;
         }
@@ -53,14 +125,165 @@ public sealed class EnemySpawner : MonoBehaviour
     {
         Vector2 center = GetSpawnCenter();
         Vector2 spawnPosition = GetSpawnPosition(center);
-        EnemyChaseAI2D enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        EnemyData selectedData = SelectEnemyData();
 
-        if (player != null)
+        if (enemyBasePrefab != null)
         {
-            enemy.SetTarget(player);
+            EnemyBase enemy = Instantiate(enemyBasePrefab, spawnPosition, Quaternion.identity);
+            EnsureEnemyRuntimeComponents(enemy);
+            if (selectedData != null)
+            {
+                enemy.SetData(selectedData);
+            }
+
+            if (player != null)
+            {
+                enemy.SetTarget(player);
+            }
+
+            spawnedEnemies.Add(enemy.gameObject);
+            totalSpawnedCount++;
+            return;
         }
 
-        spawnedEnemies.Add(enemy);
+        EnemyChaseAI2D legacyEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        if (player != null)
+        {
+            legacyEnemy.SetTarget(player);
+
+            EnemyBase enemyBase = legacyEnemy.GetComponent<EnemyBase>();
+            if (enemyBase != null)
+            {
+                EnsureEnemyRuntimeComponents(enemyBase);
+                if (selectedData != null)
+                {
+                    enemyBase.SetData(selectedData);
+                }
+
+                enemyBase.SetTarget(player);
+            }
+        }
+
+        spawnedEnemies.Add(legacyEnemy.gameObject);
+        totalSpawnedCount++;
+    }
+
+    private EnemyData SelectEnemyData()
+    {
+        if (spawnMode == SpawnMode.SingleTestEnemy)
+        {
+            return testEnemyData != null ? testEnemyData : SelectFirstTableEnemy();
+        }
+
+        if (spawnMode == SpawnMode.CycleTestEnemies)
+        {
+            return SelectNextCycleEnemy();
+        }
+
+        if (enemySpawnTable == null || enemySpawnTable.Length == 0)
+        {
+            return null;
+        }
+
+        float elapsedTime = combatManager != null ? combatManager.ElapsedTime : Time.timeSinceLevelLoad;
+        float totalWeight = 0f;
+
+        for (int i = 0; i < enemySpawnTable.Length; i++)
+        {
+            EnemySpawnEntry entry = enemySpawnTable[i];
+            if (entry != null && entry.CanSpawn(elapsedTime))
+            {
+                totalWeight += entry.Weight;
+            }
+        }
+
+        if (totalWeight <= 0f)
+        {
+            return null;
+        }
+
+        float roll = Random.Range(0f, totalWeight);
+        for (int i = 0; i < enemySpawnTable.Length; i++)
+        {
+            EnemySpawnEntry entry = enemySpawnTable[i];
+            if (entry == null || !entry.CanSpawn(elapsedTime))
+            {
+                continue;
+            }
+
+            roll -= entry.Weight;
+            if (roll <= 0f)
+            {
+                return entry.EnemyData;
+            }
+        }
+
+        return null;
+    }
+
+    private EnemyData SelectFirstTableEnemy()
+    {
+        if (enemySpawnTable == null)
+        {
+            return null;
+        }
+
+        for (int i = 0; i < enemySpawnTable.Length; i++)
+        {
+            if (enemySpawnTable[i] != null && enemySpawnTable[i].EnemyData != null)
+            {
+                return enemySpawnTable[i].EnemyData;
+            }
+        }
+
+        return null;
+    }
+
+    private EnemyData SelectNextCycleEnemy()
+    {
+        if (enemySpawnTable == null || enemySpawnTable.Length == 0)
+        {
+            return testEnemyData;
+        }
+
+        for (int attempt = 0; attempt < enemySpawnTable.Length; attempt++)
+        {
+            int index = nextCycleSpawnIndex % enemySpawnTable.Length;
+            nextCycleSpawnIndex++;
+
+            EnemySpawnEntry entry = enemySpawnTable[index];
+            if (entry != null && entry.EnemyData != null && entry.Weight > 0f)
+            {
+                return entry.EnemyData;
+            }
+        }
+
+        return testEnemyData;
+    }
+
+    private static void EnsureEnemyRuntimeComponents(EnemyBase enemy)
+    {
+        if (enemy == null)
+        {
+            return;
+        }
+
+        GameObject enemyObject = enemy.gameObject;
+        AddComponentIfMissing<EnemyRoleController>(enemyObject);
+        AddComponentIfMissing<EnemyVisual2D>(enemyObject);
+        AddComponentIfMissing<EnemyChargeAttack>(enemyObject);
+        AddComponentIfMissing<EnemyProjectileAttack>(enemyObject);
+        AddComponentIfMissing<EnemyRockThrowAttack>(enemyObject);
+        AddComponentIfMissing<EnemyRootAttack>(enemyObject);
+        AddComponentIfMissing<EnemyExperienceDropper>(enemyObject);
+    }
+
+    private static void AddComponentIfMissing<T>(GameObject gameObject) where T : Component
+    {
+        if (gameObject.GetComponent<T>() == null)
+        {
+            gameObject.AddComponent<T>();
+        }
     }
 
     private Vector2 GetSpawnCenter()
@@ -237,6 +460,44 @@ public sealed class EnemySpawner : MonoBehaviour
         }
     }
 
+    private void FindCombatManagerIfNeeded()
+    {
+        if (combatManager != null)
+        {
+            return;
+        }
+
+        combatManager = FindComponentInScene<CombatManager>();
+    }
+
+    private bool CanSpawnForCombatState()
+    {
+        FindCombatManagerIfNeeded();
+
+        if (combatManager == null)
+        {
+            return true;
+        }
+
+        if (!combatManager.IsRunning)
+        {
+            return false;
+        }
+
+        if (combatManager.Mode == CombatManager.CombatMode.BossCombat)
+        {
+            return false;
+        }
+
+        if (combatManager.Mode == CombatManager.CombatMode.NormalCombat
+            && combatManager.RemainingTime <= spawnLockBeforeCombatEnd)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Vector3 center = Application.isPlaying ? GetSpawnCenter() : transform.position;
@@ -274,10 +535,15 @@ public sealed class EnemySpawner : MonoBehaviour
 
     private static PlayerMovement2D FindPlayerMovementInScene()
     {
+        return FindComponentInScene<PlayerMovement2D>();
+    }
+
+    private static T FindComponentInScene<T>() where T : Object
+    {
 #if UNITY_2023_1_OR_NEWER
-        return FindFirstObjectByType<PlayerMovement2D>();
+        return FindFirstObjectByType<T>();
 #else
-        return FindObjectOfType<PlayerMovement2D>();
+        return FindObjectOfType<T>();
 #endif
     }
 }

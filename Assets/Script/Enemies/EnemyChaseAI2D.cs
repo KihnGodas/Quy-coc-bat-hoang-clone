@@ -6,6 +6,8 @@ public sealed class EnemyChaseAI2D : MonoBehaviour
     [SerializeField, Min(0f)] private float moveSpeed = 2.5f;
     [SerializeField] private Transform target;
     [SerializeField] private bool rotateToMoveDirection;
+    [SerializeField] private ArenaBounds arenaBounds;
+    [SerializeField, Min(0f)] private float arenaPadding = 0.35f;
 
     private Rigidbody2D body;
 
@@ -18,6 +20,7 @@ public sealed class EnemyChaseAI2D : MonoBehaviour
         body.freezeRotation = !rotateToMoveDirection;
 
         FindTargetIfNeeded();
+        FindArenaBoundsIfNeeded();
     }
 
     private void FixedUpdate()
@@ -31,6 +34,13 @@ public sealed class EnemyChaseAI2D : MonoBehaviour
 
         Vector2 direction = ((Vector2)target.position - body.position).normalized;
         Vector2 nextPosition = body.position + direction * moveSpeed * Time.fixedDeltaTime;
+        FindArenaBoundsIfNeeded();
+
+        if (arenaBounds != null)
+        {
+            nextPosition = arenaBounds.ClampPosition(nextPosition, arenaPadding);
+        }
+
         body.MovePosition(nextPosition);
 
         if (rotateToMoveDirection && direction.sqrMagnitude > 0.0001f)
@@ -69,5 +79,29 @@ public sealed class EnemyChaseAI2D : MonoBehaviour
         {
             target = playerObject.transform;
         }
+    }
+
+    private void FindArenaBoundsIfNeeded()
+    {
+        if (arenaBounds != null)
+        {
+            return;
+        }
+
+        arenaBounds = ArenaBounds.Instance;
+
+        if (arenaBounds == null)
+        {
+            arenaBounds = FindComponentInScene<ArenaBounds>();
+        }
+    }
+
+    private static T FindComponentInScene<T>() where T : Object
+    {
+#if UNITY_2023_1_OR_NEWER
+        return FindFirstObjectByType<T>();
+#else
+        return FindObjectOfType<T>();
+#endif
     }
 }

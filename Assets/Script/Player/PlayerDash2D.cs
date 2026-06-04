@@ -6,17 +6,24 @@ public sealed class PlayerDash2D : MonoBehaviour
 {
     [SerializeField] private PlayerMovement2D playerMovement;
     [SerializeField] private PlayerHealth2D playerHealth;
+    [SerializeField] private PlayerStatus2D playerStatus;
+    [SerializeField, Min(0f)] private float dashDistance = 4.5f;
     [SerializeField, Min(0f)] private float dashSpeed = 12f;
     [SerializeField, Min(0.01f)] private float dashDuration = 0.15f;
     [SerializeField, Min(0f)] private float dashCooldown = 1f;
+    [SerializeField, Min(0f)] private float invulnerableDuration = 0.2f;
     [SerializeField] private string playerLayerName = "Player";
     [SerializeField] private string enemyLayerName = "Enemy";
+    [SerializeField] private ArenaBounds arenaBounds;
+    [SerializeField, Min(0f)] private float arenaPadding = 0.35f;
 
     private Rigidbody2D body;
     private Vector2 dashDirection = Vector2.right;
     private float dashEndTime;
     private float nextDashTime;
     private bool isDashing;
+    private bool dashInvulnerabilityActive;
+    private float invulnerableEndTime;
     private bool hasStoredLayerCollision;
     private bool previousPlayerEnemyCollisionIgnored;
 
@@ -37,10 +44,19 @@ public sealed class PlayerDash2D : MonoBehaviour
         {
             playerHealth = GetComponent<PlayerHealth2D>();
         }
+
+        if (playerStatus == null)
+        {
+            playerStatus = GetComponent<PlayerStatus2D>();
+        }
+
+        FindArenaBoundsIfNeeded();
     }
 
     private void Update()
     {
+        UpdateDashInvulnerability();
+
         Keyboard keyboard = Keyboard.current;
         if (keyboard == null || !keyboard.spaceKey.wasPressedThisFrame)
         {
@@ -63,13 +79,30 @@ public sealed class PlayerDash2D : MonoBehaviour
             return;
         }
 
-        Vector2 nextPosition = body.position + dashDirection * dashSpeed * Time.fixedDeltaTime;
+        FindArenaBoundsIfNeeded();
+
+        Vector2 nextPosition = body.position + dashDirection * GetDashSpeed() * Time.fixedDeltaTime;
+        if (arenaBounds != null)
+        {
+            nextPosition = arenaBounds.ClampPosition(nextPosition, arenaPadding);
+        }
+
         body.MovePosition(nextPosition);
     }
 
     private void TryStartDash()
     {
         if (!IsDashReady)
+        {
+            return;
+        }
+
+        if (playerStatus == null)
+        {
+            playerStatus = GetComponent<PlayerStatus2D>();
+        }
+
+        if (playerStatus != null && playerStatus.IsRooted)
         {
             return;
         }
@@ -87,6 +120,8 @@ public sealed class PlayerDash2D : MonoBehaviour
         if (playerHealth != null)
         {
             playerHealth.SetInvincible(true);
+            dashInvulnerabilityActive = true;
+            invulnerableEndTime = Time.time + invulnerableDuration;
         }
 
         SetPlayerEnemyCollisionIgnored(true);
@@ -121,9 +156,10 @@ public sealed class PlayerDash2D : MonoBehaviour
             playerMovement.CanMove = true;
         }
 
-        if (playerHealth != null)
+        if (playerHealth != null && Time.time >= invulnerableEndTime)
         {
             playerHealth.SetInvincible(false);
+            dashInvulnerabilityActive = false;
         }
 
         RestorePlayerEnemyCollision();
@@ -134,6 +170,12 @@ public sealed class PlayerDash2D : MonoBehaviour
         if (isDashing)
         {
             StopDash();
+        }
+
+        if (playerHealth != null && dashInvulnerabilityActive)
+        {
+            playerHealth.SetInvincible(false);
+            dashInvulnerabilityActive = false;
         }
     }
 
@@ -172,5 +214,50 @@ public sealed class PlayerDash2D : MonoBehaviour
         }
 
         hasStoredLayerCollision = false;
+    }
+
+    private float GetDashSpeed()
+    {
+        if (dashDistance > 0f && dashDuration > 0f)
+        {
+            return dashDistance / dashDuration;
+        }
+
+        return dashSpeed;
+    }
+
+    private void UpdateDashInvulnerability()
+    {
+        if (!dashInvulnerabilityActive || playerHealth == null || Time.time < invulnerableEndTime)
+        {
+            return;
+        }
+
+        playerHealth.SetInvincible(false);
+        dashInvulnerabilityActive = false;
+    }
+
+    private void FindArenaBoundsIfNeeded()
+    {
+        if (arenaBounds != null)
+        {
+            return;
+        }
+
+        arenaBounds = ArenaBounds.Instance;
+
+        if (arenaBounds == null)
+        {
+            arenaBounds = FindComponentInScene<ArenaBounds>();
+        }
+    }
+
+    private static T FindComponentInScene<T>() where T : Object
+    {
+#if UNITY_2023_1_OR_NEWER
+        return FindFirstObjectByType<T>();
+#else
+        return FindObjectOfType<T>();
+#endif
     }
 }

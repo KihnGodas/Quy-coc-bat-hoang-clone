@@ -5,6 +5,10 @@ using UnityEngine.InputSystem;
 public sealed class PlayerMovement2D : MonoBehaviour
 {
     [SerializeField, Min(0f)] private float moveSpeed = 5f;
+    [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private ArenaBounds arenaBounds;
+    [SerializeField, Min(0f)] private float arenaPadding = 0.35f;
+    [SerializeField] private PlayerStatus2D playerStatus;
 
     private Rigidbody2D body;
     private Vector2 moveInput;
@@ -18,6 +22,9 @@ public sealed class PlayerMovement2D : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         body.gravityScale = 0f;
         body.freezeRotation = true;
+        FindPlayerStatsIfNeeded();
+        FindArenaBoundsIfNeeded();
+        FindPlayerStatusIfNeeded();
     }
 
     private void Update()
@@ -62,12 +69,67 @@ public sealed class PlayerMovement2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!CanMove)
+        FindPlayerStatusIfNeeded();
+
+        if (!CanMove || (playerStatus != null && playerStatus.IsRooted))
         {
             return;
         }
 
-        Vector2 nextPosition = body.position + moveInput * moveSpeed * Time.fixedDeltaTime;
+        FindArenaBoundsIfNeeded();
+
+        Vector2 nextPosition = body.position + moveInput * GetMoveSpeed() * Time.fixedDeltaTime;
+        if (arenaBounds != null)
+        {
+            nextPosition = arenaBounds.ClampPosition(nextPosition, arenaPadding);
+        }
+
         body.MovePosition(nextPosition);
+    }
+
+    private float GetMoveSpeed()
+    {
+        FindPlayerStatsIfNeeded();
+        return playerStats != null ? playerStats.MoveSpeed : moveSpeed;
+    }
+
+    private void FindPlayerStatsIfNeeded()
+    {
+        if (playerStats == null)
+        {
+            playerStats = GetComponent<PlayerStats>();
+        }
+    }
+
+    private void FindArenaBoundsIfNeeded()
+    {
+        if (arenaBounds != null)
+        {
+            return;
+        }
+
+        arenaBounds = ArenaBounds.Instance;
+
+        if (arenaBounds == null)
+        {
+            arenaBounds = FindComponentInScene<ArenaBounds>();
+        }
+    }
+
+    private void FindPlayerStatusIfNeeded()
+    {
+        if (playerStatus == null)
+        {
+            playerStatus = GetComponent<PlayerStatus2D>();
+        }
+    }
+
+    private static T FindComponentInScene<T>() where T : Object
+    {
+#if UNITY_2023_1_OR_NEWER
+        return FindFirstObjectByType<T>();
+#else
+        return FindObjectOfType<T>();
+#endif
     }
 }

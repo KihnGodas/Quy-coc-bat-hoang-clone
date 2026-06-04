@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public sealed class SimpleHealth : MonoBehaviour
+public sealed class SimpleHealth : MonoBehaviour, IDamageable
 {
     [SerializeField, Min(1f)] private float maxHealth = 50f;
     [SerializeField] private bool destroyOnDeath = true;
@@ -16,10 +16,18 @@ public sealed class SimpleHealth : MonoBehaviour
     public bool IsDead => currentHealth <= 0f;
     public event System.Action<float, Vector2> Damaged;
     public event System.Action Died;
+    public event System.Action<DamageInfo> OnDamaged;
+    public event System.Action OnDeath;
 
     private void Awake()
     {
         currentHealth = maxHealth;
+    }
+
+    public void Initialize(float newMaxHealth, bool refill = true)
+    {
+        maxHealth = Mathf.Max(1f, newMaxHealth);
+        currentHealth = refill ? maxHealth : Mathf.Clamp(currentHealth, 0f, maxHealth);
     }
 
     public void TakeDamage(float damage)
@@ -29,13 +37,26 @@ public sealed class SimpleHealth : MonoBehaviour
 
     public void TakeDamage(float damage, Vector2 hitDirection)
     {
-        if (IsDead || damage <= 0f)
+        TakeDamage(new DamageInfo(damage, null, false, 0f, 1f, hitDirection));
+    }
+
+    public void TakeDamage(DamageInfo damageInfo)
+    {
+        if (IsDead || damageInfo.amount <= 0f)
         {
             return;
         }
 
-        currentHealth = Mathf.Max(currentHealth - damage, 0f);
-        Damaged?.Invoke(damage, hitDirection);
+        float finalDamage = damageInfo.RollFinalAmount();
+        if (finalDamage <= 0f)
+        {
+            return;
+        }
+
+        currentHealth = Mathf.Max(currentHealth - finalDamage, 0f);
+        damageInfo.amount = finalDamage;
+        Damaged?.Invoke(finalDamage, damageInfo.hitDirection);
+        OnDamaged?.Invoke(damageInfo);
 
         if (IsDead)
         {
@@ -43,9 +64,20 @@ public sealed class SimpleHealth : MonoBehaviour
         }
     }
 
+    public void Heal(float amount)
+    {
+        if (IsDead || amount <= 0f)
+        {
+            return;
+        }
+
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+    }
+
     private void Die()
     {
         Died?.Invoke();
+        OnDeath?.Invoke();
         SpawnDeathEffect();
 
         if (destroyOnDeath)

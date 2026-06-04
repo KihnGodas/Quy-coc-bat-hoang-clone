@@ -173,3 +173,19 @@ MonoBehaviour:
   lifetime: 2
   damage: 50
   destroyOnHit: 1
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  canCrit: 0
+  critChance: 0
+  critMultiplier: 2
+  pierceTargets: 0
+  appliesPoison: 0
+  poisonDuration: 0
+  poisonTickDamage: 0
+  poisonTickInterval: 1
+  poisonTintColor: {r: 0.25, g: 1, b: 0.15, a: 1}
+  spawnImpactEffect: 0
+  impactEffectColor: {r: 1, g: 1, b: 1, a: 0.8}
+  impactEffectScale: 1
+  impactEffectLifetime: 0.18
