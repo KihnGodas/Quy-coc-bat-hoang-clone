@@ -15,10 +15,20 @@ public sealed class PlayerUltimateController : MonoBehaviour
     [SerializeField] private List<UltimateData> ultimates = new List<UltimateData>();
 
     private float nextUltimateTime;
+    private float nextResolveTime;
+    private const float RESOLVE_INTERVAL = 0.5f;
 
     public bool IsUltimateUnlocked => cultivationState == null || cultivationState.CanUseUltimate;
     public bool IsUltimateReady => IsUltimateUnlocked && Time.time >= nextUltimateTime;
     public float UltimateCooldownRemaining => Mathf.Max(0f, nextUltimateTime - Time.time);
+    public float CurrentUltimateCooldown
+    {
+        get
+        {
+            UltimateData data = GetCurrentUltimateData();
+            return data != null ? data.Cooldown : 1f;
+        }
+    }
     public UltimateType CurrentUltimateType => GetCurrentUltimateData()?.UltimateType ?? UltimateType.WoodGrandRoots;
 
     private void Awake()
@@ -29,12 +39,25 @@ public sealed class PlayerUltimateController : MonoBehaviour
 
     private void Update()
     {
-        ResolveReferences();
+        if (!ReferencesResolved() && Time.time >= nextResolveTime)
+        {
+            nextResolveTime = Time.time + RESOLVE_INTERVAL;
+            ResolveReferences();
+        }
 
         if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
         {
             TryCastUltimate();
         }
+    }
+
+    private bool ReferencesResolved()
+    {
+        return playerStats != null
+            && playerAim != null
+            && spellController != null
+            && cultivationState != null
+            && projectileSpawner != null;
     }
 
     public bool TryCastUltimate()

@@ -16,6 +16,8 @@ public sealed class PlayerSpellController : MonoBehaviour
 
     private readonly Dictionary<SpellType, float> nextCastTimes = new Dictionary<SpellType, float>();
     private Coroutine waterRoutine;
+    private float nextResolveTime;
+    private const float RESOLVE_INTERVAL = 0.5f;
 
     public SpellType CurrentSpell => currentSpell;
 
@@ -58,7 +60,11 @@ public sealed class PlayerSpellController : MonoBehaviour
 
     private void Update()
     {
-        ResolveReferences();
+        if (!ReferencesResolved() && Time.time >= nextResolveTime)
+        {
+            nextResolveTime = Time.time + RESOLVE_INTERVAL;
+            ResolveReferences();
+        }
         HandleDebugSelectionInput();
 
         if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
@@ -371,6 +377,13 @@ public sealed class PlayerSpellController : MonoBehaviour
         {
             SelectSpell(SpellType.MetalBlade);
         }
+    }
+
+    private bool ReferencesResolved()
+    {
+        return playerStats != null
+            && playerAim != null
+            && projectileSpawner != null;
     }
 
     private void ResolveReferences()

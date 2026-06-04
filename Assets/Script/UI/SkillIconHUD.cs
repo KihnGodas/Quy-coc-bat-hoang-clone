@@ -31,22 +31,44 @@ public sealed class SkillIconHUD : MonoBehaviour
     private GUIStyle iconStyle;
     private GUIStyle cooldownStyle;
     private GUIStyle keyStyle;
+    private float nextResolveTime;
+    private const float RESOLVE_INTERVAL = 0.5f;
 
     private void Awake()
     {
         ResolveReferences();
         InitializeWhiteTexture();
+        EnsureStyles();
     }
 
     private void Update()
     {
-        ResolveReferences();
+        if (!ReferencesResolved() && Time.time >= nextResolveTime)
+        {
+            nextResolveTime = Time.time + RESOLVE_INTERVAL;
+            ResolveReferences();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (whiteTexture != null)
+        {
+            Destroy(whiteTexture);
+        }
+    }
+
+    private bool ReferencesResolved()
+    {
+        return playerDash != null
+            && weaponController != null
+            && spellController != null
+            && playerUltimate != null
+            && cultivationState != null;
     }
 
     private void OnGUI()
     {
-        EnsureStyles();
-
         float totalWidth = iconSize * 4f + iconGap * 3f;
         float startX = (Screen.width - totalWidth) * 0.5f;
         float y = Screen.height - barBottomOffset - iconSize;
@@ -91,7 +113,7 @@ public sealed class SkillIconHUD : MonoBehaviour
         if (data == null) return;
 
         bool ready = spellController.CanCastCurrentSpell();
-        float cdRemainingRaw = spellController.GetCurrentSpellCooldownRemainingRaw();
+        float cdRemainingRaw = spellController.GetCurrentSpellCooldownRemaining();
         float cdTotal = spellController.GetCurrentSpellTotalCooldown();
 
         string label = GetSpellAbbreviation(data.SpellType);

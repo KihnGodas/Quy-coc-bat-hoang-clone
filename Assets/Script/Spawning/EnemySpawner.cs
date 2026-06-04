@@ -41,9 +41,9 @@ public sealed class EnemySpawner : MonoBehaviour
     public int TotalKilled => totalKilled;
     private float runtimeSpawnInterval = -1f;
     private int runtimeMaxAliveEnemies = -1;
-    private int nextCycleSpawnIndex;
+
     private int totalSpawnedCount;
-    private readonly List<GameObject> spawnedEnemies = new List<GameObject>();
+  
 
     public int AliveCount
     {
