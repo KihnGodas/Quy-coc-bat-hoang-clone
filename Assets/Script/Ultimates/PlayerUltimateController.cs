@@ -20,6 +20,7 @@ public sealed class PlayerUltimateController : MonoBehaviour
     public bool IsUltimateReady => IsUltimateUnlocked && Time.time >= nextUltimateTime;
     public float UltimateCooldownRemaining => Mathf.Max(0f, nextUltimateTime - Time.time);
     public UltimateType CurrentUltimateType => GetCurrentUltimateData()?.UltimateType ?? UltimateType.WoodGrandRoots;
+    public float CurrentUltimateCooldown => GetCurrentUltimateData() != null ? GetCurrentUltimateData().Cooldown : 0f;
 
     private void Awake()
     {

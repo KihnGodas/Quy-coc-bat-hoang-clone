@@ -19,6 +19,37 @@ public sealed class PlayerSpellController : MonoBehaviour
 
     public SpellType CurrentSpell => currentSpell;
 
+    public float GetCurrentSpellCooldownRemaining()
+    {
+        SpellData data = GetSpellData(currentSpell);
+        if (data == null) return 0f;
+        return Mathf.Max(0f, GetNextCastTime(currentSpell) - Time.time);
+    }
+
+    public float GetCurrentSpellTotalCooldown()
+    {
+        SpellData data = GetSpellData(currentSpell);
+        return data != null ? data.Cooldown : 0f;
+    }
+
+    public SpellData GetCurrentSpellData()
+    {
+        return GetSpellData(currentSpell);
+    }
+
+    public bool CanCastCurrentSpell()
+    {
+        SpellData data = GetSpellData(currentSpell);
+        return data != null && Time.time >= GetNextCastTime(data.SpellType);
+    }
+
+    public float GetCurrentSpellCooldownRemainingRaw()
+    {
+        SpellData data = GetSpellData(currentSpell);
+        if (data == null) return 0f;
+        return GetNextCastTime(currentSpell) - Time.time;
+    }
+
     private void Awake()
     {
         ResolveReferences();

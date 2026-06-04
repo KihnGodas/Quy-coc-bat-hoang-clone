@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca6edc70a084c4da84c09c5a7ce83f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
-  enemyData: {fileID: 11400000, guid: 85cb17f55c314f73b9df3f7fd4c6247f, type: 2}
+  enemyData: {fileID: 0}
   target: {fileID: 0}
   movement: {fileID: 914000000000000002}
   health: {fileID: 0}

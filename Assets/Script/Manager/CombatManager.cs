@@ -37,6 +37,7 @@ public sealed class CombatManager : MonoBehaviour
     public float ElapsedTime => timer.Elapsed;
     public float RemainingTime => combatMode == CombatMode.NormalCombat ? timer.Remaining : 0f;
     public int RemainingEnemyCount => enemySpawner != null ? enemySpawner.AliveCount : 0;
+    public int TotalKills => enemySpawner != null ? enemySpawner.TotalKilled : 0;
     public bool IsRunning => state == CombatState.Running;
     public bool IsClearingEnemies => state == CombatState.ClearingEnemies;
 

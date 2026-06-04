@@ -135,6 +135,11 @@ public class Projectile2D : MonoBehaviour
             return;
         }
 
+        if (other.GetComponentInParent<ExperienceOrb>() != null)
+        {
+            return;
+        }
+
         if (!IsInTargetLayer(other.gameObject.layer))
         {
             return;

@@ -30,6 +30,7 @@ public sealed class PlayerDash2D : MonoBehaviour
     public bool IsDashing => isDashing;
     public bool IsDashReady => Time.time >= nextDashTime && !isDashing;
     public float DashCooldownRemaining => Mathf.Max(nextDashTime - Time.time, 0f);
+    public float DashCooldownTotal => dashCooldown;
 
     private void Awake()
     {

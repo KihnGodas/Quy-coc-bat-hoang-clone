@@ -33,6 +33,7 @@ public sealed class WeaponController : MonoBehaviour
     public bool IsSkillReady => Time.time >= nextSkillTime;
     public float NormalAttackCooldownRemaining => Mathf.Max(nextNormalAttackTime - Time.time, 0f);
     public float SkillCooldownRemaining => Mathf.Max(nextSkillTime - Time.time, 0f);
+    public float CurrentSkillCooldown => GetCurrentWeaponData() != null ? GetCurrentWeaponData().SkillCooldown : 0f;
 
     private void Reset()
     {

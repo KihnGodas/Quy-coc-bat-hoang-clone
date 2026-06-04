@@ -20,7 +20,7 @@ public sealed class CombatHUD2D : MonoBehaviour
     [Header("Health Bar")]
     [SerializeField] private float healthBarWidth = 280f;
     [SerializeField] private float healthBarHeight = 22f;
-    [SerializeField] private float healthBarBottomOffset = 30f;
+    [SerializeField] private float healthBarBottomOffset = 85f;
     [SerializeField] private Color healthBarBackgroundColor = new Color(0.12f, 0.12f, 0.12f, 0.85f);
     [SerializeField] private Color healthBarBorderColor = new Color(0.4f, 0.4f, 0.4f, 1f);
 
@@ -33,6 +33,7 @@ public sealed class CombatHUD2D : MonoBehaviour
     [SerializeField] private Color expBarColor = new Color(0.35f, 0.55f, 1f);
 
     private GUIStyle labelStyle;
+    private GUIStyle centerStyle;
     private Texture2D whiteTexture;
 
     private void Awake()
@@ -49,11 +50,11 @@ public sealed class CombatHUD2D : MonoBehaviour
     private void OnGUI()
     {
         EnsureStyle();
+        EnsureCenterStyle();
+
+        DrawCenterTopInfo();
 
         float y = screenOffset.y;
-
-        DrawLine(FormatCombatTimeText(), GetCombatTimeTextColor(), y);
-        y += lineHeight;
 
         DrawLine(FormatProgressionText(), GetProgressionTextColor(), y);
         y += lineHeight;
@@ -126,6 +127,63 @@ public sealed class CombatHUD2D : MonoBehaviour
             fontStyle = FontStyle.Bold,
             alignment = TextAnchor.UpperLeft
         };
+    }
+
+    private void EnsureCenterStyle()
+    {
+        if (centerStyle != null && centerStyle.fontSize == fontSize)
+        {
+            return;
+        }
+
+        centerStyle = new GUIStyle(GUI.skin.label)
+        {
+            fontSize = fontSize,
+            fontStyle = FontStyle.Bold,
+            alignment = TextAnchor.UpperCenter
+        };
+    }
+
+    private void DrawCenterTopInfo()
+    {
+        if (combatManager == null)
+        {
+            centerStyle.normal.textColor = normalTextColor;
+            DrawCenteredLine("Missing CombatManager");
+            return;
+        }
+
+        centerStyle.normal.textColor = GetCombatTimeTextColor();
+
+        if (combatManager.Mode == CombatManager.CombatMode.BossCombat)
+        {
+            DrawCenteredLine($"BOSS  |  Kills: {combatManager.TotalKills}");
+            return;
+        }
+
+        switch (combatManager.State)
+        {
+            case CombatManager.CombatState.NotStarted:
+                DrawCenteredLine($"Starting: {combatManager.Duration:0.0}s");
+                break;
+
+            case CombatManager.CombatState.Running:
+                DrawCenteredLine($"{combatManager.RemainingTime:0.0}s  |  Kills: {combatManager.TotalKills}");
+                break;
+
+            case CombatManager.CombatState.ClearingEnemies:
+                DrawCenteredLine($"Clear: {combatManager.RemainingEnemyCount} remaining");
+                break;
+
+            default:
+                DrawCenteredLine($"Combat: {combatManager.State}");
+                break;
+        }
+    }
+
+    private void DrawCenteredLine(string text)
+    {
+        GUI.Label(new Rect(0f, screenOffset.y, Screen.width, lineHeight), text, centerStyle);
     }
 
     private void DrawLine(string text, Color color, float y)
@@ -290,36 +348,6 @@ public sealed class CombatHUD2D : MonoBehaviour
         return playerUltimate.IsUltimateReady
             ? $"Ult: {playerUltimate.CurrentUltimateType} Ready"
             : $"Ult: {playerUltimate.UltimateCooldownRemaining:0.0}s";
-    }
-
-    private string FormatCombatTimeText()
-    {
-        if (combatManager == null)
-        {
-            return "Time Left: Missing CombatManager";
-        }
-
-        if (combatManager.Mode != CombatManager.CombatMode.NormalCombat)
-        {
-            return $"Combat: {combatManager.State} | Boss Mode";
-        }
-
-        if (combatManager.State == CombatManager.CombatState.ClearingEnemies)
-        {
-            return $"Clear Enemies: {combatManager.RemainingEnemyCount}";
-        }
-
-        if (combatManager.State == CombatManager.CombatState.Running)
-        {
-            return $"Time Left: {combatManager.RemainingTime:0.0}s";
-        }
-
-        if (combatManager.State == CombatManager.CombatState.NotStarted)
-        {
-            return $"Time Left: {combatManager.Duration:0.0}s";
-        }
-
-        return $"Combat: {combatManager.State}";
     }
 
     private Color GetSkillTextColor()

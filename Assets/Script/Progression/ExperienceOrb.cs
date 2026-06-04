@@ -38,7 +38,7 @@ public sealed class ExperienceOrb : MonoBehaviour
 
         CircleCollider2D collider = GetComponent<CircleCollider2D>();
         collider.isTrigger = true;
-        collider.radius = 1f;
+        collider.radius = 0.24f;
 
         spriteRenderer.sprite = GetOrbSprite();
         spriteRenderer.color = orbColor;

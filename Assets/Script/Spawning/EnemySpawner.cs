@@ -35,8 +35,10 @@ public sealed class EnemySpawner : MonoBehaviour
 
     private float nextSpawnTime;
     private int nextCycleSpawnIndex;
+    private int totalKilled;
     private readonly List<GameObject> spawnedEnemies = new List<GameObject>();
 
+    public int TotalKilled => totalKilled;
     public int AliveCount
     {
         get
@@ -116,6 +118,7 @@ public sealed class EnemySpawner : MonoBehaviour
             }
 
             spawnedEnemies.Add(enemy.gameObject);
+            SubscribeToEnemyDeath(enemy.gameObject);
             return;
         }
 
@@ -138,6 +141,27 @@ public sealed class EnemySpawner : MonoBehaviour
         }
 
         spawnedEnemies.Add(legacyEnemy.gameObject);
+        SubscribeToEnemyDeath(legacyEnemy.gameObject);
+    }
+
+    private void SubscribeToEnemyDeath(GameObject enemyObj)
+    {
+        if (enemyObj == null)
+        {
+            return;
+        }
+
+        Health health = enemyObj.GetComponent<Health>();
+        if (health != null)
+        {
+            health.OnDeath += () => totalKilled++;
+        }
+
+        SimpleHealth simpleHealth = enemyObj.GetComponent<SimpleHealth>();
+        if (simpleHealth != null)
+        {
+            simpleHealth.OnDeath += () => totalKilled++;
+        }
     }
 
     private EnemyData SelectEnemyData()

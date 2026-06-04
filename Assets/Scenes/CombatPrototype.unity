@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 100001}
   - component: {fileID: 100002}
   - component: {fileID: 100003}
+  - component: {fileID: 100004}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -214,7 +215,7 @@ MonoBehaviour:
   cooldownTextColor: {r: 1, g: 0.82, b: 0.35, a: 1}
   healthBarWidth: 280
   healthBarHeight: 22
-  healthBarBottomOffset: 30
+  healthBarBottomOffset: 90
   healthBarBackgroundColor: {r: 0.12, g: 0.12, b: 0.12, a: 0.85}
   healthBarBorderColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
   expBarWidth: 200
@@ -223,6 +224,38 @@ MonoBehaviour:
   expBarBackgroundColor: {r: 0.12, g: 0.12, b: 0.12, a: 0.85}
   expBarBorderColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
   expBarColor: {r: 0.35, g: 0.55, b: 1, a: 1}
+--- !u!114 &100004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bb2af6cfd219f40b5d9329e8e006d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillIconHUD
+  playerDash: {fileID: 300009}
+  weaponController: {fileID: 1537638391}
+  spellController: {fileID: 341117000}
+  playerUltimate: {fileID: 0}
+  cultivationState: {fileID: 0}
+  iconSize: 65
+  iconGap: 35
+  barBottomOffset: 10
+  iconFontSize: 15
+  cooldownFontSize: 20
+  keyFontSize: 15
+  dashColor: {r: 0.3, g: 0.7, b: 1, a: 1}
+  weaponSkillColor: {r: 1, g: 0.6, b: 0.1, a: 1}
+  ultColor: {r: 1, g: 0.2, b: 0.2, a: 1}
+  readyBorderColor: {r: 1, g: 1, b: 1, a: 0.85}
+  cooldownBorderColor: {r: 0.6, g: 0.6, b: 0.6, a: 0.7}
+  lockedColor: {r: 0.25, g: 0.25, b: 0.25, a: 0.9}
+  cooldownOverlayColor: {r: 0, g: 0, b: 0, a: 0.6}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  cooldownTextColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &200000
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 725dbe9a1be6eab4bb6c5224a381519a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement2D
-  moveSpeed: 6
+  moveSpeed: 2
   playerStats: {fileID: 248003822}
   arenaBounds: {fileID: 1847977468}
   arenaPadding: 0.35
@@ -1348,7 +1381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   maxHP: 10000
   baseDamage: 1000
-  moveSpeed: 12
+  moveSpeed: 5
   healthRegen: 100
 --- !u!4 &248003823
 Transform:
@@ -1523,8 +1556,6 @@ GameObject:
   - component: {fileID: 444070824}
   - component: {fileID: 444070823}
   - component: {fileID: 444070822}
-  - component: {fileID: 444070821}
-  - component: {fileID: 444070820}
   m_Layer: 0
   m_Name: Experience
   m_TagString: Untagged
@@ -1532,37 +1563,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &444070820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444070819}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 536f3dad34c405c4ba43cc1bed06f1c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerExperience
-  currentExperience: 0
-  level: 1
-  baseExperienceToNextLevel: 10
-  experienceGrowth: 1.15
-  cultivationState: {fileID: 444070821}
---- !u!114 &444070821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 444070819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e64aa5570417ee4082dd2fa67317ba4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCultivationState
-  playerRealm: 1
-  spellRealm: 3
 --- !u!212 &444070822
 SpriteRenderer:
   serializedVersion: 2
