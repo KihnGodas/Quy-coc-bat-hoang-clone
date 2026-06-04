@@ -6,6 +6,7 @@ public sealed class MeleeHitbox : MonoBehaviour
     [SerializeField] private LayerMask targetLayers;
     [SerializeField] private bool drawDebugGizmos = true;
     [SerializeField] private Color gizmoColor = new Color(1f, 0.25f, 0.15f, 0.75f);
+    [SerializeField, Min(0f)] private float colliderEdgeTolerance = 0.35f;
 
     private AttackShape lastShape;
     private Vector2 lastOrigin;
@@ -38,7 +39,7 @@ public sealed class MeleeHitbox : MonoBehaviour
                 continue;
             }
 
-            if (!IsColliderInsideAttack(candidate, shape, origin, direction, range, width, angle, radius))
+            if (!IsColliderInsideAttack(candidate, shape, origin, direction, range, width, angle, radius, colliderEdgeTolerance))
             {
                 continue;
             }
@@ -68,32 +69,37 @@ public sealed class MeleeHitbox : MonoBehaviour
         float range,
         float width,
         float angle,
-        float radius)
+        float radius,
+        float tolerance)
     {
+        float expandedRange = range + tolerance;
+        float expandedWidth = width + tolerance * 2f;
+        float expandedAngle = Mathf.Clamp(angle + tolerance * 18f, 1f, 360f);
+        float expandedRadius = radius + tolerance;
         Bounds bounds = collider.bounds;
         Vector2 center = bounds.center;
-        if (WeaponAttackShape.Contains(shape, origin, direction, center, range, width, angle, radius))
+        if (WeaponAttackShape.Contains(shape, origin, direction, center, expandedRange, expandedWidth, expandedAngle, expandedRadius))
         {
             return true;
         }
 
-        if (WeaponAttackShape.Contains(shape, origin, direction, collider.ClosestPoint(origin), range, width, angle, radius))
+        if (WeaponAttackShape.Contains(shape, origin, direction, collider.ClosestPoint(origin), expandedRange, expandedWidth, expandedAngle, expandedRadius))
         {
             return true;
         }
 
-        Vector2 shapeCenter = GetShapeCenter(shape, origin, direction, range, radius);
-        if (WeaponAttackShape.Contains(shape, origin, direction, collider.ClosestPoint(shapeCenter), range, width, angle, radius))
+        Vector2 shapeCenter = GetShapeCenter(shape, origin, direction, expandedRange, expandedRadius);
+        if (WeaponAttackShape.Contains(shape, origin, direction, collider.ClosestPoint(shapeCenter), expandedRange, expandedWidth, expandedAngle, expandedRadius))
         {
             return true;
         }
 
         Vector2 min = bounds.min;
         Vector2 max = bounds.max;
-        return WeaponAttackShape.Contains(shape, origin, direction, new Vector2(min.x, min.y), range, width, angle, radius)
-            || WeaponAttackShape.Contains(shape, origin, direction, new Vector2(min.x, max.y), range, width, angle, radius)
-            || WeaponAttackShape.Contains(shape, origin, direction, new Vector2(max.x, min.y), range, width, angle, radius)
-            || WeaponAttackShape.Contains(shape, origin, direction, new Vector2(max.x, max.y), range, width, angle, radius);
+        return WeaponAttackShape.Contains(shape, origin, direction, new Vector2(min.x, min.y), expandedRange, expandedWidth, expandedAngle, expandedRadius)
+            || WeaponAttackShape.Contains(shape, origin, direction, new Vector2(min.x, max.y), expandedRange, expandedWidth, expandedAngle, expandedRadius)
+            || WeaponAttackShape.Contains(shape, origin, direction, new Vector2(max.x, min.y), expandedRange, expandedWidth, expandedAngle, expandedRadius)
+            || WeaponAttackShape.Contains(shape, origin, direction, new Vector2(max.x, max.y), expandedRange, expandedWidth, expandedAngle, expandedRadius);
     }
 
     private static Vector2 GetShapeCenter(AttackShape shape, Vector2 origin, Vector2 direction, float range, float radius)

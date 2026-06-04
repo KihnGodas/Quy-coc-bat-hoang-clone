@@ -5,10 +5,18 @@ public sealed class CombatBootstrap : MonoBehaviour
     [SerializeField] private ArenaBounds arenaBounds;
     [SerializeField] private Transform player;
     [SerializeField] private EnemySpawner enemySpawner;
+    [SerializeField] private CombatDifficultyScaler combatDifficultyScaler;
+    [SerializeField] private BossController bossController;
     [SerializeField] private CombatManager combatManager;
     [SerializeField] private CombatHUD2D combatHud;
+    [SerializeField] private BossHealthUI bossHealthUi;
+    [SerializeField] private CombatResultUI combatResultUi;
     [SerializeField] private DebugCombatUI debugCombatUI;
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private bool ensureBossController = true;
+    [SerializeField] private bool ensureBossHealthUi = true;
+    [SerializeField] private bool ensureCombatDifficultyScaler = true;
+    [SerializeField] private bool ensureCombatResultUi = true;
     [SerializeField] private bool ensurePlayerExperience = true;
     [SerializeField] private bool ensurePlayerCultivationState = true;
     [SerializeField] private bool ensurePlayerSpellController = true;
@@ -29,6 +37,7 @@ public sealed class CombatBootstrap : MonoBehaviour
     {
         ResolveReferences();
         EnsureRuntimePlayerComponents();
+        EnsureRuntimeCombatComponents();
 
         if (logBootstrap)
         {
@@ -62,9 +71,29 @@ public sealed class CombatBootstrap : MonoBehaviour
             combatManager = FindComponentInScene<CombatManager>();
         }
 
+        if (bossController == null)
+        {
+            bossController = FindComponentInScene<BossController>();
+        }
+
+        if (combatDifficultyScaler == null)
+        {
+            combatDifficultyScaler = FindComponentInScene<CombatDifficultyScaler>();
+        }
+
         if (combatHud == null)
         {
             combatHud = FindComponentInScene<CombatHUD2D>();
+        }
+
+        if (bossHealthUi == null)
+        {
+            bossHealthUi = FindComponentInScene<BossHealthUI>();
+        }
+
+        if (combatResultUi == null)
+        {
+            combatResultUi = FindComponentInScene<CombatResultUI>();
         }
 
         if (debugCombatUI == null)
@@ -104,6 +133,36 @@ public sealed class CombatBootstrap : MonoBehaviour
         {
             player.gameObject.AddComponent<PlayerUltimateController>();
         }
+    }
+
+    private void EnsureRuntimeCombatComponents()
+    {
+        if (ensureBossController && bossController == null)
+        {
+            bossController = gameObject.AddComponent<BossController>();
+        }
+
+        if (ensureBossHealthUi && bossHealthUi == null)
+        {
+            bossHealthUi = gameObject.AddComponent<BossHealthUI>();
+        }
+
+        if (ensureCombatDifficultyScaler && combatDifficultyScaler == null)
+        {
+            combatDifficultyScaler = gameObject.AddComponent<CombatDifficultyScaler>();
+        }
+
+        if (!ensureCombatResultUi)
+        {
+            return;
+        }
+
+        if (combatResultUi != null)
+        {
+            return;
+        }
+
+        combatResultUi = gameObject.AddComponent<CombatResultUI>();
     }
 
     private static T FindComponentInScene<T>() where T : Object

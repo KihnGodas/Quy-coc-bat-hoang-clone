@@ -407,9 +407,9 @@ public sealed class PlayerSpellController : MonoBehaviour
             return;
         }
 
-        spells.Add(new SpellData(SpellType.WoodVine, 1.3f, 10f, 2f, 1.5f, 0f, 0.1f, 1, 0f, 0f, false, new Color(0.2f, 1f, 0.35f, 0.9f)));
+        spells.Add(new SpellData(SpellType.WoodVine, 1.3f, 9f, 2.4f, 1.5f, 0f, 0.1f, 1, 0f, 0f, false, new Color(0.2f, 1f, 0.35f, 0.9f)));
         spells.Add(new SpellData(SpellType.Fireball, 2.3f, 8f, 0f, 0f, 15f, 1.4f, 1, 0f, 0f, false, new Color(1f, 0.28f, 0.05f, 0.95f)));
-        spells.Add(new SpellData(SpellType.EarthSpike, 1.8f, 9f, 2f, 0f, 0f, 0.1f, 1, 0f, 0f, false, new Color(0.9f, 0.62f, 0.2f, 0.95f)));
+        spells.Add(new SpellData(SpellType.EarthSpike, 1.8f, 9f, 2.5f, 0f, 0f, 0.1f, 1, 0f, 0f, false, new Color(0.9f, 0.62f, 0.2f, 0.95f)));
         spells.Add(new SpellData(SpellType.WaterArrows, 0.75f, 7f, 0f, 0f, 14f, 1.3f, 3, 0.12f, 8f, false, new Color(0.15f, 0.78f, 1f, 0.9f)));
         spells.Add(new SpellData(SpellType.MetalBlade, 1.7f, 8f, 0f, 0f, 16f, 1.4f, 1, 0f, 0f, true, new Color(1f, 0.95f, 0.45f, 0.95f)));
     }

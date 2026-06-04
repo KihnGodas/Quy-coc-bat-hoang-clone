@@ -40,6 +40,9 @@ public sealed class CombatManager : MonoBehaviour
     public int TotalKills => enemySpawner != null ? enemySpawner.TotalKilled : 0;
     public bool IsRunning => state == CombatState.Running;
     public bool IsClearingEnemies => state == CombatState.ClearingEnemies;
+    public bool IsRunning => state == CombatState.Running;
+    public bool IsClearingEnemies => state == CombatState.ClearingEnemies;
+    public bool IsBossCombat => combatMode == CombatMode.BossCombat;
 
     public event Action OnCombatStarted;
     public event Action OnCombatVictory;
@@ -112,10 +115,20 @@ public sealed class CombatManager : MonoBehaviour
 
         if (controlEnemySpawner && enemySpawner != null)
         {
-            enemySpawner.SetSpawningEnabled(true);
+            enemySpawner.SetSpawningEnabled(combatMode == CombatMode.NormalCombat);
         }
 
         OnCombatStarted?.Invoke();
+    }
+
+    public void SetCombatMode(CombatMode newCombatMode)
+    {
+        if (state == CombatState.Running || state == CombatState.ClearingEnemies)
+        {
+            return;
+        }
+
+        combatMode = newCombatMode;
     }
 
     public void CompleteCombat(CombatResult combatResult)
@@ -174,6 +187,15 @@ public sealed class CombatManager : MonoBehaviour
         if (enemySpawner == null)
         {
             enemySpawner = FindComponentInScene<EnemySpawner>();
+        }
+
+        if (bossHealth == null)
+        {
+            BossBase boss = FindComponentInScene<BossBase>();
+            if (boss != null)
+            {
+                SetBossHealth(boss.Health);
+            }
         }
     }
 

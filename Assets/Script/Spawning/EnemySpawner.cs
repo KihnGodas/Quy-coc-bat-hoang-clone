@@ -39,6 +39,12 @@ public sealed class EnemySpawner : MonoBehaviour
     private readonly List<GameObject> spawnedEnemies = new List<GameObject>();
 
     public int TotalKilled => totalKilled;
+    private float runtimeSpawnInterval = -1f;
+    private int runtimeMaxAliveEnemies = -1;
+    private int nextCycleSpawnIndex;
+    private int totalSpawnedCount;
+    private readonly List<GameObject> spawnedEnemies = new List<GameObject>();
+
     public int AliveCount
     {
         get
@@ -49,21 +55,44 @@ public sealed class EnemySpawner : MonoBehaviour
     }
 
     public bool IsSpawningEnabled => spawningEnabled;
+    public float EffectiveSpawnInterval => runtimeSpawnInterval > 0f ? runtimeSpawnInterval : spawnInterval;
+    public int EffectiveMaxAliveEnemies => runtimeMaxAliveEnemies > 0 ? runtimeMaxAliveEnemies : maxAliveEnemies;
+    public int TotalSpawnedCount => totalSpawnedCount;
+    public int DefeatedEnemyCount
+    {
+        get
+        {
+            CleanupDeadEnemies();
+            return Mathf.Max(0, totalSpawnedCount - spawnedEnemies.Count);
+        }
+    }
 
     public void SetSpawningEnabled(bool enabled)
     {
         spawningEnabled = enabled;
         if (spawningEnabled)
         {
-            nextSpawnTime = Time.time + spawnInterval;
+            nextSpawnTime = Time.time + EffectiveSpawnInterval;
         }
+    }
+
+    public void SetDifficultySpawnSettings(float effectiveSpawnInterval, int effectiveMaxAliveEnemies)
+    {
+        runtimeSpawnInterval = Mathf.Max(0.1f, effectiveSpawnInterval);
+        runtimeMaxAliveEnemies = Mathf.Max(1, effectiveMaxAliveEnemies);
+    }
+
+    public void ClearDifficultySpawnSettings()
+    {
+        runtimeSpawnInterval = -1f;
+        runtimeMaxAliveEnemies = -1;
     }
 
     private void Start()
     {
         FindPlayerIfNeeded();
         FindCombatManagerIfNeeded();
-        nextSpawnTime = Time.time + spawnInterval;
+        nextSpawnTime = Time.time + EffectiveSpawnInterval;
     }
 
     private void Update()
@@ -85,11 +114,11 @@ public sealed class EnemySpawner : MonoBehaviour
             return;
         }
 
-        nextSpawnTime = Time.time + spawnInterval;
+        nextSpawnTime = Time.time + EffectiveSpawnInterval;
 
         CleanupDeadEnemies();
 
-        if ((enemyPrefab == null && enemyBasePrefab == null) || spawnedEnemies.Count >= maxAliveEnemies)
+        if ((enemyPrefab == null && enemyBasePrefab == null) || spawnedEnemies.Count >= EffectiveMaxAliveEnemies)
         {
             return;
         }
@@ -119,6 +148,7 @@ public sealed class EnemySpawner : MonoBehaviour
 
             spawnedEnemies.Add(enemy.gameObject);
             SubscribeToEnemyDeath(enemy.gameObject);
+            totalSpawnedCount++;
             return;
         }
 
@@ -476,6 +506,11 @@ public sealed class EnemySpawner : MonoBehaviour
         }
 
         if (!combatManager.IsRunning)
+        {
+            return false;
+        }
+
+        if (combatManager.Mode == CombatManager.CombatMode.BossCombat)
         {
             return false;
         }

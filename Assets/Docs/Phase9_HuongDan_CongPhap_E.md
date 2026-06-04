@@ -36,8 +36,8 @@ He thong duoc gan runtime thong qua `CombatBootstrap`, khong sua scene/prefab YA
 - Phim cast: E.
 - Target: vi tri chuot.
 - Damage: 130% BaseDamage = 65 khi BaseDamage = 50.
-- Cooldown: 10s.
-- Ban kinh: 2m.
+- Cooldown: 9s.
+- Ban kinh: 2.4m.
 - Hieu ung: vong xanh la + cac duong re/cay bo ra tu tam.
 - Tac dung: gay damage AoE va Root enemy 1.5s.
 - Root chi khoa di chuyen, khong khoa hoan toan attack.
@@ -58,7 +58,7 @@ He thong duoc gan runtime thong qua `CombatBootstrap`, khong sua scene/prefab YA
 - Target: vi tri chuot.
 - Damage: 180% BaseDamage = 90 khi BaseDamage = 50.
 - Cooldown: 9s.
-- Ban kinh: 2m.
+- Ban kinh: 2.5m.
 - Hieu ung: vong vang nau + cac duong gai dat noi len.
 - Tac dung: AoE damage, moi enemy chi nhan damage 1 lan du co nhieu collider.
 
@@ -139,7 +139,7 @@ He thong duoc gan runtime thong qua `CombatBootstrap`, khong sua scene/prefab YA
 - Bam E.
 - Ky vong:
   - Co vong/gai dat mau vang nau.
-  - Enemy trong ban kinh 2m bi damage.
+  - Enemy trong ban kinh 2.5m bi damage.
   - Enemy co nhieu collider khong bi tinh damage lap.
 
 ### Test 4 - Thuy ban lien tiep
@@ -173,8 +173,8 @@ He thong hien tu gan runtime nen khong bat buoc sua scene. Neu muon Player luon 
 ## Luu y can bang
 
 - Damage tinh theo `PlayerStats.BaseDamage`, hien tai BaseDamage mac dinh la 50.
-- Moc uu tien khong che nen damage vua phai va cooldown cao.
+- Moc uu tien khong che nen damage vua phai, cooldown 9s va radius 2.4m de de test hon.
 - Hoa la burst don muc tieu nen damage cao nhat.
-- Tho la AoE nen damage thap hon Hoa.
+- Tho la AoE nen damage thap hon Hoa, radius 2.5m de vung danh ro hon.
 - Thuy chia damage thanh 3 vien, hop de test nhieu hit.
 - Kim co xuyen muc tieu nen damage moi hit thap hon Hoa.

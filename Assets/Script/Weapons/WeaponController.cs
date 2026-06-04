@@ -16,7 +16,8 @@ public sealed class WeaponController : MonoBehaviour
     [SerializeField] private LayerMask targetLayers;
     [SerializeField, Min(0f)] private float meleeOriginForwardOffset = 0.45f;
     [SerializeField] private bool useAutomaticNormalAttack = true;
-    [SerializeField, Min(0f)] private float autoAttackRangePadding = 2.5f;
+    [SerializeField, Min(0f)] private float autoAttackRangePadding = 0.45f;
+    [SerializeField, Min(0f)] private float autoTargetShapeTolerance = 0.45f;
     [SerializeField, Min(0.05f)] private float autoTargetRefreshInterval = 0.12f;
     [SerializeField] private WeaponType currentWeapon = WeaponType.FlyingSword;
     [SerializeField] private bool disableLegacyCombatOnAwake = true;
@@ -33,7 +34,6 @@ public sealed class WeaponController : MonoBehaviour
     public bool IsSkillReady => Time.time >= nextSkillTime;
     public float NormalAttackCooldownRemaining => Mathf.Max(nextNormalAttackTime - Time.time, 0f);
     public float SkillCooldownRemaining => Mathf.Max(nextSkillTime - Time.time, 0f);
-    public float CurrentSkillCooldown => GetCurrentWeaponData() != null ? GetCurrentWeaponData().SkillCooldown : 0f;
 
     private void Reset()
     {
@@ -369,6 +369,17 @@ public sealed class WeaponController : MonoBehaviour
             }
 
             Transform root = candidate.transform.root;
+            Vector2 directionToTarget = (Vector2)(root.position - transform.position);
+            if (directionToTarget.sqrMagnitude <= 0.0001f)
+            {
+                continue;
+            }
+
+            if (!IsInsideAutoAttackShape(weaponData, candidate, directionToTarget.normalized))
+            {
+                continue;
+            }
+
             float distanceSqr = ((Vector2)root.position - (Vector2)transform.position).sqrMagnitude;
             if (distanceSqr < bestDistanceSqr)
             {
@@ -394,9 +405,61 @@ public sealed class WeaponController : MonoBehaviour
         if (weaponData.NormalAttackShape == AttackShape.Projectile || weaponData.NormalAttackShape == AttackShape.ProjectileSpread)
         {
             reach = Mathf.Max(reach, weaponData.NormalProjectileSpeed * weaponData.NormalProjectileLifetime);
+            return Mathf.Max(0.1f, reach + autoAttackRangePadding);
         }
 
-        return Mathf.Max(0.1f, reach + autoAttackRangePadding);
+        return Mathf.Max(0.1f, reach + meleeOriginForwardOffset + autoAttackRangePadding);
+    }
+
+    private bool IsInsideAutoAttackShape(WeaponData weaponData, Collider2D candidate, Vector2 direction)
+    {
+        AttackShape shape = weaponData.NormalAttackShape;
+        if (shape == AttackShape.Projectile || shape == AttackShape.ProjectileSpread)
+        {
+            return true;
+        }
+
+        Vector2 origin = GetAttackOrigin(shape, direction);
+        float range = weaponData.NormalRange + autoTargetShapeTolerance;
+        float width = weaponData.NormalWidth + autoTargetShapeTolerance * 2f;
+        float angle = Mathf.Clamp(weaponData.NormalAngle + autoTargetShapeTolerance * 18f, 1f, 360f);
+        float radius = weaponData.NormalRadius + autoTargetShapeTolerance;
+        Bounds bounds = candidate.bounds;
+
+        if (WeaponAttackShape.Contains(shape, origin, direction, bounds.center, range, width, angle, radius))
+        {
+            return true;
+        }
+
+        if (WeaponAttackShape.Contains(shape, origin, direction, candidate.ClosestPoint(origin), range, width, angle, radius))
+        {
+            return true;
+        }
+
+        Vector2 shapeCenter = GetAutoAttackShapeCenter(shape, origin, direction, range, radius);
+        if (WeaponAttackShape.Contains(shape, origin, direction, candidate.ClosestPoint(shapeCenter), range, width, angle, radius))
+        {
+            return true;
+        }
+
+        Vector2 min = bounds.min;
+        Vector2 max = bounds.max;
+        return WeaponAttackShape.Contains(shape, origin, direction, new Vector2(min.x, min.y), range, width, angle, radius)
+            || WeaponAttackShape.Contains(shape, origin, direction, new Vector2(min.x, max.y), range, width, angle, radius)
+            || WeaponAttackShape.Contains(shape, origin, direction, new Vector2(max.x, min.y), range, width, angle, radius)
+            || WeaponAttackShape.Contains(shape, origin, direction, new Vector2(max.x, max.y), range, width, angle, radius);
+    }
+
+    private static Vector2 GetAutoAttackShapeCenter(AttackShape shape, Vector2 origin, Vector2 direction, float range, float radius)
+    {
+        if (shape == AttackShape.Circle)
+        {
+            return origin;
+        }
+
+        direction = direction.sqrMagnitude > 0.0001f ? direction.normalized : Vector2.right;
+        float forwardDistance = shape == AttackShape.Cone ? range * 0.65f : range * 0.5f;
+        return origin + direction * Mathf.Max(forwardDistance, radius);
     }
 
     private LayerMask ResolveTargetLayers()
@@ -474,14 +537,14 @@ public sealed class WeaponController : MonoBehaviour
                 WeaponType.Sword,
                 AttackShape.Cone,
                 AttackShape.Projectile,
-                1.5f,
-                1.9f,
+                1.75f,
+                2f,
                 0.1f,
                 1.5f,
                 7f,
+                3.8f,
                 2f,
-                2f,
-                180f,
+                200f,
                 1f,
                 1,
                 0f,
@@ -501,13 +564,13 @@ public sealed class WeaponController : MonoBehaviour
                 WeaponType.Spear,
                 AttackShape.Rectangle,
                 AttackShape.Circle,
-                1.6f,
-                1.8f,
+                1.9f,
+                2.1f,
                 0.1f,
-                1.25f,
-                5f,
-                4f,
                 1.2f,
+                5.2f,
+                6.2f,
+                2.1f,
                 1f,
                 1f,
                 1,
@@ -518,7 +581,7 @@ public sealed class WeaponController : MonoBehaviour
                 0f,
                 1f,
                 1f,
-                5.5f,
+                6.2f,
                 1,
                 0f,
                 16f,
@@ -528,22 +591,22 @@ public sealed class WeaponController : MonoBehaviour
                 WeaponType.Axe,
                 AttackShape.Cone,
                 AttackShape.Rectangle,
-                2f,
-                2.8f,
-                0.05f,
-                2f,
-                8f,
                 2.5f,
+                3.15f,
+                0.05f,
+                1.9f,
+                8f,
+                3.4f,
                 2f,
-                120f,
+                135f,
                 1f,
                 1,
                 0f,
                 16f,
                 1f,
                 false,
-                3.8f,
-                2.3f,
+                4.8f,
+                2.8f,
                 1f,
                 1f,
                 1,
@@ -555,10 +618,10 @@ public sealed class WeaponController : MonoBehaviour
                 WeaponType.FlyingSword,
                 AttackShape.ProjectileSpread,
                 AttackShape.ProjectileSpread,
-                0.5f,
-                0.9f,
+                0.38f,
+                0.75f,
                 0.2f,
-                1f,
+                1.15f,
                 7f,
                 0f,
                 1f,

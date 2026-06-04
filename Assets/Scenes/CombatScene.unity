@@ -130,10 +130,12 @@ GameObject:
   - component: {fileID: 100001}
   - component: {fileID: 100002}
   - component: {fileID: 100003}
-  - component: {fileID: 100007}
   - component: {fileID: 100004}
   - component: {fileID: 100005}
   - component: {fileID: 100006}
+  - component: {fileID: 100007}
+  - component: {fileID: 100008}
+  - component: {fileID: 100009}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -165,24 +167,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 898d1a551da347941a2622d895e35d5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 17ff9a25f6937fa47bf0b52db78d991e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  enemyPrefab: {fileID: 848361170983661050, guid: b1d569a47fd28f448a04c3f79ecbc5bc, type: 3}
-  enemyBasePrefab: {fileID: 914000000000000001, guid: b1d569a47fd28f448a04c3f79ecbc5bc, type: 3}
-  spawnMode: 1
+  enemyPrefab: {fileID: 848361170983661050, guid: df31fc83800c0134f81dd2a176e08e77, type: 3}
+  enemyBasePrefab: {fileID: 914000000000000001, guid: df31fc83800c0134f81dd2a176e08e77, type: 3}
+  spawnMode: 0
   testEnemyData: {fileID: 11400000, guid: efc6cd34448f4c0ca610d3dc265cefb0, type: 2}
   enemySpawnTable:
-  - enemyData: {fileID: 11400000, guid: c406d2b86f5fb0040a52903233cc0558, type: 2}
+  - enemyData: {fileID: 11400000, guid: 85cb17f55c314f73b9df3f7fd4c6247f, type: 2}
     unlockTime: 0
     weight: 5
-  - enemyData: {fileID: 11400000, guid: c406d2b86f5fb0040a52903233cc0558, type: 2}
+  - enemyData: {fileID: 11400000, guid: 0b93071f78c3423b9bb0edc5d46f7745, type: 2}
     unlockTime: 3
     weight: 2.5
   - enemyData: {fileID: 11400000, guid: a1c4ec72c87c4734b9f13e866ec68dbf, type: 2}
     unlockTime: 5
     weight: 1.6
-  - enemyData: {fileID: 11400000, guid: c406d2b86f5fb0040a52903233cc0558, type: 2}
+  - enemyData: {fileID: 11400000, guid: db39ac55b5e4483ea3b99b0c9b3db246, type: 2}
     unlockTime: 7
     weight: 1.4
   - enemyData: {fileID: 11400000, guid: b5fb6a5d2eec4cc9954264c0afe2eae4, type: 2}
@@ -226,7 +228,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8e69c073051f6b46b34c0b8a59da38d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c4a2d2f81e34812a41d2e8939b8a601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatHUD2D
   playerHealth: {fileID: 300008}
@@ -263,16 +265,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b757b83654b3c94a80f41dae5322a93, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c50bb45477d4f5fa4960a0479fe0121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatBootstrap
   arenaBounds: {fileID: 500002}
   player: {fileID: 300001}
   enemySpawner: {fileID: 100002}
+  combatDifficultyScaler: {fileID: 100007}
+  bossController: {fileID: 100008}
   combatManager: {fileID: 100006}
   combatHud: {fileID: 100003}
+  bossHealthUi: {fileID: 100009}
+  combatResultUi: {fileID: 0}
   debugCombatUI: {fileID: 100005}
   mainCamera: {fileID: 200002}
+  ensureBossController: 1
+  ensureBossHealthUi: 1
+  ensureCombatDifficultyScaler: 1
+  ensureCombatResultUi: 1
   ensurePlayerExperience: 1
   ensurePlayerCultivationState: 1
   ensurePlayerSpellController: 1
@@ -287,7 +297,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fcf8eabbc6556a42a9c983fd85ddfef, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e7a38ae02ae48f299fdaff663677d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DebugCombatUI
   playerHealth2D: {fileID: 300008}
@@ -311,10 +321,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aad60eab9f69b2e429755fd3f2a8b85e, type: 3}
+  m_Script: {fileID: 11500000, guid: 70d31d351ef24b6eb7fce1b38a564fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatManager
-  combatMode: 0
+  combatMode: 1
   normalCombatDuration: 30
   autoStart: 1
   controlEnemySpawner: 1
@@ -330,29 +340,65 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bb2af6cfd219f40b5d9329e8e006d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 52738ec358d9ce642a9d068eafc5b815, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkillIconHUD
-  playerDash: {fileID: 300009}
-  weaponController: {fileID: 300015}
-  spellController: {fileID: 300017}
-  playerUltimate: {fileID: 300018}
-  cultivationState: {fileID: 0}
-  iconSize: 70
-  iconGap: 50
-  barBottomOffset: 8
-  iconFontSize: 13
-  cooldownFontSize: 16
-  keyFontSize: 10
-  dashColor: {r: 0.3, g: 0.7, b: 1, a: 1}
-  weaponSkillColor: {r: 1, g: 0.6, b: 0.1, a: 1}
-  ultColor: {r: 1, g: 0.2, b: 0.2, a: 1}
-  readyBorderColor: {r: 1, g: 1, b: 1, a: 0.85}
-  cooldownBorderColor: {r: 0.6, g: 0.6, b: 0.6, a: 0.7}
-  lockedColor: {r: 0.25, g: 0.25, b: 0.25, a: 0.9}
-  cooldownOverlayColor: {r: 0, g: 0, b: 0, a: 0.6}
+  m_EditorClassIdentifier: Assembly-CSharp::CombatDifficultyScaler
+  enemySpawner: {fileID: 100002}
+  combatManager: {fileID: 100006}
+  scalingEnabled: 1
+  earlySpawnInterval: 2.2
+  lateSpawnInterval: 0.85
+  earlyMaxAliveEnemies: 7
+  lateMaxAliveEnemies: 14
+  currentDifficulty01: 0
+  currentSpawnInterval: 0
+  currentMaxAliveEnemies: 0
+--- !u!114 &100008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d41d01b7674edbb76810cb540e5a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossController
+  combatManager: {fileID: 100006}
+  player: {fileID: 300001}
+  bossPrefab: {fileID: 0}
+  activeBoss: {fileID: 0}
+  spawnPrototypeBoss: 1
+  useAct1WoodBossPrototype: 1
+  prototypeBossName: Boss Prototype - Co Thu Ton Gia
+  prototypeBossHP: 4500
+  prototypeBossDamage: 60
+  spawnPosition: {x: 0, y: 0}
+  prototypeBossColor: {r: 0.18, g: 0.95, b: 0.35, a: 1}
+  prototypeBossScale: {x: 2.2, y: 2.2}
+--- !u!114 &100009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0135d9178d9410abf70effa21d5b30e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossHealthUI
+  bossController: {fileID: 100008}
+  combatManager: {fileID: 100006}
+  screenOffset: {x: 16, y: 124}
+  width: 420
+  height: 22
+  fontSize: 15
+  frameColor: {r: 0, g: 0, b: 0, a: 0.75}
+  fillColor: {r: 0.2, g: 0.9, b: 0.35, a: 0.95}
+  lowFillColor: {r: 1, g: 0.25, b: 0.15, a: 0.95}
   textColor: {r: 1, g: 1, b: 1, a: 1}
-  cooldownTextColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &200000
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +519,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 200000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e1f5f9ab83f6ae4e9555bbc2bd58fa3, type: 3}
+  m_Script: {fileID: 11500000, guid: 4bd2af96a3d043e5be63888ea7b28181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow2D
   target: {fileID: 300001}
@@ -505,8 +551,6 @@ GameObject:
   - component: {fileID: 300014}
   - component: {fileID: 300015}
   - component: {fileID: 300016}
-  - component: {fileID: 300018}
-  - component: {fileID: 300017}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -580,7 +624,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
   m_Color: {r: 0.25, g: 0.65, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -662,14 +706,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 725dbe9a1be6eab4bb6c5224a381519a, type: 3}
+  m_Script: {fileID: 11500000, guid: da8a37a412373db449c76358e47f910c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement2D
   moveSpeed: 12
   playerStats: {fileID: 300011}
   arenaBounds: {fileID: 500002}
   arenaPadding: 0.35
-  playerStatus: {fileID: 2064141119}
+  playerStatus: {fileID: 0}
 --- !u!114 &300006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,7 +723,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5a1d29bb9c3aa49979221f250e4747, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b2f9a6e1d2a4f9fbc3b839473d98620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAim2D
   aimCamera: {fileID: 200002}
@@ -694,13 +738,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 245d6033c92885344aa5c3d715ca2b04, type: 3}
+  m_Script: {fileID: 11500000, guid: a43ef97d771b4df29d9874f09d6e8c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat2D
   playerAim: {fileID: 300006}
-  basicProjectilePrefab: {fileID: 3328599918361081148, guid: 8f16f393fb9a30b4abf44207c7ce8bc9, type: 3}
+  basicProjectilePrefab: {fileID: 3328599918361081148, guid: 6b22e13a84708e94f9bdf42deee13f28, type: 3}
   basicFireCooldown: 0.25
-  skillProjectilePrefab: {fileID: 6100000000000000005, guid: 0993b65e51bc9a84887d910a596df47d, type: 3}
+  skillProjectilePrefab: {fileID: 6100000000000000005, guid: 26a764c98cb94c718a8b2a6a37922f07, type: 3}
   skillCooldown: 3
   muzzleFlash: {fileID: 300010}
   useLegacyCombat: 0
@@ -713,10 +757,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01d5fe4811626f94a8c45fb370bb9812, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f7e31b65a7741a293d25f0f4b78485d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth2D
-  maxHealth: 20000
+  maxHealth: 200
   currentHealth: 200
   disableControlsOnDeath: 1
   playerStats: {fileID: 300011}
@@ -730,12 +774,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 513d5f7625dc4d54c9a74e4af5dc9eec, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b4f7fcb01b946e1b2da47ad1d8a52a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDash2D
   playerMovement: {fileID: 300005}
   playerHealth: {fileID: 300008}
-  playerStatus: {fileID: 2064141119}
+  playerStatus: {fileID: 0}
   dashDistance: 4.5
   dashSpeed: 30
   dashDuration: 0.15
@@ -754,7 +798,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a028d4849981bd347972100161b9e27e, type: 3}
+  m_Script: {fileID: 11500000, guid: de6c4a8944204fcdb67449a1220ba442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MuzzleFlash2D
   playerAim: {fileID: 300006}
@@ -772,13 +816,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e33432bb27c47b04ba6c748e53e35a2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4dd7c2db09924fda8f91e6f873cbe012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  maxHP: 20000
+  maxHP: 200
   baseDamage: 50
-  moveSpeed: 5
-  healthRegen: 10
+  moveSpeed: 12
+  healthRegen: 1
 --- !u!114 &300012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,7 +832,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e04687f4c9e92847aba8099b57ac885, type: 3}
+  m_Script: {fileID: 11500000, guid: e8d33742d8a943928dd4efc851cb386f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthRegen
   playerStats: {fileID: 300011}
@@ -804,7 +848,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50a5f43a913f84744b4b9944255f7d3c, type: 3}
+  m_Script: {fileID: 11500000, guid: b10465a94ccd4b149ec35c0d344a7513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeHitbox
   targetLayers:
@@ -812,6 +856,7 @@ MonoBehaviour:
     m_Bits: 512
   drawDebugGizmos: 1
   gizmoColor: {r: 1, g: 0.25, b: 0.15, a: 0.75}
+  colliderEdgeTolerance: 0.35
 --- !u!114 &300014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,10 +866,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23c17f5bd85e5944098305c3819857b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a7cb6647a154d1abc2e9f667b7f7db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileSpawner
-  defaultProjectilePrefab: {fileID: 3328599918361081148, guid: 8f16f393fb9a30b4abf44207c7ce8bc9, type: 3}
+  defaultProjectilePrefab: {fileID: 3328599918361081148, guid: 6b22e13a84708e94f9bdf42deee13f28, type: 3}
   defaultBoomerangProjectilePrefab: {fileID: 0}
   defaultTargetLayers:
     serializedVersion: 2
@@ -838,7 +883,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f9c670c8363f234bb03a75474db5adf, type: 3}
+  m_Script: {fileID: 11500000, guid: 8357fd1fe26b47d6b43044d77c40a050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponController
   playerStats: {fileID: 300011}
@@ -849,16 +894,17 @@ MonoBehaviour:
   weaponSpriteVisual: {fileID: 320003}
   projectileSpawner: {fileID: 300014}
   muzzleFlash: {fileID: 300010}
-  projectilePrefab: {fileID: 3328599918361081148, guid: 8f16f393fb9a30b4abf44207c7ce8bc9, type: 3}
+  projectilePrefab: {fileID: 3328599918361081148, guid: 6b22e13a84708e94f9bdf42deee13f28, type: 3}
   targetLayers:
     serializedVersion: 2
     m_Bits: 512
   meleeOriginForwardOffset: 0.45
   useAutomaticNormalAttack: 1
-  autoAttackRangePadding: 2.5
+  autoAttackRangePadding: 0.45
+  autoTargetShapeTolerance: 0.45
   autoTargetRefreshInterval: 0.12
-  currentWeapon: 2
-  disableLegacyCombatOnAwake: 0
+  currentWeapon: 0
+  disableLegacyCombatOnAwake: 1
   weapons: []
 --- !u!114 &300016
 MonoBehaviour:
@@ -869,7 +915,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 300000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c985790a4a33c4c967c3d5eea53ba5, type: 3}
+  m_Script: {fileID: 11500000, guid: 47972c363466426194dce624f00947e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponVisualEffect2D
   effectLifetime: 0.18
@@ -1115,7 +1161,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 320000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3433f34cb324444bb195479da8493c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ecf124c75d74d66a9d69eec5757f1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSpriteVisual2D
   weaponRenderer: {fileID: 320002}
@@ -1165,12 +1211,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410000}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 18, z: 0}
   m_LocalScale: {x: 50, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 500001}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &410002
 SpriteRenderer:
@@ -1303,12 +1349,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 420000}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -18, z: 0}
   m_LocalScale: {x: 50, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 500001}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &420002
 SpriteRenderer:
@@ -1441,12 +1487,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 430000}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -24, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 36, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 500001}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &430002
 SpriteRenderer:
@@ -1579,12 +1625,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440000}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 24, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 36, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 500001}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &440002
 SpriteRenderer:
@@ -1736,7 +1782,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 500000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23886d1ebfb0864449f07293e307b0bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b9fa627ad324a5194f4caf31821044c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBounds
   center: {x: 0, y: 0}
