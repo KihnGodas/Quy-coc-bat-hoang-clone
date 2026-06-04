@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 100006}
   - component: {fileID: 100007}
   - component: {fileID: 100008}
+  - component: {fileID: 100010}
   - component: {fileID: 100009}
   m_Layer: 0
   m_Name: GameManager
@@ -399,6 +400,38 @@ MonoBehaviour:
   fillColor: {r: 0.2, g: 0.9, b: 0.35, a: 0.95}
   lowFillColor: {r: 1, g: 0.25, b: 0.15, a: 0.95}
   textColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &100010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bb2af6cfd219f40b5d9329e8e006d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillIconHUD
+  playerDash: {fileID: 300009}
+  weaponController: {fileID: 300015}
+  spellController: {fileID: 300017}
+  playerUltimate: {fileID: 300018}
+  cultivationState: {fileID: 0}
+  iconSize: 50
+  iconGap: 8
+  barBottomOffset: 8
+  iconFontSize: 13
+  cooldownFontSize: 16
+  keyFontSize: 10
+  dashColor: {r: 0.3, g: 0.7, b: 1, a: 1}
+  weaponSkillColor: {r: 1, g: 0.6, b: 0.1, a: 1}
+  ultColor: {r: 1, g: 0.2, b: 0.2, a: 1}
+  readyBorderColor: {r: 1, g: 1, b: 1, a: 0.85}
+  cooldownBorderColor: {r: 0.6, g: 0.6, b: 0.6, a: 0.7}
+  lockedColor: {r: 0.25, g: 0.25, b: 0.25, a: 0.9}
+  cooldownOverlayColor: {r: 0, g: 0, b: 0, a: 0.6}
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  cooldownTextColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &200000
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +443,6 @@ GameObject:
   - component: {fileID: 200001}
   - component: {fileID: 200002}
   - component: {fileID: 200003}
-  - component: {fileID: 200004}
   - component: {fileID: 200005}
   m_Layer: 0
   m_Name: Main Camera
@@ -493,23 +525,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200000}
   m_Enabled: 1
---- !u!114 &200004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e1f5f9ab83f6ae4e9555bbc2bd58fa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 300001}
-  arenaBounds: {fileID: 500002}
-  smoothTime: 0.12
-  followOffset: {x: 0, y: 0}
-  clampToArena: 1
 --- !u!114 &200005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,6 +566,8 @@ GameObject:
   - component: {fileID: 300014}
   - component: {fileID: 300015}
   - component: {fileID: 300016}
+  - component: {fileID: 300017}
+  - component: {fileID: 300018}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1216,7 +1233,7 @@ Transform:
   m_LocalScale: {x: 50, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 500001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &410002
 SpriteRenderer:
@@ -1354,7 +1371,7 @@ Transform:
   m_LocalScale: {x: 50, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 500001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &420002
 SpriteRenderer:
@@ -1492,7 +1509,7 @@ Transform:
   m_LocalScale: {x: 1, y: 36, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 500001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &430002
 SpriteRenderer:
@@ -1630,7 +1647,7 @@ Transform:
   m_LocalScale: {x: 1, y: 36, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 500001}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &440002
 SpriteRenderer:
@@ -1814,13 +1831,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 608500661}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e33432bb27c47b04ba6c748e53e35a2e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4dd7c2db09924fda8f91e6f873cbe012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  maxHP: 2000
+  maxHP: 200
   baseDamage: 50
-  moveSpeed: 5
-  healthRegen: 20
+  moveSpeed: 12
+  healthRegen: 1
 --- !u!4 &608500663
 Transform:
   m_ObjectHideFlags: 0

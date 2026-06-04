@@ -38,7 +38,6 @@ public sealed class SkillIconHUD : MonoBehaviour
     {
         ResolveReferences();
         InitializeWhiteTexture();
-        EnsureStyles();
     }
 
     private void Update()
@@ -69,6 +68,7 @@ public sealed class SkillIconHUD : MonoBehaviour
 
     private void OnGUI()
     {
+        EnsureStyles();
         float totalWidth = iconSize * 4f + iconGap * 3f;
         float startX = (Screen.width - totalWidth) * 0.5f;
         float y = Screen.height - barBottomOffset - iconSize;
