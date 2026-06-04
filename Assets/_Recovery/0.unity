@@ -172,15 +172,33 @@ MonoBehaviour:
   spawnMode: 1
   testEnemyData: {fileID: 11400000, guid: fa19c88db0634aac9e8c01993acda8cc, type: 2}
   enemySpawnTable:
-  - {enemyData: {fileID: 11400000, guid: 85cb17f55c314f73b9df3f7fd4c6247f, type: 2}, unlockTime: 0, weight: 5}
-  - {enemyData: {fileID: 11400000, guid: 0b93071f78c3423b9bb0edc5d46f7745, type: 2}, unlockTime: 3, weight: 2.5}
-  - {enemyData: {fileID: 11400000, guid: a1c4ec72c87c4734b9f13e866ec68dbf, type: 2}, unlockTime: 5, weight: 1.6}
-  - {enemyData: {fileID: 11400000, guid: db39ac55b5e4483ea3b99b0c9b3db246, type: 2}, unlockTime: 7, weight: 1.4}
-  - {enemyData: {fileID: 11400000, guid: b5fb6a5d2eec4cc9954264c0afe2eae4, type: 2}, unlockTime: 9, weight: 1.2}
-  - {enemyData: {fileID: 11400000, guid: 22d9de1e8c0f4e6c977608a603ef4465, type: 2}, unlockTime: 11, weight: 1.2}
-  - {enemyData: {fileID: 11400000, guid: 1f5ee6e4fa564cc4a931c5b7a2bf8991, type: 2}, unlockTime: 13, weight: 0.9}
-  - {enemyData: {fileID: 11400000, guid: efc6cd34448f4c0ca610d3dc265cefb0, type: 2}, unlockTime: 15, weight: 1}
-  - {enemyData: {fileID: 11400000, guid: fa19c88db0634aac9e8c01993acda8cc, type: 2}, unlockTime: 17, weight: 0.8}
+  - enemyData: {fileID: 11400000, guid: 85cb17f55c314f73b9df3f7fd4c6247f, type: 2}
+    unlockTime: 0
+    weight: 5
+  - enemyData: {fileID: 11400000, guid: 0b93071f78c3423b9bb0edc5d46f7745, type: 2}
+    unlockTime: 3
+    weight: 2.5
+  - enemyData: {fileID: 11400000, guid: a1c4ec72c87c4734b9f13e866ec68dbf, type: 2}
+    unlockTime: 5
+    weight: 1.6
+  - enemyData: {fileID: 11400000, guid: db39ac55b5e4483ea3b99b0c9b3db246, type: 2}
+    unlockTime: 7
+    weight: 1.4
+  - enemyData: {fileID: 11400000, guid: b5fb6a5d2eec4cc9954264c0afe2eae4, type: 2}
+    unlockTime: 9
+    weight: 1.2
+  - enemyData: {fileID: 11400000, guid: 22d9de1e8c0f4e6c977608a603ef4465, type: 2}
+    unlockTime: 11
+    weight: 1.2
+  - enemyData: {fileID: 11400000, guid: 1f5ee6e4fa564cc4a931c5b7a2bf8991, type: 2}
+    unlockTime: 13
+    weight: 0.9
+  - enemyData: {fileID: 11400000, guid: efc6cd34448f4c0ca610d3dc265cefb0, type: 2}
+    unlockTime: 15
+    weight: 1
+  - enemyData: {fileID: 11400000, guid: fa19c88db0634aac9e8c01993acda8cc, type: 2}
+    unlockTime: 17
+    weight: 0.8
   player: {fileID: 300001}
   spawnInterval: 2
   maxAliveEnemies: 8
@@ -214,28 +232,14 @@ MonoBehaviour:
   playerCombat: {fileID: 300007}
   weaponController: {fileID: 300015}
   playerDash: {fileID: 300009}
-  playerExperience: {fileID: 0}
-  playerUltimate: {fileID: 0}
   combatManager: {fileID: 100006}
   screenOffset: {x: 16, y: 16}
   labelWidth: 420
   lineHeight: 22
   fontSize: 16
-  normalTextColor:
-    r: 1
-    g: 1
-    b: 1
-    a: 1
-  readyTextColor:
-    r: 0.45
-    g: 1
-    b: 0.55
-    a: 1
-  cooldownTextColor:
-    r: 1
-    g: 0.82
-    b: 0.35
-    a: 1
+  normalTextColor: {r: 1, g: 1, b: 1, a: 1}
+  readyTextColor: {r: 0.45, g: 1, b: 0.55, a: 1}
+  cooldownTextColor: {r: 1, g: 0.82, b: 0.35, a: 1}
 --- !u!114 &100004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,10 +259,6 @@ MonoBehaviour:
   combatHud: {fileID: 100003}
   debugCombatUI: {fileID: 100005}
   mainCamera: {fileID: 200002}
-  ensurePlayerExperience: 1
-  ensurePlayerCultivationState: 1
-  ensurePlayerSpellController: 1
-  ensurePlayerUltimateController: 1
   logBootstrap: 1
 --- !u!114 &100005
 MonoBehaviour:
@@ -283,11 +283,7 @@ MonoBehaviour:
   labelWidth: 260
   lineHeight: 22
   fontSize: 16
-  textColor:
-    r: 1
-    g: 1
-    b: 1
-    a: 1
+  textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &100006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,11 +702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MuzzleFlash2D
   playerAim: {fileID: 300006}
   fallbackSprite: {fileID: 0}
-  flashColor:
-    r: 1
-    g: 0.92
-    b: 0.35
-    a: 0.9
+  flashColor: {r: 1, g: 0.92, b: 0.35, a: 0.9}
   flashLifetime: 0.08
   flashScaleMultiplier: 1.6
   sortingOrder: 5
@@ -759,13 +751,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeHitbox
   targetLayers:
+    serializedVersion: 2
     m_Bits: 512
   drawDebugGizmos: 1
-  gizmoColor:
-    r: 1
-    g: 0.25
-    b: 0.15
-    a: 0.75
+  gizmoColor: {r: 1, g: 0.25, b: 0.15, a: 0.75}
 --- !u!114 &300014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,6 +770,7 @@ MonoBehaviour:
   defaultProjectilePrefab: {fileID: 3328599918361081148, guid: 6b22e13a84708e94f9bdf42deee13f28, type: 3}
   defaultBoomerangProjectilePrefab: {fileID: 0}
   defaultTargetLayers:
+    serializedVersion: 2
     m_Bits: 512
 --- !u!114 &300015
 MonoBehaviour:
@@ -804,11 +794,9 @@ MonoBehaviour:
   muzzleFlash: {fileID: 300010}
   projectilePrefab: {fileID: 3328599918361081148, guid: 6b22e13a84708e94f9bdf42deee13f28, type: 3}
   targetLayers:
+    serializedVersion: 2
     m_Bits: 512
   meleeOriginForwardOffset: 0.45
-  useAutomaticNormalAttack: 1
-  autoAttackRangePadding: 2.5
-  autoTargetRefreshInterval: 0.12
   currentWeapon: 3
   disableLegacyCombatOnAwake: 1
   weapons: []
@@ -829,16 +817,8 @@ MonoBehaviour:
   arcSegments: 24
   projectileVisualLength: 1.6
   sortingOrder: 6
-  normalColor:
-    r: 0.7
-    g: 0.95
-    b: 1
-    a: 0.85
-  skillColor:
-    r: 1
-    g: 0.65
-    b: 0.2
-    a: 0.9
+  normalColor: {r: 0.7, g: 0.95, b: 1, a: 0.85}
+  skillColor: {r: 1, g: 0.65, b: 0.2, a: 0.9}
 --- !u!1 &310000
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,42 +1023,15 @@ MonoBehaviour:
   secondaryPartRenderer: {fileID: 0}
   accentPartRenderer: {fileID: 0}
   holdDistance: 0.72
-  idleBobAmplitude: 0.08
-  idleBobFrequency: 4.5
-  idleSwayAngle: 7
   normalAttackDuration: 0.16
   skillAttackDuration: 0.24
   sortingOrder: 7
-  swordColor:
-    r: 0.8627452
-    g: 0.07843138
-    b: 0.2352941
-    a: 1
-  spearColor:
-    r: 1
-    g: 0.9
-    b: 0.45
-    a: 1
-  axeColor:
-    r: 1
-    g: 0.45
-    b: 0.2
-    a: 1
-  flyingSwordColor:
-    r: 0.55
-    g: 0.85
-    b: 1
-    a: 1
-  handleColor:
-    r: 0.52
-    g: 0.34
-    b: 0.18
-    a: 1
-  metalAccentColor:
-    r: 0.95
-    g: 0.98
-    b: 1
-    a: 1
+  swordColor: {r: 0.8627452, g: 0.07843138, b: 0.2352941, a: 1}
+  spearColor: {r: 1, g: 0.9, b: 0.45, a: 1}
+  axeColor: {r: 1, g: 0.45, b: 0.2, a: 1}
+  flyingSwordColor: {r: 0.55, g: 0.85, b: 1, a: 1}
+  handleColor: {r: 0.52, g: 0.34, b: 0.18, a: 1}
+  metalAccentColor: {r: 0.95, g: 0.98, b: 1, a: 1}
 --- !u!1 &410000
 GameObject:
   m_ObjectHideFlags: 0
@@ -1677,11 +1630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArenaBounds
   center: {x: 0, y: 0}
   size: {x: 50, y: 35}
-  gizmoColor:
-    r: 0.15
-    g: 0.85
-    b: 1
-    a: 0.8
+  gizmoColor: {r: 0.15, g: 0.85, b: 1, a: 0.8}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
