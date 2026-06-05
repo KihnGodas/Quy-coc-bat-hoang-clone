@@ -10,11 +10,13 @@ public sealed class MainMenuUI : MonoBehaviour
     [SerializeField] private Color lockedColor = new Color(0.5f, 0.5f, 0.5f, 1f);
     [SerializeField] private Color unlockedColor = Color.white;
     [SerializeField] private Color bossStageColor = new Color(1f, 0.7f, 0.2f, 1f);
+    [SerializeField] private Color tutorialColor = new Color(0.3f, 0.8f, 1f, 1f);
 
     private GUIStyle titleStyle;
     private GUIStyle stageStyle;
     private GUIStyle lockStyle;
     private GUIStyle buttonStyle;
+    private GUIStyle tutorialButtonStyle;
 
     private void OnGUI()
     {
@@ -54,8 +56,17 @@ public sealed class MainMenuUI : MonoBehaviour
         GUILayout.BeginArea(new Rect(windowRect.x + 20f, windowRect.y + 16f, windowRect.width - 40f, windowRect.height - 32f));
 
         titleStyle.normal.textColor = bossStageColor;
-        GUILayout.Label("Quỷ Cốc Bát Hoang", titleStyle);
-        GUILayout.Space(20f);
+        GUILayout.Label("Đjt mẹ TKKCG", titleStyle);
+        GUILayout.Space(16f);
+
+        Color originalColor = GUI.color;
+        GUI.color = tutorialColor;
+        if (GUILayout.Button("Hướng dẫn", tutorialButtonStyle, GUILayout.Height(buttonHeight)))
+        {
+            GameManager.Instance.LoadTutorial();
+        }
+        GUI.color = originalColor;
+        GUILayout.Space(12f);
 
         for (int i = 0; i < progression.TotalStages; i++)
         {
@@ -68,7 +79,6 @@ public sealed class MainMenuUI : MonoBehaviour
             bool unlocked = GameManager.Instance.IsStageUnlocked(i);
             bool isBoss = stage.CombatMode == CombatManager.CombatMode.BossCombat;
 
-            Color originalColor = GUI.color;
             string label = unlocked
                 ? $"{(isBoss ? "👑 " : "")}Stage {stage.StageNumber}: {stage.StageName}"
                 : $"Stage {stage.StageNumber}: ???";
@@ -134,6 +144,13 @@ public sealed class MainMenuUI : MonoBehaviour
             fontSize = stageFontSize,
             fontStyle = FontStyle.Bold,
             alignment = TextAnchor.MiddleLeft
+        };
+
+        tutorialButtonStyle = new GUIStyle(GUI.skin.button)
+        {
+            fontSize = stageFontSize,
+            fontStyle = FontStyle.Bold,
+            alignment = TextAnchor.MiddleCenter
         };
     }
 }

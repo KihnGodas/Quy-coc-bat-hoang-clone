@@ -7,12 +7,14 @@ public sealed class GameManager : MonoBehaviour
     [SerializeField] private StageProgression stageProgression;
     [SerializeField] private string combatSceneName = "CombatScene";
     [SerializeField] private string mainMenuSceneName = "MainMenu";
+    [SerializeField] private string tutorialSceneName = "TutorialScene";
     [SerializeField] private string stageProgressionResourcePath = "StageProgression";
 
     private int currentStageIndex;
     private readonly HashSet<int> unlockedStages = new HashSet<int>();
     private int savedLevel = 1;
     private float savedExperience;
+    private bool tutorialCompleted;
 
     public static GameManager Instance { get; private set; }
 
@@ -119,6 +121,23 @@ public sealed class GameManager : MonoBehaviour
         {
             UnlockStage(nextIndex);
         }
+    }
+
+    public static bool TutorialCompleted => Instance != null && Instance.tutorialCompleted;
+
+    public void LoadTutorial()
+    {
+        SceneManager.LoadScene(tutorialSceneName);
+    }
+
+    public void CompleteTutorial()
+    {
+        tutorialCompleted = true;
+        if (!unlockedStages.Contains(0))
+        {
+            UnlockStage(0);
+        }
+        GoToMainMenu();
     }
 
     public void GoToMainMenu()
