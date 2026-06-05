@@ -129,6 +129,21 @@ public sealed class CombatManager : MonoBehaviour
         combatMode = newCombatMode;
     }
 
+    public void Configure(StageData stageData)
+    {
+        if (stageData == null)
+        {
+            return;
+        }
+
+        combatMode = stageData.CombatMode;
+
+        if (combatMode == CombatMode.NormalCombat)
+        {
+            normalCombatDuration = stageData.Duration;
+        }
+    }
+
     public void CompleteCombat(CombatResult combatResult)
     {
         if (state != CombatState.Running && state != CombatState.ClearingEnemies)

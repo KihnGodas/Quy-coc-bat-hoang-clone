@@ -3,14 +3,17 @@ using UnityEngine.SceneManagement;
 
 public sealed class CombatResultUI : MonoBehaviour
 {
-    [SerializeField] private CombatManager combatManager;
+    [SerializeField]     private CombatManager combatManager;
     [SerializeField] private EnemySpawner enemySpawner;
     [SerializeField] private PlayerExperience playerExperience;
-    [SerializeField] private Vector2 windowSize = new Vector2(420f, 300f);
+    private bool stageCompletionRegistered;
+    [SerializeField] private Vector2 windowSize = new Vector2(420f, 380f);
     [SerializeField, Min(10)] private int titleFontSize = 30;
     [SerializeField, Min(8)] private int bodyFontSize = 16;
     [SerializeField, Min(20f)] private float buttonHeight = 42f;
-    [SerializeField] private string restartButtonText = "Restart";
+    [SerializeField] private string restartButtonText = "Retry";
+    [SerializeField] private string nextStageButtonText = "Next Stage";
+    [SerializeField] private string mainMenuButtonText = "Main Menu";
     [SerializeField] private Color victoryColor = new Color(0.45f, 1f, 0.55f, 1f);
     [SerializeField] private Color defeatColor = new Color(1f, 0.35f, 0.3f, 1f);
 
@@ -26,6 +29,15 @@ public sealed class CombatResultUI : MonoBehaviour
     private void Update()
     {
         ResolveReferences();
+
+        if (!stageCompletionRegistered
+            && combatManager != null
+            && combatManager.State == CombatManager.CombatState.Victory
+            && GameManager.Instance != null)
+        {
+            GameManager.Instance.CompleteCurrentStage(CombatResult.Victory);
+            stageCompletionRegistered = true;
+        }
     }
 
     private void OnGUI()
@@ -51,9 +63,28 @@ public sealed class CombatResultUI : MonoBehaviour
         DrawStats();
         GUILayout.FlexibleSpace();
 
-        if (GUILayout.Button(restartButtonText, buttonStyle, GUILayout.Height(buttonHeight)))
+        bool victory = combatManager.Result == CombatResult.Victory;
+
+        if (victory)
         {
-            RestartCurrentScene();
+            if (GUILayout.Button(nextStageButtonText, buttonStyle, GUILayout.Height(buttonHeight)))
+            {
+                LoadNextStage();
+            }
+
+            GUILayout.Space(6f);
+        }
+
+        if (GUILayout.Button(victory ? mainMenuButtonText : restartButtonText, buttonStyle, GUILayout.Height(buttonHeight)))
+        {
+            if (victory)
+            {
+                BackToMainMenu();
+            }
+            else
+            {
+                RestartCurrentScene();
+            }
         }
 
         GUILayout.EndArea();
@@ -91,14 +122,30 @@ public sealed class CombatResultUI : MonoBehaviour
 
     private void RestartCurrentScene()
     {
-        Scene activeScene = SceneManager.GetActiveScene();
-        if (activeScene.buildIndex >= 0)
+        if (GameManager.Instance != null)
         {
-            SceneManager.LoadScene(activeScene.buildIndex);
+            GameManager.Instance.ReloadCurrentStage();
             return;
         }
 
+        Scene activeScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(activeScene.name);
+    }
+
+    private void LoadNextStage()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.LoadNextStage();
+        }
+    }
+
+    private void BackToMainMenu()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.GoToMainMenu();
+        }
     }
 
     private void EnsureStyles()

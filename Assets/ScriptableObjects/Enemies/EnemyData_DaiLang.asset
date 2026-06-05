@@ -9,20 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb214320c7a6b614e8cf2376126fd81c, type: 3}
+  m_Script: {fileID: 11500000, guid: a30f7b45c9d1423abf7c1f69b7e3cb74, type: 3}
   m_Name: EnemyData_DaiLang
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Enemy
-  enemyRole: 0
-  maxHP: 100
-  damage: 10
-  moveSpeed: 5
-  attackRange: 1.1
-  attackCooldown: 1
+  enemyName: Dai Lang
+  enemyRole: 2
+  maxHP: 300
+  damage: 20
+  moveSpeed: 8
+  attackRange: 1
+  attackCooldown: 1.2
   rotateToMoveDirection: 0
   arenaPadding: 0.35
-  visualColor: {r: 1, g: 1, b: 1, a: 1}
-  visualScale: {x: 1, y: 1}
+  visualColor: {r: 0.92, g: 0.92, b: 0.86, a: 1}
+  visualScale: {x: 1.5, y: 1.05}
   colliderSize: {x: 1, y: 1}
   colliderOffset: {x: 0, y: 0}
   lowHealthThreshold: 0.5
@@ -30,12 +30,12 @@ MonoBehaviour:
   lowHealthDamageMultiplier: 1
   lowHealthAttackRateMultiplier: 1
   lowHealthMaxHealthMultiplier: 1
-  chargeRange: 5
-  chargeCooldown: 4
+  chargeRange: 4.5
+  chargeCooldown: 1.2
   chargeWindup: 0.4
-  chargeDistance: 6
-  chargeSpeed: 18
-  chargeDamageMultiplier: 1.5
+  chargeDistance: 7.5
+  chargeSpeed: 24
+  chargeDamageMultiplier: 1
   projectilePrefab: {fileID: 0}
   projectileRange: 8
   projectileRetreatRange: 0
@@ -61,5 +61,3 @@ MonoBehaviour:
   rootDuration: 1
   rootRadius: 1.5
   rootDamage: 0
-  rootTrapDamageMultiplier: 0.5
-  experienceReward: 1

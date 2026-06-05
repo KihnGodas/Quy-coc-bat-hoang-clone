@@ -50,6 +50,34 @@ public sealed class BossController : MonoBehaviour
         }
     }
 
+    public void ConfigureFromStage(StageData stageData)
+    {
+        if (stageData == null)
+        {
+            return;
+        }
+
+        if (stageData.CombatMode != CombatManager.CombatMode.BossCombat)
+        {
+            enabled = false;
+            return;
+        }
+
+        enabled = true;
+        spawnPrototypeBoss = false;
+
+        if (stageData.BossPrefab != null)
+        {
+            bossPrefab = stageData.BossPrefab;
+        }
+
+        prototypeBossName = stageData.BossName;
+        prototypeBossHP = stageData.BossHP;
+        prototypeBossDamage = stageData.BossDamage;
+        spawnPosition = stageData.BossSpawnPosition;
+        prototypeBossScale = stageData.BossScale;
+    }
+
     public void EnsureBossForBossCombat()
     {
         ResolveReferences();

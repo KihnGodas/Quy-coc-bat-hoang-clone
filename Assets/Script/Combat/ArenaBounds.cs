@@ -10,6 +10,33 @@ public sealed class ArenaBounds : MonoBehaviour
 
     public Vector2 Center => (Vector2)transform.position + center;
     public Vector2 Size => size;
+
+    public void SetSize(Vector2 newSize)
+    {
+        size = new Vector2(Mathf.Max(0.1f, newSize.x), Mathf.Max(0.1f, newSize.y));
+        UpdateWalls();
+    }
+
+    private void UpdateWalls()
+    {
+        float halfW = size.x * 0.5f;
+        float halfH = size.y * 0.5f;
+
+        SetWall("Wall_Top",    new Vector3(0,           halfH + 0.5f, 0), new Vector3(size.x + 1f, 1f, 1f));
+        SetWall("Wall_Bottom", new Vector3(0,          -halfH - 0.5f, 0), new Vector3(size.x + 1f, 1f, 1f));
+        SetWall("Wall_Left",   new Vector3(-halfW - 0.5f, 0,          0), new Vector3(1f, size.y + 1f, 1f));
+        SetWall("Wall_Right",  new Vector3( halfW + 0.5f, 0,          0), new Vector3(1f, size.y + 1f, 1f));
+    }
+
+    private void SetWall(string name, Vector3 pos, Vector3 scale)
+    {
+        Transform t = transform.Find(name);
+        if (t != null)
+        {
+            t.localPosition = pos;
+            t.localScale = scale;
+        }
+    }
     public Vector2 Min => Center - size * 0.5f;
     public Vector2 Max => Center + size * 0.5f;
 

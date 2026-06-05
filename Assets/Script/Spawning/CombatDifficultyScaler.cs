@@ -19,6 +19,20 @@ public sealed class CombatDifficultyScaler : MonoBehaviour
         set => scalingEnabled = value;
     }
 
+    public void ConfigureFromStage(StageData stageData)
+    {
+        if (stageData == null)
+        {
+            return;
+        }
+
+        scalingEnabled = stageData.EnableDifficultyScaling;
+        earlySpawnInterval = stageData.EarlySpawnInterval;
+        lateSpawnInterval = stageData.LateSpawnInterval;
+        earlyMaxAliveEnemies = stageData.EarlyMaxAlive;
+        lateMaxAliveEnemies = stageData.LateMaxAlive;
+    }
+
     private void Start()
     {
         ResolveReferences();

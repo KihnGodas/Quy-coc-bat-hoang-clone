@@ -545,7 +545,7 @@ public sealed class WeaponController : MonoBehaviour
                 WeaponType.Sword,
                 AttackShape.Cone,
                 AttackShape.Projectile,
-                1.75f,
+                10f,
                 2f,
                 0.1f,
                 1.5f,

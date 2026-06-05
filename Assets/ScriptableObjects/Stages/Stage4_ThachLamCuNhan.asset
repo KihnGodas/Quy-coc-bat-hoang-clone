@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efccf9b8a2f845644a5d768b73805de3, type: 3}
+  m_Name: Stage4_ThachLamCuNhan
+  m_EditorClassIdentifier: Assembly-CSharp::StageData
+  stageName: "Th\u1EA1ch L\xE2m C\u1EF1 Nh\xE2n"
+  stageNumber: 4
+  description: "Khu r\u1EEBng \u0111\xE1 v\u1EDBi nh\u1EEFng t\xEAn Oai H\xF9ng v\xE0
+    Thi\u1EBFt Tr\u01B0"
+  stageIcon: {fileID: 0}
+  combatMode: 0
+  duration: 35
+  spawnTable:
+  - enemyData: {fileID: 11400000, guid: 0b93071f78c3423b9bb0edc5d46f7745, type: 2}
+    unlockTime: 0
+    weight: 2
+  - enemyData: {fileID: 11400000, guid: 85cb17f55c314f73b9df3f7fd4c6247f, type: 2}
+    unlockTime: 0
+    weight: 2
+  - enemyData: {fileID: 11400000, guid: efc6cd34448f4c0ca610d3dc265cefb0, type: 2}
+    unlockTime: 5
+    weight: 2
+  - enemyData: {fileID: 11400000, guid: b5fb6a5d2eec4cc9954264c0afe2eae4, type: 2}
+    unlockTime: 8
+    weight: 1.5
+  - enemyData: {fileID: 11400000, guid: db39ac55b5e4483ea3b99b0c9b3db246, type: 2}
+    unlockTime: 12
+    weight: 1.5
+  spawnInterval: 2
+  maxAliveEnemies: 10
+  enableDifficultyScaling: 1
+  earlySpawnInterval: 2.2
+  lateSpawnInterval: 0.9
+  earlyMaxAlive: 7
+  lateMaxAlive: 13
+  bossPrefab: {fileID: 0}
+  bossName: Boss
+  bossHP: 4500
+  bossDamage: 60
+  bossSpawnPosition: {x: 0, y: 0}
+  bossScale: {x: 1, y: 1}
+  arenaSize: {x: 24, y: 16}
+  requiredStageNumber: 3
+  requiredPlayerLevel: 4
+  experienceReward: 120

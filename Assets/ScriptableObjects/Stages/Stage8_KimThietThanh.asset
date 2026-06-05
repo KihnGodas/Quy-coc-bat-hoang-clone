@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efccf9b8a2f845644a5d768b73805de3, type: 3}
+  m_Name: Stage8_KimThietThanh
+  m_EditorClassIdentifier: Assembly-CSharp::StageData
+  stageName: "Kim Thi\u1EBFt Th\xE0nh"
+  stageNumber: 8
+  description: "Ph\xE1o \u0111\xE0i kim lo\u1EA1i v\u1EDBi l\u0169 y\xEAu qu\xE1i
+    tinh nhu\u1EC7"
+  stageIcon: {fileID: 0}
+  combatMode: 0
+  duration: 50
+  spawnTable:
+  - enemyData: {fileID: 11400000, guid: b5fb6a5d2eec4cc9954264c0afe2eae4, type: 2}
+    unlockTime: 0
+    weight: 2
+  - enemyData: {fileID: 11400000, guid: 22d9de1e8c0f4e6c977608a603ef4465, type: 2}
+    unlockTime: 0
+    weight: 2
+  - enemyData: {fileID: 11400000, guid: fa19c88db0634aac9e8c01993acda8cc, type: 2}
+    unlockTime: 0
+    weight: 2
+  - enemyData: {fileID: 11400000, guid: 1f5ee6e4fa564cc4a931c5b7a2bf8991, type: 2}
+    unlockTime: 3
+    weight: 2
+  - enemyData: {fileID: 11400000, guid: 0b93071f78c3423b9bb0edc5d46f7745, type: 2}
+    unlockTime: 0
+    weight: 2
+  - enemyData: {fileID: 11400000, guid: efc6cd34448f4c0ca610d3dc265cefb0, type: 2}
+    unlockTime: 3
+    weight: 1.5
+  spawnInterval: 1.4
+  maxAliveEnemies: 15
+  enableDifficultyScaling: 1
+  earlySpawnInterval: 1.6
+  lateSpawnInterval: 0.6
+  earlyMaxAlive: 10
+  lateMaxAlive: 18
+  bossPrefab: {fileID: 0}
+  bossName: Boss
+  bossHP: 4500
+  bossDamage: 60
+  bossSpawnPosition: {x: 0, y: 0}
+  bossScale: {x: 1, y: 1}
+  arenaSize: {x: 28, y: 18}
+  requiredStageNumber: 7
+  requiredPlayerLevel: 9
+  experienceReward: 350

@@ -242,7 +242,7 @@ MonoBehaviour:
   screenOffset: {x: 16, y: 16}
   labelWidth: 420
   lineHeight: 22
-  fontSize: 16
+  fontSize: 8
   normalTextColor: {r: 1, g: 1, b: 1, a: 1}
   readyTextColor: {r: 0.45, g: 1, b: 0.55, a: 1}
   cooldownTextColor: {r: 1, g: 0.82, b: 0.35, a: 1}
@@ -288,7 +288,7 @@ MonoBehaviour:
   ensurePlayerCultivationState: 1
   ensurePlayerSpellController: 1
   ensurePlayerUltimateController: 1
-  logBootstrap: 1
+  logBootstrap: 0
 --- !u!114 &100005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,7 +311,7 @@ MonoBehaviour:
   screenOffset: {x: 16, y: 108}
   labelWidth: 260
   lineHeight: 22
-  fontSize: 16
+  fontSize: 20
   textColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &100006
 MonoBehaviour:
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d31d351ef24b6eb7fce1b38a564fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatManager
-  combatMode: 1
+  combatMode: 0
   normalCombatDuration: 30
   autoStart: 1
   controlEnemySpawner: 1
@@ -976,12 +976,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad292388144cb948b8df1173f508410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerUltimateController
-  playerStats: {fileID: 0}
-  playerAim: {fileID: 0}
-  spellController: {fileID: 0}
+  playerStats: {fileID: 608500662}
+  playerAim: {fileID: 300006}
+  spellController: {fileID: 300017}
   cultivationState: {fileID: 0}
-  projectileSpawner: {fileID: 0}
-  projectilePrefab: {fileID: 0}
+  projectileSpawner: {fileID: 300014}
+  projectilePrefab: {fileID: 6100000000000000005, guid: 26a764c98cb94c718a8b2a6a37922f07, type: 3}
   targetLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1853,6 +1853,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1246500615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1246500616}
+  m_Layer: 0
+  m_Name: StageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1246500616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246500615}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.70879, y: -3.41427, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1471142011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1966,6 +1997,7 @@ SceneRoots:
   - {fileID: 200001}
   - {fileID: 1471142012}
   - {fileID: 100001}
+  - {fileID: 1246500616}
   - {fileID: 500001}
   - {fileID: 1953616260}
   - {fileID: 300001}

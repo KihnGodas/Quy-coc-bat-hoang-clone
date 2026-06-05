@@ -88,6 +88,18 @@ public sealed class EnemySpawner : MonoBehaviour
         runtimeMaxAliveEnemies = -1;
     }
 
+    public void ConfigureFromStage(StageData stageData)
+    {
+        if (stageData == null)
+        {
+            return;
+        }
+
+        enemySpawnTable = stageData.SpawnTable;
+        spawnInterval = stageData.SpawnInterval;
+        maxAliveEnemies = stageData.MaxAliveEnemies;
+    }
+
     private void Start()
     {
         FindPlayerIfNeeded();

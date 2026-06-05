@@ -36,13 +36,75 @@ public sealed class CombatBootstrap : MonoBehaviour
     private void Start()
     {
         ResolveReferences();
+        ApplyStageConfiguration();
         EnsureRuntimePlayerComponents();
+        RestorePlayerProgression();
         EnsureRuntimeCombatComponents();
 
         if (logBootstrap)
         {
             Debug.Log($"Combat bootstrap ready. Arena: {arenaBounds != null}, Player: {player != null}, Spawner: {enemySpawner != null}");
         }
+    }
+
+    private void ApplyStageConfiguration()
+    {
+        if (GameManager.Instance == null)
+        {
+            Debug.LogWarning("GameManager.Instance not found, skipping stage configuration.");
+            return;
+        }
+
+        StageData stageData = GameManager.Instance.CurrentStage;
+        if (stageData == null)
+        {
+            Debug.LogWarning("No current stage data found, skipping stage configuration.");
+            return;
+        }
+
+        if (combatManager != null)
+        {
+            combatManager.Configure(stageData);
+        }
+
+        if (enemySpawner != null)
+        {
+            enemySpawner.ConfigureFromStage(stageData);
+        }
+
+        if (combatDifficultyScaler != null)
+        {
+            combatDifficultyScaler.ConfigureFromStage(stageData);
+        }
+
+        if (bossController != null)
+        {
+            bossController.ConfigureFromStage(stageData);
+        }
+
+        if (arenaBounds != null)
+        {
+            arenaBounds.SetSize(stageData.ArenaSize);
+        }
+
+        if (logBootstrap)
+        {
+            Debug.Log($"Stage configured: {stageData.StageName} ({stageData.CombatMode})");
+        }
+    }
+
+    private void RestorePlayerProgression()
+    {
+        if (GameManager.Instance == null)
+        {
+            return;
+        }
+
+        PlayerExperience exp = player != null
+            ? player.GetComponent<PlayerExperience>()
+            : FindComponentInScene<PlayerExperience>();
+
+        GameManager.Instance.RestorePlayerProgression(exp);
     }
 
     public void ResolveReferences()

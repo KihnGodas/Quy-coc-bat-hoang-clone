@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efccf9b8a2f845644a5d768b73805de3, type: 3}
+  m_Name: Stage5_CoMocLam
+  m_EditorClassIdentifier: Assembly-CSharp::StageData
+  stageName: "C\u1ED5 M\u1ED9c L\xE2m"
+  stageNumber: 5
+  description: "R\u1EEBng c\xE2y c\u1ED5 th\u1EE5 v\u1EDBi b\u1ECDn M\u1ED9c Y\xEAu
+    v\xE0 \u01AFng Y\xEAu phi\xEAn b\u1EA3n m\u1EA1nh"
+  stageIcon: {fileID: 0}
+  combatMode: 0
+  duration: 40
+  spawnTable:
+  - enemyData: {fileID: 11400000, guid: b5fb6a5d2eec4cc9954264c0afe2eae4, type: 2}
+    unlockTime: 0
+    weight: 2
+  - enemyData: {fileID: 11400000, guid: db39ac55b5e4483ea3b99b0c9b3db246, type: 2}
+    unlockTime: 0
+    weight: 2
+  - enemyData: {fileID: 11400000, guid: 85cb17f55c314f73b9df3f7fd4c6247f, type: 2}
+    unlockTime: 0
+    weight: 2
+  - enemyData: {fileID: 11400000, guid: 22d9de1e8c0f4e6c977608a603ef4465, type: 2}
+    unlockTime: 5
+    weight: 2
+  spawnInterval: 1.8
+  maxAliveEnemies: 12
+  enableDifficultyScaling: 1
+  earlySpawnInterval: 2
+  lateSpawnInterval: 0.8
+  earlyMaxAlive: 8
+  lateMaxAlive: 14
+  bossPrefab: {fileID: 0}
+  bossName: Boss
+  bossHP: 4500
+  bossDamage: 60
+  bossSpawnPosition: {x: 0, y: 0}
+  bossScale: {x: 1, y: 1}
+  arenaSize: {x: 26, y: 17}
+  requiredStageNumber: 4
+  requiredPlayerLevel: 5
+  experienceReward: 160
