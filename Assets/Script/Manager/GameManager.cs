@@ -140,6 +140,16 @@ public sealed class GameManager : MonoBehaviour
         GoToMainMenu();
     }
 
+    public void CompleteTutorialAndPlayStage1()
+    {
+        tutorialCompleted = true;
+        if (!unlockedStages.Contains(0))
+        {
+            UnlockStage(0);
+        }
+        TryLoadStage(0);
+    }
+
     public void GoToMainMenu()
     {
         SavePlayerProgressionFromScene();

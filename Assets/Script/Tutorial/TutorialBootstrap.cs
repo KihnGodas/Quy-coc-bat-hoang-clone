@@ -9,12 +9,14 @@ public sealed class TutorialBootstrap : MonoBehaviour
     [SerializeField] private bool ensurePlayerCultivationState = true;
     [SerializeField] private bool ensurePlayerSpellController = true;
     [SerializeField] private bool ensurePlayerUltimateController = true;
+    [SerializeField] private bool ensureDialogueSystem = true;
     [SerializeField] private bool logBootstrap = true;
 
     private void Awake()
     {
         ResolveReferences();
         EnsureRuntimePlayerComponents();
+        EnsureDialogueInfrastructure();
     }
 
     private void Start()
@@ -58,6 +60,21 @@ public sealed class TutorialBootstrap : MonoBehaviour
 
         if (ensurePlayerUltimateController && player.GetComponent<PlayerUltimateController>() == null)
             player.gameObject.AddComponent<PlayerUltimateController>();
+    }
+
+    private void EnsureDialogueInfrastructure()
+    {
+        if (!ensureDialogueSystem) return;
+
+        if (FindComponentInScene<DialogueManager>() == null)
+        {
+            GameObject dialogueGO = new GameObject("DialogueSystem");
+            dialogueGO.transform.SetParent(transform);
+            dialogueGO.AddComponent<DialogueManager>();
+            dialogueGO.AddComponent<DialogueUI>();
+            if (logBootstrap)
+                Debug.Log("TutorialBootstrap: created DialogueSystem runtime.");
+        }
     }
 
     private static T FindComponentInScene<T>() where T : Object

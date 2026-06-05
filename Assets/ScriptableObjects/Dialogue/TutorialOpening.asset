@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10388b5eb67ab074db119a7e57a34d2f, type: 3}
+  m_Name: TutorialOpening
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  lines:
+  - speaker: {fileID: 11400000, guid: 72271e117fbac474c9d6c5e162d86ff1, type: 2}
+    text: "Ch\xE0o m\u1EEBng con \u0111\u1EBFn v\u1EDBi th\u1EBF gi\u1EDBi tu ti\xEAn!
+      Ta l\xE0 L\xE3o Ti\xEAn Sinh, ng\u01B0\u1EDDi s\u1EBD h\u01B0\u1EDBng d\u1EABn
+      con nh\u1EEFng b\u01B0\u1EDBc \u0111\u1EA7u ti\xEAn."
+  - speaker: {fileID: 11400000, guid: 9650f74e4586efb46a1cac31df7f68e4, type: 2}
+    text: "D\u1EA1 th\u01B0a ti\xEAn sinh! Con r\u1EA5t h\xE1o h\u1EE9c \u0111\u01B0\u1EE3c
+      b\u1EAFt \u0111\u1EA7u h\xE0nh tr\xECnh tu luy\u1EC7n."
+  - speaker: {fileID: 11400000, guid: 72271e117fbac474c9d6c5e162d86ff1, type: 2}
+    text: "T\u1ED1t l\u1EAFm! Tr\u01B0\u1EDBc h\u1EBFt, h\xE3y l\xE0m theo c\xE1c
+      h\u01B0\u1EDBng d\u1EABn m\xE0 ta b\u1EA3o nh\xE9"
+  - speaker: {fileID: 11400000, guid: 9650f74e4586efb46a1cac31df7f68e4, type: 2}
+    text: "V\xE2ng \u1EA1! Con s\u1EBD l\xE0m theo l\u1EDDi ti\xEAn sinh."

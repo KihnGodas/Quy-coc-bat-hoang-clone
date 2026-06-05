@@ -328,6 +328,7 @@ MonoBehaviour:
   ultimateController: {fileID: 1311992494}
   cultivationState: {fileID: 0}
   playerTransform: {fileID: 1311992511}
+  tutorialOpeningDialogue: {fileID: 11400000, guid: 439b977f53e3f964a82113db4bd31c30, type: 2}
   stepCompleteDelay: 1.2
   movementRequiredDistance: 5
   aimDeltaThreshold: 0.5
@@ -776,6 +777,7 @@ MonoBehaviour:
   ensurePlayerCultivationState: 1
   ensurePlayerSpellController: 1
   ensurePlayerUltimateController: 1
+  ensureDialogueSystem: 1
   logBootstrap: 1
 --- !u!4 &1223162386
 Transform:

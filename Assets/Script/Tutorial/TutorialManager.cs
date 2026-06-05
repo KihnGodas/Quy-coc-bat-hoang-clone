@@ -24,6 +24,9 @@ public sealed class TutorialManager : MonoBehaviour
     [SerializeField] private PlayerCultivationState cultivationState;
     [SerializeField] private Transform playerTransform;
 
+    [Header("Dialogue")]
+    [SerializeField] private DialogueSO tutorialOpeningDialogue;
+
     [Header("Settings")]
     [SerializeField] private float stepCompleteDelay = 1.2f;
     [SerializeField] private float movementRequiredDistance = 5f;
@@ -59,7 +62,15 @@ public sealed class TutorialManager : MonoBehaviour
     {
         ResolveReferences();
         EnsurePlayerReadyForTutorial();
-        OnStepChanged?.Invoke(currentStep);
+
+        if (tutorialOpeningDialogue != null)
+        {
+            PlayOpeningDialogue();
+        }
+        else
+        {
+            OnStepChanged?.Invoke(currentStep);
+        }
     }
 
     private void Update()
@@ -151,7 +162,7 @@ public sealed class TutorialManager : MonoBehaviour
     {
         int nextIndex = (int)currentStep + 1;
 
-        if (nextIndex > (int)Step.Complete)
+        if (nextIndex >= (int)Step.Complete)
         {
             allCompleted = true;
             OnStepChanged?.Invoke(Step.Complete);
@@ -208,6 +219,41 @@ public sealed class TutorialManager : MonoBehaviour
     {
         Keyboard keyboard = Keyboard.current;
         return keyboard != null && keyboard.rKey.wasPressedThisFrame;
+    }
+
+    private void PlayOpeningDialogue()
+    {
+        DialogueManager dm = DialogueManager.Instance;
+        if (dm == null)
+        {
+            GameObject dialogueGO = new GameObject("DialogueSystem");
+            dialogueGO.AddComponent<DialogueManager>();
+            dialogueGO.AddComponent<DialogueUI>();
+            dm = DialogueManager.Instance;
+            if (dm == null)
+            {
+                OnStepChanged?.Invoke(currentStep);
+                return;
+            }
+        }
+
+        if (playerMovement != null)
+            playerMovement.CanMove = false;
+
+        dm.OnDialogueEnd += HandleOpeningDialogueEnd;
+        dm.PlayDialogue(tutorialOpeningDialogue);
+    }
+
+    private void HandleOpeningDialogueEnd()
+    {
+        DialogueManager dm = DialogueManager.Instance;
+        if (dm != null)
+            dm.OnDialogueEnd -= HandleOpeningDialogueEnd;
+
+        if (playerMovement != null)
+            playerMovement.CanMove = true;
+
+        OnStepChanged?.Invoke(currentStep);
     }
 
     private static T FindComponentInScene<T>() where T : Object

@@ -47,6 +47,9 @@ public sealed class TutorialUI : MonoBehaviour
 
         if (tutorialManager == null) return;
 
+        DialogueManager dm = DialogueManager.Instance;
+        if (dm != null && dm.IsPlaying) return;
+
         if (tutorialManager.AllCompleted)
         {
             DrawCompletionScreen();
@@ -111,7 +114,7 @@ public sealed class TutorialUI : MonoBehaviour
     private void DrawCompletionScreen()
     {
         float boxWidth = 440f;
-        float boxHeight = 280f;
+        float boxHeight = 290f;
         float x = (Screen.width - boxWidth) * 0.5f;
         float y = (Screen.height - boxHeight) * 0.5f + 20f;
 
@@ -126,7 +129,7 @@ public sealed class TutorialUI : MonoBehaviour
             alignment = TextAnchor.MiddleCenter
         };
         titleStyleLocal.normal.textColor = completedColor;
-        GUI.Label(new Rect(x + 20f, y + 35f, boxWidth - 40f, 50f), "Chúc mừng!", titleStyleLocal);
+        GUI.Label(new Rect(x + 20f, y + 30f, boxWidth - 40f, 50f), "Chúc mừng!", titleStyleLocal);
 
         GUIStyle bodyStyle = new GUIStyle(GUI.skin.label)
         {
@@ -135,10 +138,22 @@ public sealed class TutorialUI : MonoBehaviour
             alignment = TextAnchor.MiddleCenter
         };
         bodyStyle.normal.textColor = Color.white;
-        GUI.Label(new Rect(x + 30f, y + 100f, boxWidth - 60f, 35f), "Bạn đã học xong các thao tác cơ bản!", bodyStyle);
-        GUI.Label(new Rect(x + 30f, y + 135f, boxWidth - 60f, 30f), "Giờ hãy bắt đầu cuộc phiêu lưu!", bodyStyle);
+        GUI.Label(new Rect(x + 30f, y + 90f, boxWidth - 60f, 35f), "Bạn đã học xong các thao tác cơ bản!", bodyStyle);
+        GUI.Label(new Rect(x + 30f, y + 125f, boxWidth - 60f, 30f), "Giờ hãy bắt đầu cuộc phiêu lưu!", bodyStyle);
 
-        if (GUI.Button(new Rect(x + 60f, y + 195f, boxWidth - 120f, 54f), "Bắt đầu Stage 1", buttonStyle))
+        float buttonY = y + 170f;
+        float buttonHeight = 44f;
+        float buttonGap = 12f;
+
+        if (GUI.Button(new Rect(x + 60f, buttonY, boxWidth - 120f, buttonHeight), "Chơi Stage 1", buttonStyle))
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.CompleteTutorialAndPlayStage1();
+            }
+        }
+
+        if (GUI.Button(new Rect(x + 60f, buttonY + buttonHeight + buttonGap, boxWidth - 120f, buttonHeight), "Về Main Menu", buttonStyle))
         {
             if (GameManager.Instance != null)
             {
