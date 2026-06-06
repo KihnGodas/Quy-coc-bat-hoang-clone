@@ -6,6 +6,7 @@ public sealed class BossController : MonoBehaviour
     {
         Act1Wood,
         Act2Fire,
+        TutorialMessenger,
         Simple
     }
 
@@ -21,6 +22,9 @@ public sealed class BossController : MonoBehaviour
     [SerializeField, Min(1f)] private float prototypeBossHP = 4500f;
     [SerializeField, Min(0f)] private float prototypeBossDamage = 60f;
     [SerializeField] private Vector2 spawnPosition = Vector2.zero;
+    [SerializeField] private bool repositionPlayerForBossCombat = true;
+    [SerializeField] private Vector2 bossCombatPlayerSpawnPosition = new Vector2(-7f, 0f);
+    [SerializeField, Min(0.5f)] private float minPlayerDistanceFromBoss = 3f;
     [SerializeField] private Color prototypeBossColor = new Color(0.18f, 0.95f, 0.35f, 1f);
     [SerializeField] private Vector2 prototypeBossScale = new Vector2(2.2f, 2.2f);
 
@@ -63,7 +67,7 @@ public sealed class BossController : MonoBehaviour
     {
         ResolveReferences();
 
-        if (combatManager == null || combatManager.Mode != CombatManager.CombatMode.BossCombat)
+        if (combatManager == null || !combatManager.IsBossCombat)
         {
             return;
         }
@@ -80,6 +84,7 @@ public sealed class BossController : MonoBehaviour
         }
 
         PrototypeStats stats = GetPrototypeStats();
+        RepositionPlayerForBossCombatIfNeeded();
         activeBoss = bossPrefab != null
             ? Instantiate(bossPrefab, spawnPosition, Quaternion.identity)
             : CreatePrototypeBoss(stats);
@@ -117,6 +122,11 @@ public sealed class BossController : MonoBehaviour
             bossObject.AddComponent<Act2FireBossVisual>();
             bossObject.AddComponent<Act2FireBossController>();
         }
+        else if (selectedType == PrototypeBossType.TutorialMessenger)
+        {
+            bossObject.AddComponent<TutorialBossVisual>();
+            bossObject.AddComponent<TutorialBossController>();
+        }
         else
         {
             SpriteRenderer spriteRenderer = bossObject.AddComponent<SpriteRenderer>();
@@ -145,6 +155,13 @@ public sealed class BossController : MonoBehaviour
                     95f,
                     new Color(1f, 0.28f, 0.08f, 1f),
                     new Vector2(2.25f, 2.25f));
+            case PrototypeBossType.TutorialMessenger:
+                return new PrototypeStats(
+                    "Su Gia Thai Thuong Dao Vien",
+                    99999f,
+                    20f,
+                    new Color(0.82f, 0.92f, 1f, 1f),
+                    new Vector2(2.35f, 2.35f));
             case PrototypeBossType.Simple:
                 return new PrototypeStats(prototypeBossName, prototypeBossHP, prototypeBossDamage, prototypeBossColor, prototypeBossScale);
             default:
@@ -170,6 +187,22 @@ public sealed class BossController : MonoBehaviour
     private void HandleCombatStarted()
     {
         EnsureBossForBossCombat();
+    }
+
+    private void RepositionPlayerForBossCombatIfNeeded()
+    {
+        if (!repositionPlayerForBossCombat || player == null)
+        {
+            return;
+        }
+
+        Vector2 playerPosition = player.position;
+        if (Vector2.Distance(playerPosition, spawnPosition) >= minPlayerDistanceFromBoss)
+        {
+            return;
+        }
+
+        player.position = new Vector3(bossCombatPlayerSpawnPosition.x, bossCombatPlayerSpawnPosition.y, player.position.z);
     }
 
     private void ResolveReferences()

@@ -6,7 +6,8 @@ public sealed class CombatManager : MonoBehaviour
     public enum CombatMode
     {
         NormalCombat,
-        BossCombat
+        BossCombat,
+        TutorialBossCombat
     }
 
     public enum CombatState
@@ -39,7 +40,7 @@ public sealed class CombatManager : MonoBehaviour
     public int RemainingEnemyCount => enemySpawner != null ? enemySpawner.AliveCount : 0;
     public bool IsRunning => state == CombatState.Running;
     public bool IsClearingEnemies => state == CombatState.ClearingEnemies;
-    public bool IsBossCombat => combatMode == CombatMode.BossCombat;
+    public bool IsBossCombat => combatMode == CombatMode.BossCombat || combatMode == CombatMode.TutorialBossCombat;
 
     public event Action OnCombatStarted;
     public event Action OnCombatVictory;

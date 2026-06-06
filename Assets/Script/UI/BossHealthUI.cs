@@ -67,6 +67,20 @@ public sealed class BossHealthUI : MonoBehaviour
                 : new Color(1f, 0.72f, 0.22f, 1f);
             string stateText = fireBoss.IsEnraged ? "State: ENRAGED" : "State: NORMAL";
             GUI.Label(stateRect, $"{stateText} | Skill: {fireBoss.CurrentSkillName}", labelStyle);
+            return;
+        }
+
+        TutorialBossController tutorialBoss = boss.GetComponent<TutorialBossController>();
+        if (tutorialBoss != null)
+        {
+            Rect stateRect = new Rect(screenOffset.x, screenOffset.y + height + 4f, width, height);
+            labelStyle.normal.textColor = tutorialBoss.IsEnding
+                ? new Color(1f, 0.85f, 0.35f, 1f)
+                : new Color(0.68f, 0.9f, 1f, 1f);
+            string stateText = tutorialBoss.IsEnding
+                ? "KET THUC"
+                : $"SAT HACH {tutorialBoss.RemainingTrialTime:0.0}s";
+            GUI.Label(stateRect, $"{stateText} | Skill: {tutorialBoss.CurrentSkillName}", labelStyle);
         }
     }
 

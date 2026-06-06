@@ -209,6 +209,11 @@ public sealed class CombatHUD2D : MonoBehaviour
             return "Time Left: Missing CombatManager";
         }
 
+        if (combatManager.Mode == CombatManager.CombatMode.TutorialBossCombat)
+        {
+            return $"Tutorial Trial: {combatManager.State}";
+        }
+
         if (combatManager.Mode != CombatManager.CombatMode.NormalCombat)
         {
             return $"Boss Stage: {combatManager.State}";
