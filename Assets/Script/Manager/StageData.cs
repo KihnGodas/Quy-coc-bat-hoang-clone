@@ -33,6 +33,21 @@ public sealed class StageData : ScriptableObject
     [Header("Arena")]
     [SerializeField] private Vector2 arenaSize = new Vector2(20f, 14f);
 
+    [System.Serializable]
+    public struct NPCSpawnEntry
+    {
+        public DialogueSO dialogue;
+        public Vector2 spawnPosition;
+        public float triggerRadius;
+        public Sprite npcSprite;
+    }
+
+    [Header("Dialogue")]
+    [SerializeField] private DialogueSO entranceDialogue;
+    [SerializeField] private DialogueSO bossPreDialogue;
+    [SerializeField] private DialogueSO bossPostDialogue;
+    [SerializeField] private NPCSpawnEntry[] npcEncounters;
+
     [Header("Unlock & Rewards")]
     [SerializeField] private int requiredStageNumber;
     [SerializeField] private int requiredPlayerLevel;
@@ -59,6 +74,10 @@ public sealed class StageData : ScriptableObject
     public Vector2 BossSpawnPosition => bossSpawnPosition;
     public Vector2 BossScale => bossScale;
     public Vector2 ArenaSize => arenaSize;
+    public DialogueSO EntranceDialogue => entranceDialogue;
+    public DialogueSO BossPreDialogue => bossPreDialogue;
+    public DialogueSO BossPostDialogue => bossPostDialogue;
+    public NPCSpawnEntry[] NPCSpawns => npcEncounters;
     public int RequiredStageNumber => requiredStageNumber;
     public int RequiredPlayerLevel => requiredPlayerLevel;
     public float ExperienceReward => experienceReward;

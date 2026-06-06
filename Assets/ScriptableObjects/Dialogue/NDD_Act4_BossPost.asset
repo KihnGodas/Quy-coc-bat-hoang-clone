@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10388b5eb67ab074db119a7e57a34d2f, type: 3}
+  m_Name: NDD_Act4_BossPost
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  lines:
+  - speaker: {fileID: 11400000, guid: 8b72e6edcdc05094293d1d2dc8916521, type: 2}
+    text: "\u0110\u1EA1o T\xF4n... ng\xE0i l\u1EEBa ta... L\xF2 r\xE8n n\xE0y...
+      kh\xF4ng r\xE8n ra th\u1EA7n kh\xED... N\xF3 r\xE8n ra... \xE1c qu\u1EF7..."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "S\u1EAFt v\u1EE5n th\xEC v\u1EC1 v\u1EDBi b\xE3i r\xE1c \u0111i."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 78d4e64e81e4bf94a9f05d8e01f098b2, type: 2}
+    text: "Kim Tr\u1EA5n Thi\xEAn Kh\xED \u0111\xE3 v\u1EC1 tay ng\u01B0\u01A1i.
+      B\u1EC7 ph\xF3ng trung t\xE2m \u0111\xE3 k\xEDch ho\u1EA1t. Chu\u1EA9n b\u1ECB
+      cho tr\u1EADn chi\u1EBFn cu\u1ED1i c\xF9ng."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 

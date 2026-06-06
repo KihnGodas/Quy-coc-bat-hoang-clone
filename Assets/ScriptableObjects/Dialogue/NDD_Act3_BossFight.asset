@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10388b5eb67ab074db119a7e57a34d2f, type: 3}
+  m_Name: NDD_Act3_BossFight
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  lines:
+  - speaker: {fileID: 11400000, guid: 877fb4f5732a48a4cbd31da0e12048a3, type: 2}
+    text: "\u0110\u1EA1i La Kim \u1EA4n! C\xFAi \u0111\u1EA7u tr\u01B0\u1EDBc uy
+      nghi\xEAm c\u1EE7a Thi\xEAn \u0110\u1EA1o!"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "S\xE1t th\u01B0\u01A1ng c\u1EE7a l\u1EDBp kim quang qu\xE1 l\u1EDBn. Ph\u1EA3i
+      li\xEAn t\u1EE5c t\u1EA5n c\xF4ng v\xE0o c\xE1c \u0111i\u1EC3m m\xF9, ph\xE1
+      v\u1EE1 thanh s\u1EE9c b\u1EC1n \u0111\u1EC3 l\u1ED9t l\u1EDBp v\u1ECF b\u1ECDc
+      n\xE0y."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 2fd88ab75ed909943ac5e041c833bb75, type: 2}
+    text: "R\xC1C R\u01AF\u1EDEI! D\xE1m l\xE0m x\u01B0\u1EDBc kim th\xE2n v\u1EA1n
+      n\u0103m c\u1EE7a ta! Ta s\u1EBD nhai n\xE1t s\u1ECD ng\u01B0\u01A1i! X\xE9
+      x\xE1c ng\u01B0\u01A1i ra t\u1EEBng m\u1EA3nh!"
+    autoAdvance: 1
+    autoAdvanceDelay: 2
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 2fd88ab75ed909943ac5e041c833bb75, type: 2}
+    text: "Ch\u1EA1y \u0111i \u0111\xE2u! N\u1EBFm th\u1EED ng\u1ECDn l\u1EEDa t\u1EEB
+      \u0111\u1ECBa ng\u1EE5c \u0111i!"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 

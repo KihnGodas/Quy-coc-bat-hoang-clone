@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10388b5eb67ab074db119a7e57a34d2f, type: 3}
+  m_Name: NDD_Act4_BossPre
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  lines:
+  - speaker: {fileID: 11400000, guid: 8b72e6edcdc05094293d1d2dc8916521, type: 2}
+    text: "Ph\xE0m... nh\xE2n... T\u1EA4T... C\u1EA2... PH\u1EA2I... CH\u1EBET!"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "M\u1ED9t \u0111\u1ED1ng s\u1EAFt v\u1EE5n bi\u1EBFt s\u1EE7a. Tr\u1EA3
+      Kim Tr\u1EA5n Thi\xEAn Kh\xED \u0111\xE2y."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 

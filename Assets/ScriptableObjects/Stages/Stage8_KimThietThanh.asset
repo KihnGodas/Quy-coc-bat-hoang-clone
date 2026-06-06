@@ -52,6 +52,9 @@ MonoBehaviour:
   bossSpawnPosition: {x: 0, y: 0}
   bossScale: {x: 1, y: 1}
   arenaSize: {x: 28, y: 18}
+  entranceDialogue: {fileID: 11400000, guid: 285d1846b4d24fa4bbed5b3490e07755, type: 2}
+  bossPreDialogue: {fileID: 0}
+  bossPostDialogue: {fileID: 0}
   requiredStageNumber: 7
   requiredPlayerLevel: 9
   experienceReward: 350

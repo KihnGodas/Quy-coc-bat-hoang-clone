@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public sealed class BossController : MonoBehaviour
@@ -23,6 +24,10 @@ public sealed class BossController : MonoBehaviour
     [SerializeField] private Vector2 spawnPosition = Vector2.zero;
     [SerializeField] private Color prototypeBossColor = new Color(0.18f, 0.95f, 0.35f, 1f);
     [SerializeField] private Vector2 prototypeBossScale = new Vector2(2.2f, 2.2f);
+
+    [Header("Dialogue")]
+    [SerializeField] private DialogueSO bossPreDialogue;
+    [SerializeField] private DialogueSO bossPostDialogue;
 
     public BossBase ActiveBoss => activeBoss;
     public bool HasActiveBoss => activeBoss != null && activeBoss.Health != null && !activeBoss.Health.IsDead;
@@ -85,6 +90,9 @@ public sealed class BossController : MonoBehaviour
         prototypeBossDamage = stageData.BossDamage;
         spawnPosition = stageData.BossSpawnPosition;
         prototypeBossScale = stageData.BossScale;
+
+        bossPreDialogue = stageData.BossPreDialogue;
+        bossPostDialogue = stageData.BossPostDialogue;
     }
 
     public void EnsureBossForBossCombat()
@@ -114,6 +122,52 @@ public sealed class BossController : MonoBehaviour
 
         activeBoss.Initialize(stats.Name, stats.HP, stats.Damage, player);
         combatManager.SetBossHealth(activeBoss.Health);
+
+        if (bossPostDialogue != null && activeBoss.Health != null)
+        {
+            activeBoss.Health.OnDeath -= HandleBossDeathForPostDialogue;
+            activeBoss.Health.OnDeath += HandleBossDeathForPostDialogue;
+        }
+    }
+
+    private void HandleBossDeathForPostDialogue()
+    {
+        if (activeBoss != null && activeBoss.Health != null)
+            activeBoss.Health.OnDeath -= HandleBossDeathForPostDialogue;
+
+        DialogueManager dm = DialogueManager.Instance;
+        if (dm == null)
+        {
+            if (combatManager != null)
+                combatManager.CompleteCombat(CombatResult.Victory);
+            return;
+        }
+
+        if (player != null)
+        {
+            PlayerMovement2D movement = player.GetComponent<PlayerMovement2D>();
+            if (movement != null)
+                movement.CanMove = false;
+        }
+
+        System.Action onEnd = null;
+        onEnd = () =>
+        {
+            dm.OnDialogueEnd -= onEnd;
+
+            if (player != null)
+            {
+                PlayerMovement2D movement = player.GetComponent<PlayerMovement2D>();
+                if (movement != null)
+                    movement.CanMove = true;
+            }
+
+            if (combatManager != null)
+                combatManager.CompleteCombat(CombatResult.Victory);
+        };
+        dm.OnDialogueEnd += onEnd;
+
+        dm.PlayDialogue(bossPostDialogue);
     }
 
     private BossBase CreatePrototypeBoss(PrototypeStats stats)
@@ -197,7 +251,45 @@ public sealed class BossController : MonoBehaviour
 
     private void HandleCombatStarted()
     {
-        EnsureBossForBossCombat();
+        if (bossPreDialogue != null)
+        {
+            PlayBossPreDialogue();
+        }
+        else
+        {
+            EnsureBossForBossCombat();
+        }
+    }
+
+    private void PlayBossPreDialogue()
+    {
+        DialogueManager dm = DialogueManager.Instance;
+        if (dm == null) return;
+
+        if (player != null)
+        {
+            PlayerMovement2D movement = player.GetComponent<PlayerMovement2D>();
+            if (movement != null)
+                movement.CanMove = false;
+        }
+
+        System.Action onEnd = null;
+        onEnd = () =>
+        {
+            dm.OnDialogueEnd -= onEnd;
+
+            if (player != null)
+            {
+                PlayerMovement2D movement = player.GetComponent<PlayerMovement2D>();
+                if (movement != null)
+                    movement.CanMove = true;
+            }
+
+            EnsureBossForBossCombat();
+        };
+        dm.OnDialogueEnd += onEnd;
+
+        dm.PlayDialogue(bossPreDialogue);
     }
 
     private void ResolveReferences()
@@ -222,7 +314,7 @@ public sealed class BossController : MonoBehaviour
         }
     }
 
-    private static T FindComponentInScene<T>() where T : Object
+    private static T FindComponentInScene<T>() where T : UnityEngine.Object
     {
 #if UNITY_2023_1_OR_NEWER
         return FindFirstObjectByType<T>();

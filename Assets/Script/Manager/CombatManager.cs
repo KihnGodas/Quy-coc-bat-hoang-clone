@@ -12,6 +12,7 @@ public sealed class CombatManager : MonoBehaviour
     public enum CombatState
     {
         NotStarted,
+        InDialogue,
         Running,
         ClearingEnemies,
         Victory,
@@ -38,6 +39,7 @@ public sealed class CombatManager : MonoBehaviour
     public float RemainingTime => combatMode == CombatMode.NormalCombat ? timer.Remaining : 0f;
     public int RemainingEnemyCount => enemySpawner != null ? enemySpawner.AliveCount : 0;
     public int TotalKills => enemySpawner != null ? enemySpawner.TotalKilled : 0;
+    public bool IsInDialogue => state == CombatState.InDialogue;
     public bool IsClearingEnemies => state == CombatState.ClearingEnemies;
     public bool IsRunning => state == CombatState.Running;
     public bool IsBossCombat => combatMode == CombatMode.BossCombat;
@@ -89,6 +91,12 @@ public sealed class CombatManager : MonoBehaviour
         {
             CompleteCombat(CombatResult.Victory);
         }
+    }
+
+    public void StartDialogue()
+    {
+        if (state != CombatState.NotStarted) return;
+        state = CombatState.InDialogue;
     }
 
     public void StartCombat()

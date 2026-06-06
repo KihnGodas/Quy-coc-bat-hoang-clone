@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10388b5eb67ab074db119a7e57a34d2f, type: 3}
+  m_Name: NDD_Act3_BossPre
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  lines:
+  - speaker: {fileID: 11400000, guid: 877fb4f5732a48a4cbd31da0e12048a3, type: 2}
+    text: "Bi\u1EC3n kh\u1ED5 v\xF4 bi\xEAn, quay \u0111\u1EA7u l\xE0 b\u1EDD. Th\xED
+      ch\u1EE7 s\xE1t nghi\u1EC7p qu\xE1 n\u1EB7ng, tr\xEAn tay d\xEDnh m\xE1u c\u1EE7a
+      M\u1ED9c v\xE0 Th\u1EE7y. H\xE3y bu\xF4ng b\u1ECF \u0111\u1ED3 \u0111ao, b\u01B0\u1EDBc
+      v\xE0o l\xF2 b\xE1t qu\xE1i c\u1EE7a ta \u0111\u1EC3 g\u1ED9t r\u1EEDa nghi\u1EC7p
+      ch\u01B0\u1EDBng."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "G\u1ED9t r\u1EEDa? Ng\u01B0\u01A1i t\u1EF1 tay ch\xE2m l\u1EEDa \u0111\u1ED1t
+      nh\xE0 ng\u01B0\u1EDDi ta, r\u1ED3i b\u1EAFt h\u1ECD d\u1EADp \u0111\u1EA7u
+      t\u1EA1 \u01A1n v\xEC \u0111\xE3 mang \u0111\u1EBFn m\u1ED9t x\xF4 n\u01B0\u1EDBc?
+      Th\xE1o c\xE1i m\u1EB7t n\u1EA1 \u0111\u1EA1o m\u1EA1o \u0111\xF3 xu\u1ED1ng
+      \u0111i, s\xFAc sinh."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 877fb4f5732a48a4cbd31da0e12048a3, type: 2}
+    text: "K\u1EBB kh\xF4ng hi\u1EC3u Ph\u1EADt ph\xE1p, t\u1EA5t ph\u1EA3i d\xF9ng
+      nghi\u1EC7p h\u1ECFa \u0111\u1EC3 \u0111\u1ED9 h\xF3a. Ch\u1EBFt \u0111i, t\u1ED9i
+      \u0111\u1ED3."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 

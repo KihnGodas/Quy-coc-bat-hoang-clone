@@ -11,6 +11,7 @@ public sealed class TutorialManager : MonoBehaviour
         WeaponSkill,
         Spell,
         Ultimate,
+        BossFight,
         Complete
     }
 
@@ -23,9 +24,15 @@ public sealed class TutorialManager : MonoBehaviour
     [SerializeField] private PlayerUltimateController ultimateController;
     [SerializeField] private PlayerCultivationState cultivationState;
     [SerializeField] private Transform playerTransform;
+    [SerializeField] private EnemySpawner enemySpawner;
 
     [Header("Dialogue")]
-    [SerializeField] private DialogueSO tutorialOpeningDialogue;
+    [SerializeField] private DialogueSO prologueNightDialogue;
+    [SerializeField] private DialogueSO prologueCeremonyDialogue;
+    [SerializeField] private DialogueSO prologueAwakeningDialogue;
+    [SerializeField] private DialogueSO trainingDialogue;
+    [SerializeField] private DialogueSO bossPreDialogue;
+    [SerializeField] private DialogueSO bossPostDialogue;
 
     [Header("Settings")]
     [SerializeField] private float stepCompleteDelay = 1.2f;
@@ -36,6 +43,8 @@ public sealed class TutorialManager : MonoBehaviour
     private float stepCompleteTime;
     private bool stepCompleted;
     private bool allCompleted;
+    private bool isPlayingChainDialogue;
+    private int openingChainIndex;
 
     private Vector3 movementStartPosition;
     private Vector2 previousMousePosition;
@@ -63,18 +72,13 @@ public sealed class TutorialManager : MonoBehaviour
         ResolveReferences();
         EnsurePlayerReadyForTutorial();
 
-        if (tutorialOpeningDialogue != null)
-        {
-            PlayOpeningDialogue();
-        }
-        else
-        {
-            OnStepChanged?.Invoke(currentStep);
-        }
+        PlayOpeningDialogueChain();
     }
 
     private void Update()
     {
+        if (isPlayingChainDialogue) return;
+
         if (!ReferencesResolved() && Time.time >= nextResolveTime)
         {
             nextResolveTime = Time.time + RESOLVE_INTERVAL;
@@ -118,6 +122,8 @@ public sealed class TutorialManager : MonoBehaviour
             cultivationState = FindComponentInScene<PlayerCultivationState>();
         if (playerTransform == null && playerMovement != null)
             playerTransform = playerMovement.transform;
+        if (enemySpawner == null)
+            enemySpawner = FindComponentInScene<EnemySpawner>();
     }
 
     private void EnsurePlayerReadyForTutorial()
@@ -148,6 +154,7 @@ public sealed class TutorialManager : MonoBehaviour
             Step.WeaponSkill => CheckWeaponSkillCompleted(),
             Step.Spell => CheckSpellCompleted(),
             Step.Ultimate => CheckUltimateCompleted(),
+            Step.BossFight => CheckBossFightCompleted(),
             _ => false
         };
 
@@ -177,6 +184,16 @@ public sealed class TutorialManager : MonoBehaviour
         if (currentStep == Step.Movement)
         {
             movementStartPosition = playerTransform != null ? playerTransform.position : Vector3.zero;
+        }
+
+        if (currentStep == Step.BossFight)
+        {
+            StartBossFight();
+        }
+
+        if (currentStep == Step.Dash && trainingDialogue != null)
+        {
+            PlayTrainingHint();
         }
 
         OnStepChanged?.Invoke(currentStep);
@@ -221,7 +238,126 @@ public sealed class TutorialManager : MonoBehaviour
         return keyboard != null && keyboard.rKey.wasPressedThisFrame;
     }
 
-    private void PlayOpeningDialogue()
+    private bool CheckBossFightCompleted()
+    {
+        BossBase boss = FindComponentInScene<BossBase>();
+        return boss == null || (boss.Health != null && boss.Health.IsDead);
+    }
+
+    private void StartBossFight()
+    {
+        if (bossPreDialogue != null)
+        {
+            isPlayingChainDialogue = true;
+            DialogueManager dm = EnsureDialogueManager();
+            if (dm == null) { SpawnBossOrComplete(); return; }
+
+            if (playerMovement != null)
+                playerMovement.CanMove = false;
+
+            System.Action onEnd = null;
+            onEnd = () =>
+            {
+                dm.OnDialogueEnd -= onEnd;
+                if (playerMovement != null)
+                    playerMovement.CanMove = true;
+                isPlayingChainDialogue = false;
+                SpawnBossOrComplete();
+            };
+            dm.OnDialogueEnd += onEnd;
+            dm.PlayDialogue(bossPreDialogue);
+        }
+        else
+        {
+            SpawnBossOrComplete();
+        }
+    }
+
+    private void SpawnBossOrComplete()
+    {
+        if (enemySpawner != null)
+        {
+            enemySpawner.SetSpawningEnabled(true);
+        }
+    }
+
+    // ---- DIALOGUE CHAIN ----
+
+    private void PlayOpeningDialogueChain()
+    {
+        DialogueManager dm = EnsureDialogueManager();
+        if (dm == null)
+        {
+            OnStepChanged?.Invoke(currentStep);
+            return;
+        }
+
+        isPlayingChainDialogue = true;
+        openingChainIndex = 0;
+
+        if (playerMovement != null)
+            playerMovement.CanMove = false;
+
+        dm.OnDialogueEnd += HandleChainDialogueEnd;
+        PlayCurrentChainDialogue(dm);
+    }
+
+    private void HandleChainDialogueEnd()
+    {
+        DialogueManager dm = DialogueManager.Instance;
+        if (dm == null) return;
+
+        openingChainIndex++;
+
+        if (openingChainIndex >= 3 || !HasChainDialogueAtIndex(openingChainIndex))
+        {
+            dm.OnDialogueEnd -= HandleChainDialogueEnd;
+            isPlayingChainDialogue = false;
+
+            if (playerMovement != null)
+                playerMovement.CanMove = true;
+            OnStepChanged?.Invoke(currentStep);
+            return;
+        }
+
+        PlayCurrentChainDialogue(dm);
+    }
+
+    private bool HasChainDialogueAtIndex(int index)
+    {
+        return index switch
+        {
+            0 => prologueNightDialogue != null,
+            1 => prologueCeremonyDialogue != null,
+            2 => prologueAwakeningDialogue != null,
+            _ => false
+        };
+    }
+
+    private void PlayCurrentChainDialogue(DialogueManager dm)
+    {
+        DialogueSO d = openingChainIndex switch
+        {
+            0 => prologueNightDialogue,
+            1 => prologueCeremonyDialogue,
+            2 => prologueAwakeningDialogue,
+            _ => null
+        };
+        if (d != null)
+            dm.PlayDialogue(d);
+        else
+            HandleChainDialogueEnd();
+    }
+
+    private void PlayTrainingHint()
+    {
+        if (trainingDialogue == null) return;
+        DialogueManager dm = DialogueManager.Instance;
+        if (dm == null) return;
+        dm.PlayDialogue(trainingDialogue);
+    }
+
+    private DialogueManager EnsureDialogueManager()
     {
         DialogueManager dm = DialogueManager.Instance;
         if (dm == null)
@@ -230,30 +366,8 @@ public sealed class TutorialManager : MonoBehaviour
             dialogueGO.AddComponent<DialogueManager>();
             dialogueGO.AddComponent<DialogueUI>();
             dm = DialogueManager.Instance;
-            if (dm == null)
-            {
-                OnStepChanged?.Invoke(currentStep);
-                return;
-            }
         }
-
-        if (playerMovement != null)
-            playerMovement.CanMove = false;
-
-        dm.OnDialogueEnd += HandleOpeningDialogueEnd;
-        dm.PlayDialogue(tutorialOpeningDialogue);
-    }
-
-    private void HandleOpeningDialogueEnd()
-    {
-        DialogueManager dm = DialogueManager.Instance;
-        if (dm != null)
-            dm.OnDialogueEnd -= HandleOpeningDialogueEnd;
-
-        if (playerMovement != null)
-            playerMovement.CanMove = true;
-
-        OnStepChanged?.Invoke(currentStep);
+        return dm;
     }
 
     private static T FindComponentInScene<T>() where T : Object

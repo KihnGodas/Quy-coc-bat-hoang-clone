@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10388b5eb67ab074db119a7e57a34d2f, type: 3}
+  m_Name: NDD_Act3_Entrance
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  lines:
+  - speaker: {fileID: 11400000, guid: b5de3fdd057e4f8498efdd44df9fa668, type: 2}
+    text: "L\u1EEDa nghi\u1EC7p thanh t\u1EA9y... C\xF4ng \u0111\u1EE9c v\xF4 l\u01B0\u1EE3ng...
+      T\u1EBF Th\u1EBF T\xF4n Gi\u1EA3 s\u1EBD \u0111\u01B0a ch\xFAng ta tho\xE1t
+      kh\u1ECFi b\u1EC3 kh\u1ED5 M\u1EA1t Ph\xE1p. Nh\u1EA3y xu\u1ED1ng \u0111i,
+      c\xE1c \u0111\u1EA1o h\u1EEFu!"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "M\u1EDF m\u1EAFt ra! L\u1EEDa n\xE0y \u0111ang \u0111\u1ED1t ch\xE1y l\u1EE5c
+      ph\u1EE7 ng\u0169 t\u1EA1ng, r\xFAt c\u1EA1n h\u1ED3n ph\xE1ch c\u1EE7a c\xE1c
+      ng\u01B0\u01A1i ch\u1EE9 kh\xF4ng thanh t\u1EA9y c\xE1i g\xEC c\u1EA3."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: b5de3fdd057e4f8498efdd44df9fa668, type: 2}
+    text: "Ng\u01B0\u01A1i l\xE0 \xE1c ma ngo\u1EA1i \u0111\u1EA1o! T\xF4n Gi\u1EA3
+      \u0111\xE3 ban cho ch\xFAng ta vinh h\u1EA1nh \u0111\u01B0\u1EE3c l\xE0m c\u1EE7i
+      \u0111\u1ED1t \u0111\u1EC3 ng\xE0i duy tr\xEC H\u1ECFa Tr\u1EA5n Thi\xEAn Kh\xED.
+      Ch\u1EBFt v\xEC ng\xE0i l\xE0 ni\u1EBFt b\xE0n!"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "T\xEDn ng\u01B0\u1EE1ng m\xF9 qu\xE1ng. K\u1EBB ki\u1EC3m so\xE1t H\u1ECFa
+      Tr\u1EA5n Thi\xEAn Kh\xED \u0111ang d\xF9ng ch\xEDnh m\u1EA1ng s\u1ED1ng c\u1EE7a
+      ph\xE0m nh\xE2n l\xE0m nhi\xEAn li\u1EC7u."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 

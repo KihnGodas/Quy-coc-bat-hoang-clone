@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10388b5eb67ab074db119a7e57a34d2f, type: 3}
+  m_Name: NDD_Tutorial_Shop
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  lines:
+  - speaker: {fileID: 11400000, guid: a95edc3eaf2a2854ead1879650d919e8, type: 2}
+    text: "Hoan ngh\xEAnh \u0111\u1EBFn Qu\u1EF7 Th\u1ECB. \u1EDE th\u1EDDi k\u1EF3
+      M\u1EA1t Ph\xE1p n\xE0y, v\xE0ng b\u1EA1c tr\u1EA7n th\u1EBF ch\u1EC9 l\xE0
+      gi\u1EA5y v\u1EE5n. Linh th\u1EA1ch l\xE0 th\u1EE9 duy nh\u1EA5t c\xF3 gi\xE1
+      tr\u1ECB giao d\u1ECBch."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 78d4e64e81e4bf94a9f05d8e01f098b2, type: 2}
+    text: "Chu\u1EA9n b\u1ECB xong ch\u01B0a? Ph\xEDa tr\u01B0\u1EDBc c\xF3 k\u1EBB
+      \u0111ang \u0111\u1EE3i ng\u01B0\u01A1i."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 

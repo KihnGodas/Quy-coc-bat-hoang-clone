@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10388b5eb67ab074db119a7e57a34d2f, type: 3}
+  m_Name: NDD_Act3_TangBinh
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  lines:
+  - speaker: {fileID: 11400000, guid: 0cb2fd2bdd23137478860e39efcccb2d, type: 2}
+    text: "\u0110\u1EEBng... \u0111\u1EEBng ti\u1EBFn l\xEAn \u0111\u1EC9nh th\xE1p.
+      K\u1EBB ng\u1EF1 tr\u1ECB tr\xEAn \u0111\xF3... kh\xF4ng ph\u1EA3i Ph\u1EADt,
+      c\u0169ng kh\xF4ng ph\u1EA3i Ti\xEAn..."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "H\u1EAFn thu th\u1EADp t\xEDn ng\u01B0\u1EE1ng \u0111\u1EC3 l\xE0m g\xEC?"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 0cb2fd2bdd23137478860e39efcccb2d, type: 2}
+    text: "\u0110\u1EC3 duy tr\xEC l\u1EDBp v\u1ECF b\u1ECDc. B\u1EA3n t\xF4n c\u1EE7a
+      h\u1EAFn l\xE0 L\u1EE5c Nh\u0129 Ma Vi\xEAn - m\u1ED9t con v\u01B0\u1EE3n qu\u1EF7
+      kh\xE1t m\xE1u. H\u1EAFn l\xE9n th\u1EA3 Huy\u1EBFt S\xE1t H\xE0i Nhi \u0111i
+      t\xE0n s\xE1t, thi\xEAu r\u1EE5i c\xE1c th\xF4n l\xE0ng... R\u1ED3i ch\xEDnh
+      h\u1EAFn m\u1EB7c c\xE0 sa, h\u1EA1 ph\xE0m gi\u1EA3 l\xE0m ng\u01B0\u1EDDi
+      c\u1EE9u r\u1ED7i."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 0cb2fd2bdd23137478860e39efcccb2d, type: 2}
+    text: "H\u1EAFn h\xFAt l\u1EA5y s\u1EF1 bi\u1EBFt \u01A1n, s\u1EF1 tuy\u1EC7t
+      v\u1ECDng c\u1EE7a ph\xE0m nh\xE2n \u0111\u1EC3 \u0111\xFAc th\xE0nh l\u1EDBp
+      kim th\xE2n ho\xE0n m\u1EF9. Ph\xE1 v\u1EE1 l\u1EDBp v\u1ECF \u0111\xF3...
+      \xE9p con s\xFAc sinh \u0111\xF3 l\u1ED9 nguy\xEAn h\xECnh..."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 

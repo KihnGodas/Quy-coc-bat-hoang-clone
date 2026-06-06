@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 674406711}
   - component: {fileID: 674406710}
   - component: {fileID: 674406709}
+  - component: {fileID: 674406712}
   - component: {fileID: 674406708}
   m_Layer: 0
   m_Name: Tutorial Manager
@@ -328,7 +329,13 @@ MonoBehaviour:
   ultimateController: {fileID: 1311992494}
   cultivationState: {fileID: 0}
   playerTransform: {fileID: 1311992511}
-  tutorialOpeningDialogue: {fileID: 11400000, guid: 439b977f53e3f964a82113db4bd31c30, type: 2}
+  enemySpawner: {fileID: 0}
+  prologueNightDialogue: {fileID: 11400000, guid: 442d8eb72055b8b458b07c9ea85d7429, type: 2}
+  prologueCeremonyDialogue: {fileID: 11400000, guid: 043ed336ae5648b41aaefb65e5e4ce01, type: 2}
+  prologueAwakeningDialogue: {fileID: 11400000, guid: 09c4ef573147d524db5a6a0f8e05fe0f, type: 2}
+  trainingDialogue: {fileID: 11400000, guid: ba9561b38ee84ad41b5324ad5850a1de, type: 2}
+  bossPreDialogue: {fileID: 11400000, guid: bd3d32996c031454dba48c732ce56c49, type: 2}
+  bossPostDialogue: {fileID: 11400000, guid: 38447ced53b52cd4bb4f2e10b9d8d43e, type: 2}
   stepCompleteDelay: 1.2
   movementRequiredDistance: 5
   aimDeltaThreshold: 0.5
@@ -371,6 +378,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &674406712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674406707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17ff9a25f6937fa47bf0b52db78d991e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+  enemyPrefab: {fileID: 0}
+  enemyBasePrefab: {fileID: 0}
+  spawnMode: 1
+  testEnemyData: {fileID: 0}
+  enemySpawnTable: []
+  player: {fileID: 0}
+  spawnInterval: 2
+  maxAliveEnemies: 10
+  spawnRadius: 8
+  minDistanceFromPlayer: 2
+  spawnAroundPlayer: 1
+  leftWall: {fileID: 0}
+  rightWall: {fileID: 0}
+  topWall: {fileID: 0}
+  bottomWall: {fileID: 0}
+  spawnFromArenaEdges: 1
+  edgeSpawnPadding: 1
+  spawnPositionAttempts: 20
+  wallPadding: 0.5
+  spawningEnabled: 1
+  combatManager: {fileID: 0}
+  spawnLockBeforeCombatEnd: 0.5
+  enemySizeMultiplier: 1
 --- !u!1 &899255043
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,7 +819,7 @@ MonoBehaviour:
   ensurePlayerCultivationState: 1
   ensurePlayerSpellController: 1
   ensurePlayerUltimateController: 1
-  ensureDialogueSystem: 1
+  ensureDialogueSystem: 0
   logBootstrap: 1
 --- !u!4 &1223162386
 Transform:

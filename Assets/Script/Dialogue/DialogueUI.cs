@@ -106,10 +106,11 @@ public sealed class DialogueUI : MonoBehaviour
             inputPressedThisFrame = true;
         }
 
+        DialogueLine line = manager.CurrentLine;
+
         if (!textFullyRevealed)
         {
             typewriterTimer += Time.deltaTime * typewriterSpeed;
-            DialogueLine line = manager.CurrentLine;
             if (line.text != null && typewriterIndex < line.text.Length)
             {
                 typewriterIndex = Mathf.Min(typewriterIndex + Mathf.FloorToInt(typewriterTimer), line.text.Length);
@@ -118,17 +119,28 @@ public sealed class DialogueUI : MonoBehaviour
             if (typewriterIndex >= (line.text?.Length ?? 0))
             {
                 textFullyRevealed = true;
+                if (line.autoAdvance)
+                    manager.SetAutoAdvance(line.autoAdvanceDelay);
             }
             if (inputPressedThisFrame && !textFullyRevealed)
             {
                 typewriterIndex = manager.CurrentLine.text?.Length ?? 0;
                 textFullyRevealed = true;
+                if (line.autoAdvance)
+                    manager.SetAutoAdvance(line.autoAdvanceDelay);
             }
         }
         else if (inputPressedThisFrame)
         {
-            if (manager != null && manager.IsPlaying)
+            if (line.autoAdvance)
+            {
+                manager.CancelAutoAdvance();
                 manager.AdvanceLine();
+            }
+            else if (manager != null && manager.IsPlaying)
+            {
+                manager.AdvanceLine();
+            }
         }
     }
 

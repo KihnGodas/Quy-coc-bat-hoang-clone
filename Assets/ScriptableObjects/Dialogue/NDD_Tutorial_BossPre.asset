@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10388b5eb67ab074db119a7e57a34d2f, type: 3}
+  m_Name: NDD_Tutorial_BossPre
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  lines:
+  - speaker: {fileID: 11400000, guid: 043138aab2b9ec144b9ef7de9a444f26, type: 2}
+    text: "Haha, m\u1ED9t con chu\u1ED9t nh\u1EAFt m\u1EDBi h\xF4m nao c\xF2n ph\u1EBF
+      linh c\u0103n gi\u1EDD \u0111\xE3 bi\u1EBFt h\u1EA5p th\u1EE5 linh kh\xED,
+      xem ra tr\xEAn ng\u01B0\u1EDDi ng\u01B0\u01A1i ch\u1EAFc ch\u1EAFn c\xF3 b\xED
+      m\u1EADt, giao ra \u0111\xE2y ho\u1EB7c \u0111\u1EC3 ta ti\xEAu di\u1EC7t ng\u01B0\u01A1i."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "B\u1EDBt nhi\u1EC1u l\u1EDDi."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 

@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10388b5eb67ab074db119a7e57a34d2f, type: 3}
+  m_Name: NDD_Act2_BossPost
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  lines:
+  - speaker: {fileID: 11400000, guid: 84c277afceabe4c4f9f698d107189327, type: 2}
+    text: "\u0110\u1EE9a tr\u1EBB \u0111\xF3... kh\xF4ng ph\u1EA3i l\xE0 con ta...
+      Huy\u1EC5n thu\u1EADt... Ta \u0111\xE3 l\xE0m g\xEC bi\u1EC3n kh\u01A1i th\u1EBF
+      n\xE0y?"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "K\u1EBB th\xF9 t\u01B0\u1EDBc \u0111o\u1EA1t x\xE1c th\u1ECBt, nh\u01B0ng
+      h\u1ED3n ph\xE1ch con \xF4ng v\u1EABn \u1EDF \u0111\xE2y."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 84c277afceabe4c4f9f698d107189327, type: 2}
+    text: "Con ta... Ph\u1EE5 ho\xE0ng \u0111\xE3 m\xF9 l\xF2a. Ng\xE0n n\u0103m
+      tu vi, l\u1EA1i b\u1ECB m\u1ED9t c\xE1i b\u1EABy c\u1EE7a Th\u01B0\u1EE3ng
+      Gi\u1EDBi d\u1EAFt m\u0169i, h\xE8n m\u1EA1t t\u1EF1 tay n\xE9n c\u1EA1n sinh
+      c\u01A1 c\u1EE7a \u0110\xF4ng H\u1EA3i."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 84c277afceabe4c4f9f698d107189327, type: 2}
+    text: "T\u1ED9i nghi\u1EC7t c\u1EE7a ta, ta d\xF9ng m\u1EA1ng n\xE0y \u0111\u1EC3
+      b\xF9 \u0111\u1EAFp cho \u0110\xF4ng H\u1EA3i. C\u1EA7m l\u1EA5y Th\u1EE7y
+      Tr\u1EA5n Thi\xEAn Kh\xED. \u0110\u1EEBng d\u1EEBng l\u1EA1i. H\xE3y \u0111\xE2m
+      xuy\xEAn c\xE1i Th\u01B0\u1EE3ng Gi\u1EDBi \u0111\xF3... \u0111\u1EEBng \u0111\u1EC3
+      b\u1EA5t k\u1EF3 ai b\u1ECB b\u1ECDn ch\xFAng \u0111\xF9a gi\u1EE1n nh\xE2n
+      t\xEDnh nh\u01B0 cha con ta n\u1EEFa..."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 

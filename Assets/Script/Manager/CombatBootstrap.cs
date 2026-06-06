@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public sealed class CombatBootstrap : MonoBehaviour
@@ -13,6 +14,7 @@ public sealed class CombatBootstrap : MonoBehaviour
     [SerializeField] private CombatResultUI combatResultUi;
     [SerializeField] private DebugCombatUI debugCombatUI;
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private bool ensureDialogueSystem = true;
     [SerializeField] private bool ensureBossController = true;
     [SerializeField] private bool ensureBossHealthUi = true;
     [SerializeField] private bool ensureCombatDifficultyScaler = true;
@@ -40,11 +42,15 @@ public sealed class CombatBootstrap : MonoBehaviour
         EnsureRuntimePlayerComponents();
         RestorePlayerProgression();
         EnsureRuntimeCombatComponents();
+        EnsureDialogueInfrastructure();
 
         if (logBootstrap)
         {
             Debug.Log($"Combat bootstrap ready. Arena: {arenaBounds != null}, Player: {player != null}, Spawner: {enemySpawner != null}");
         }
+
+        SpawnNPCDialogueTriggers();
+        PlayEntranceDialogue();
     }
 
     private void ApplyStageConfiguration()
@@ -227,7 +233,98 @@ public sealed class CombatBootstrap : MonoBehaviour
         combatResultUi = gameObject.AddComponent<CombatResultUI>();
     }
 
-    private static T FindComponentInScene<T>() where T : Object
+    private void EnsureDialogueInfrastructure()
+    {
+        if (!ensureDialogueSystem) return;
+
+        if (FindComponentInScene<DialogueManager>() == null)
+        {
+            GameObject dialogueGO = new GameObject("DialogueSystem");
+            dialogueGO.transform.SetParent(transform);
+            dialogueGO.AddComponent<DialogueManager>();
+            dialogueGO.AddComponent<DialogueUI>();
+            if (logBootstrap)
+                Debug.Log("CombatBootstrap: created DialogueSystem runtime.");
+        }
+    }
+
+    private void PlayEntranceDialogue()
+    {
+        if (GameManager.Instance == null) return;
+        StageData stageData = GameManager.Instance.CurrentStage;
+        if (stageData == null) return;
+        DialogueSO entranceDialogue = stageData.EntranceDialogue;
+        if (entranceDialogue == null) return;
+
+        DialogueManager dm = DialogueManager.Instance;
+        if (dm == null) return;
+
+        if (combatManager != null)
+            combatManager.StartDialogue();
+
+        if (player != null)
+        {
+            PlayerMovement2D movement = player.GetComponent<PlayerMovement2D>();
+            if (movement != null)
+                movement.CanMove = false;
+        }
+
+        System.Action onEnd = null;
+        onEnd = () =>
+        {
+            dm.OnDialogueEnd -= onEnd;
+
+            if (player != null)
+            {
+                PlayerMovement2D movement = player.GetComponent<PlayerMovement2D>();
+                if (movement != null)
+                    movement.CanMove = true;
+            }
+
+            if (combatManager != null)
+            {
+                combatManager.StartCombat();
+            }
+        };
+        dm.OnDialogueEnd += onEnd;
+
+        dm.PlayDialogue(entranceDialogue);
+    }
+
+    private void SpawnNPCDialogueTriggers()
+    {
+        if (GameManager.Instance == null) return;
+        StageData stage = GameManager.Instance.CurrentStage;
+        if (stage?.NPCSpawns == null) return;
+
+        foreach (StageData.NPCSpawnEntry entry in stage.NPCSpawns)
+        {
+            if (entry.dialogue == null) continue;
+
+            GameObject go = new GameObject($"NPCTrigger_{entry.dialogue.name}");
+            go.transform.position = entry.spawnPosition;
+            go.transform.SetParent(transform);
+
+            if (entry.npcSprite != null)
+            {
+                SpriteRenderer sr = go.AddComponent<SpriteRenderer>();
+                sr.sprite = entry.npcSprite;
+                sr.sortingOrder = 1;
+            }
+
+            CircleCollider2D col = go.AddComponent<CircleCollider2D>();
+            col.isTrigger = true;
+            col.radius = entry.triggerRadius > 0f ? entry.triggerRadius : 3f;
+
+            DialogueProximityTrigger trigger = go.AddComponent<DialogueProximityTrigger>();
+            trigger.SetDialogue(entry.dialogue);
+
+            if (logBootstrap)
+                Debug.Log($"Spawned NPC trigger: {entry.dialogue.name} at {entry.spawnPosition}");
+        }
+    }
+
+    private static T FindComponentInScene<T>() where T : UnityEngine.Object
     {
 #if UNITY_2023_1_OR_NEWER
         return FindFirstObjectByType<T>();

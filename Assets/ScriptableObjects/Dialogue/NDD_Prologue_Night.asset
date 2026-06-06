@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10388b5eb67ab074db119a7e57a34d2f, type: 3}
+  m_Name: NDD_Prologue_Night
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  lines:
+  - speaker: {fileID: 11400000, guid: 6126ebd127ba25d48b23b7aef32f753b, type: 2}
+    text: "Huynh/T\u1EF7 \u0103n \u0111i. Mai l\xE0 L\u1EC5 Tr\u1EAFc C\u1ED1t r\u1ED3i,
+      ph\u1EA3i c\xF3 s\u1EE9c \u0111\u1EC3 ch\u1ECBu \u0111\u1EF1ng \xE1p l\u1EF1c
+      tr\xEAn \u0111\xE0i ng\u1ECDc. C\xE1n s\u1EF1 b\u1EA3o Tr\u1EAFc C\u1ED1t B\xE0n
+      s\u1EBD r\xFAt sinh l\u1EF1c r\u1EA5t m\u1EA1nh."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "Ta kh\xF4ng \u0111\xF3i. Mu\u1ED9i/\u0110\u1EC7 \u0103n cho h\u1EBFt \u0111i.
+      S\u1EAFc m\u1EB7t k\xE9m qu\xE1, mai l\u1EE1 b\u1ECDn gi\xE1m kh\u1EA3o Th\xE1i
+      Th\u01B0\u1EE3ng \u0110\u1EA1o Vi\u1EC7n th\u1EA5y ch\u01B0\u1EDBng m\u1EAFt
+      l\u1EA1i \u0111\xE1nh r\u1EDBt t\u1EEB v\xF2ng ngo\xE0i."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6126ebd127ba25d48b23b7aef32f753b, type: 2}
+    text: "Huynh/T\u1EF7 n\xF3i xem... Th\u01B0\u1EE3ng Gi\u1EDBi th\u1EF1c s\u1EF1
+      c\xF3 \xE1nh m\u1EB7t tr\u1EDDi kh\xF4ng? L\xE3o kh\u1EA5t c\xE1i \u0111\u1EA7u
+      l\xE0ng b\u1EA3o \u1EDF tr\xEAn \u0111\xF3, n\u01B0\u1EDBc kh\xF4ng c\xF3 m\xE0u
+      \u0111en ng\xF2m v\xE1ng d\u1EA7u, m\xE0 trong v\u1EAFt. Ti\xEAn nh\xE2n kh\xF4ng
+      bao gi\u1EDD ph\u1EA3i b\u1EDBi r\xE1c t\xECm qu\u1EB7ng linh th\u1EA1ch v\u1EE5n
+      \u0111\u1EC3 n\u1ED9p t\xF4..."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "Ch\u1EC9 c\u1EA7n ng\xE0y mai m\u1ED9t trong hai ch\xFAng ta ki\u1EC3m
+      tra ra T\u1EA1p Linh C\u0103n, \u0111\u1EE7 ti\xEAu chu\u1EA9n l\xE0m t\u1EA1p
+      d\u1ECBch ngo\u1EA1i m\xF4n, ta s\u1EBD \u0111\u01B0a nh\xE0 m\xECnh kh\u1ECFi
+      c\xE1i h\u1ED1 ph\xE2n n\xE0y."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6126ebd127ba25d48b23b7aef32f753b, type: 2}
+    text: "Nh\u01B0ng n\u1EBFu... n\u1EBFu c\u1EA3 hai ch\xFAng ta \u0111\u1EC1u
+      l\xE0 Ph\u1EBF Linh C\u0103n th\xEC sao? Th\xE1ng tr\u01B0\u1EDBc, nh\xE0 l\xE3o
+      T\xF4n c\u1EA3 ba ng\u01B0\u1EDDi con \u0111\u1EC1u b\u1ECB ph\xE1n l\xE0 Ph\u1EBF
+      c\u1ED1t. B\u1ECDn l\xEDnh canh \u0111\xE0y h\u1ECD xu\u1ED1ng h\u1EA7m m\u1ECF
+      Huy\u1EBFt C\u01B0\u01A1ng Th\u1EA1ch, ch\u01B0a \u0111\u1EA7y b\u1EA3y ng\xE0y
+      \u0111\xE3 tr\u1EA3 v\u1EC1 ba b\u1ED9 x\u01B0\u01A1ng kh\xF4..."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "Kh\xF4ng c\xF3 n\u1EBFu nh\u01B0. D\xF9 c\xF3 ph\u1EA3i li\u1EC1u m\u1EA1ng
+      v\u1EDBi l\xEDnh g\xE1c, ta c\u0169ng kh\xF4ng \u0111\u1EC3 mu\u1ED9i/\u0111\u1EC7
+      b\u01B0\u1EDBc n\u1EEDa b\u01B0\u1EDBc xu\u1ED1ng h\u1EA7m m\u1ECF. Ng\u1EE7
+      \u0111i. Gi\u1EEF s\u1EE9c."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6126ebd127ba25d48b23b7aef32f753b, type: 2}
+    text: "Ch\u1ED7 b\xE1nh n\xE0y \u0111\u1EC7/mu\u1ED9i c\u1EA5t \u0111i... Ng\xE0y
+      mai, \u0111o c\u1ED1t xong, ch\xFAng ta c\xF9ng \u0103n m\u1EEBng nh\xE9. Nh\u1EA5t
+      \u0111\u1ECBnh s\u1EBD l\xEAn \u0111\u01B0\u1EE3c Th\u01B0\u1EE3ng Gi\u1EDBi..."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 

@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10388b5eb67ab074db119a7e57a34d2f, type: 3}
+  m_Name: NDD_Act2_BossPre
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  lines:
+  - speaker: {fileID: 11400000, guid: adf4f2da4fa8139478b4f7ddd7c8ffc9, type: 2}
+    text: "Ph\u1EE5 ho\xE0ng... c\u1EE9u con! Con n\xF3ng qu\xE1... N\xE9n th\xEAm
+      n\u01B0\u1EDBc \u0111i, con c\u1EA7n th\xEAm Th\u1EE7y kh\xED!"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 84c277afceabe4c4f9f698d107189327, type: 2}
+    text: "C\u1ED1 ch\u1ECBu \u0111\u1EF1ng! Ph\u1EE5 ho\xE0ng s\u1EBD gom c\u1EA1n
+      \u0110\xF4ng H\u1EA3i n\xE0y, n\xE9n t\u1EA5t c\u1EA3 l\u1EA1i \u0111\u1EC3
+      gi\u1EEF m\u1EA1ng cho con!"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "M\u1EDF m\u1EAFt ra m\xE0 nh\xECn, H\u1EA3i Ho\xE0ng. \xD4ng \u0111ang
+      d\u1ED3n s\u1EE9c m\u1EA1nh \u0111\u1EC3 cung ph\u1EE5ng cho m\u1ED9t con k\xFD
+      sinh tr\xF9ng Th\u01B0\u1EE3ng Gi\u1EDBi \u0111\u1EA5y."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 84c277afceabe4c4f9f698d107189327, type: 2}
+    text: "K\u1EBB n\xE0o d\xE1m l\xE0m gi\xE1n \u0111o\u1EA1n nghi th\u1EE9c? B\u1EA5t
+      c\u1EE9 ai ng\u0103n c\u1EA3n ta c\u1EE9u con... \u0111\u1EC1u ph\u1EA3i ch\u1EBFt!"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 

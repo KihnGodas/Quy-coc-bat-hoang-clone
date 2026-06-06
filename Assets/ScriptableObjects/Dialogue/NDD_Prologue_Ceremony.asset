@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10388b5eb67ab074db119a7e57a34d2f, type: 3}
+  m_Name: NDD_Prologue_Ceremony
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  lines:
+  - speaker: {fileID: 11400000, guid: a95edc3eaf2a2854ead1879650d919e8, type: 2}
+    text: "Kh\u1EE5 kh\u1EE5... N\u0103m nay thu\u1EBF m\xE1u l\u1EA1i t\u0103ng.
+      N\u1EBFu th\u1EB1ng c\u1EA9u t\u1EED nh\xE0 ta kh\xF4ng \u0111\u1EADu n\u1ED5i
+      T\u1EA1p Linh C\u0103n, th\xE1ng sau c\u1EA3 nh\xE0 ch\u1EC9 c\xF3 n\u01B0\u1EDBc
+      xu\u1ED1ng h\u1EA7m qu\u1EB7ng b\u1ED1c v\xE1c cho c\u1EA1n m\u1EA1ng."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: a95edc3eaf2a2854ead1879650d919e8, type: 2}
+    text: "Im mi\u1EC7ng. Ti\xEAn nh\xE2n nghe th\u1EA5y b\xE2y gi\u1EDD. M\u01B0\u1EDDi
+      n\u0103m tr\u01B0\u1EDBc c\xF3 k\u1EBB gian l\u1EADn tu\u1ED5i, c\u1EA3 x\xF3m
+      b\u1ECB l\u1ED9t da treo l\xEAn c\u1ECDc \u0111\u1EA5y."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6126ebd127ba25d48b23b7aef32f753b, type: 2}
+    text: "\u0110\u1EEBng s\u1EE3. Huynh/Mu\u1ED9i kh\u1ECFe th\u1EBF n\xE0y, ch\u1EAFc
+      ch\u1EAFn s\u1EBD c\xF3 Linh C\u0103n. H\xF4m qua mu\u1ED9i/huynh n\u1EB1m
+      m\u01A1 th\u1EA5y hai ch\xFAng ta \u0111\u01B0\u1EE3c c\u01B0\u1EE1i h\u1EA1c
+      bay l\xEAn chi\u1EBFc thuy\u1EC1n kia. L\xEAn \u0111\xF3 r\u1ED3i, nh\xE0 m\xECnh
+      s\u1EBD c\xF3 c\u01A1m tr\u1EAFng \u0103n m\u1ED7i ng\xE0y."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 043138aab2b9ec144b9ef7de9a444f26, type: 2}
+    text: "K\xCDCH HO\u1EA0T TR\u1EAEC C\u1ED0T B\xC0N. T\u1EA4T C\u1EA2 PH\xC0M
+      NH\xC2N, R\u1EACP \u0110\u1EA6U."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 043138aab2b9ec144b9ef7de9a444f26, type: 2}
+    text: "\xC2n \u0111i\u1EC3n? C\xE1c ng\u01B0\u01A1i ngh\u0129 Thi\xEAn \u0110\u1EA1o
+      ban ph\xE1t s\u1EE9c m\u1EA1nh t\u1EEB thi\u1EC7n sao? M\u1ED9t \u0111\xE1m
+      gi\xF2i b\u1ECD. Kh\xED h\u1EA3i d\u01A1 b\u1EA9n, c\u1ED1t t\u1EE7y h\xF4i
+      th\u1ED1i. K\u1EBB c\xF3 Linh C\u0103n, \u0111\u01B0\u1EE3c l\xEAn thuy\u1EC1n
+      l\xE0m ch\xF3 s\u0103n cho Th\u01B0\u1EE3ng Gi\u1EDBi. K\u1EBB Ph\u1EBF Linh
+      C\u0103n, ngoan ngo\xE3n \u1EDF l\u1EA1i l\xE0m ph\xE2n b\xF3n cho C\xE2y Th\u1EBF
+      Gi\u1EDBi."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 043138aab2b9ec144b9ef7de9a444f26, type: 2}
+    text: "\xC1nh s\xE1ng n\xE0y... M\u1EA1ch m\xE1u tinh khi\u1EBFt, kh\xF4ng m\u1ED9t
+      t\xEC v\u1EBFt! THI\xCAN LINH C\u0102N! Hahaha! T\u1ED1t! T\u1ED1t l\u1EAFm!
+      Bay \u0111\xE2u, mang \u0111\u1EE9a tr\u1EBB n\xE0y l\xEAn ph\xF2ng th\u01B0\u1EE3ng
+      h\u1EA1ng, chu\u1EA9n b\u1ECB T\u1EA9y T\u1EE7y Tr\u1EADn!"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6126ebd127ba25d48b23b7aef32f753b, type: 2}
+    text: "Kh\xF4ng! Ta kh\xF4ng \u0111i m\u1ED9t m\xECnh! C\xF2n ng\u01B0\u1EDDi
+      nh\xE0 c\u1EE7a ta! Mau l\xEAn \u0111\xE2y, \u0111\u1EBFn l\u01B0\u1EE3t ng\u01B0\u1EDDi
+      r\u1ED3i, mau \u0111o c\u1ED1t \u0111i!"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 043138aab2b9ec144b9ef7de9a444f26, type: 2}
+    text: "Ch\xF3 m\xE1 c\xF2n \u0111\xF2i m\u1EB7c c\u1EA3? C\u1EA7m l\u1EA5y."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 043138aab2b9ec144b9ef7de9a444f26, type: 2}
+    text: "Kh\xED h\u1EA3i tr\u1ED1ng r\u1ED7ng. M\u1EA1ch m\xF4n b\u1EBF t\u1EAFc.
+      R\xE1c r\u01B0\u1EDFi nguy\xEAn ch\u1EA5t. \u0110\xE1nh g\xE3y hai ch\xE2n
+      n\xF3 r\u1ED3i n\xE9m ra sau b\xE3i ph\u1EBF li\u1EC7u, \u0111\u1EEBng \u0111\u1EC3
+      n\xF3 l\xE0m b\u1EA9n m\u1EAFt v\u1ECB 'Ti\xEAn nh\xE2n' m\u1EDBi c\u1EE7a
+      ch\xFAng ta."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 

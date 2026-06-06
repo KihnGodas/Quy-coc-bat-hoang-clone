@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10388b5eb67ab074db119a7e57a34d2f, type: 3}
+  m_Name: NDD_Prologue_Awakening
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSO
+  lines:
+  - speaker: {fileID: 11400000, guid: 78d4e64e81e4bf94a9f05d8e01f098b2, type: 2}
+    text: "T\u1EC9nh d\u1EADy. \u0110\u1EEBng gi\u1EA3 ch\u1EBFt n\u1EEFa. B\u1ECDn
+      ch\xF3 s\u0103n c\u1EE7a Th\xE1i Th\u01B0\u1EE3ng \u0110\u1EA1o Vi\u1EC7n \u0111\xE1nh
+      g\xE3y x\u01B0\u01A1ng c\u1ED1t, nh\u01B0ng ch\u01B0a b\xF3p n\xE1t t\xE2m
+      m\u1EA1ch c\u1EE7a ng\u01B0\u01A1i \u0111\xE2u."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "Ng\u01B0\u01A1i... l\xE0 th\u1EE9 g\xEC?"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 78d4e64e81e4bf94a9f05d8e01f098b2, type: 2}
+    text: "Ng\u01B0\u1EDDi nh\xE0 ng\u01B0\u01A1i mang Thi\xEAn Linh C\u0103n, \u0111\xE3
+      bay l\xEAn ch\xEDn t\u1EA7ng m\xE2y l\xE0m r\u1ED3ng l\xE0m ph\u01B0\u1EE3ng
+      r\u1ED3i. C\xF2n ng\u01B0\u01A1i? Ph\u1EBF Linh C\u0103n, r\xE1c r\u01B0\u1EDFi
+      h\u1EA1 \u0111\u1EB3ng. M\u1ED9t v\u1EA1n ki\u1EBFp n\u1EEFa c\u0169ng kh\xF4ng
+      ch\u1EA1m \u0111\u01B0\u1EE3c v\xE0o g\xF3t gi\xE0y c\u1EE7a b\u1ECDn ch\xFAng."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "Ta ph\u1EA3i l\xEAn \u0111\xF3."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 78d4e64e81e4bf94a9f05d8e01f098b2, type: 2}
+    text: "B\u1EB1ng c\xE1i th\xE2n t\xE0n t\u1EA1 n\xE0y? Kh\xED h\u1EA3i c\u1EE7a
+      ng\u01B0\u01A1i b\u1EBF t\u1EAFc, kh\xF4ng th\u1EC3 h\u1EA5p th\u1EE5 linh
+      kh\xED \u0111\u1EA5t tr\u1EDDi. Con \u0111\u01B0\u1EDDng tu ti\xEAn ch\xEDnh
+      \u0111\u1EA1o c\u1EE7a ng\u01B0\u01A1i \u0111\xE3 \u0111\u1EE9t \u0111o\u1EA1n
+      t\u1EEB l\xFAc sinh ra. Ng\u01B0\u01A1i l\u1EA5y c\xE1i g\xEC \u0111\u1EC3
+      \u0111\xF2i ng\u01B0\u1EDDi?"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 78d4e64e81e4bf94a9f05d8e01f098b2, type: 2}
+    text: "Nh\u01B0ng ta c\xF3 m\u1ED9t c\xE1ch. Thi\xEAn \u0110\u1EA1o kh\xF4ng
+      cho ng\u01B0\u01A1i sinh c\u01A1, th\xEC ng\u01B0\u01A1i c\xF3 th\u1EC3 l\u1EA5y
+      c\u1EE7a ta. D\xE1m kh\xF4ng?"
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
+  - speaker: {fileID: 11400000, guid: 6e4e438a5e4e2104ea05f9da0ef249ae, type: 2}
+    text: "\u0110\u01B0\u1EE3c, ta s\u1EBD \u0111i l\xEAn v\xE0 d\u1EABm h\u1EBFt
+      nh\u1EEFng k\u1EBB coi th\u01B0\u1EDDng ta d\u01B0\u1EDBi ch\xE2n."
+    autoAdvance: 0
+    autoAdvanceDelay: 0
+    onStartEvent: 
+    onEndEvent: 
