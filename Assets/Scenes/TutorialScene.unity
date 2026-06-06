@@ -1350,7 +1350,7 @@ GameObject:
   - component: {fileID: 1825251200}
   - component: {fileID: 1825251199}
   - component: {fileID: 1825251198}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1369,10 +1369,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b867eea220b9ada43acbf6a609e7c15d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHP: 20
+  maxHP: 100000
   currentHP: 0
   startFull: 1
-  destroyOnDeath: 1
+  destroyOnDeath: 0
   isInvulnerable: 0
   damageTakenMultiplier: 1
   spawnDeathEffect: 0

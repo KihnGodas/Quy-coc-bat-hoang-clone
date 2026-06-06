@@ -48,7 +48,7 @@ public sealed class TutorialTarget : MonoBehaviour
 
     private void OnDamaged(DamageInfo info)
     {
-        if (spriteRenderer != null && !health.IsDead)
+        if (spriteRenderer != null)
         {
             spriteRenderer.color = hitFlashColor;
             Invoke(nameof(ResetColor), 0.12f);
