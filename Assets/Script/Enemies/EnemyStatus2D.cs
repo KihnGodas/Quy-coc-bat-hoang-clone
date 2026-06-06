@@ -6,6 +6,7 @@ public sealed class EnemyStatus2D : MonoBehaviour
     [SerializeField] private Color stunTint = new Color(1f, 0.9f, 0.25f, 1f);
 
     private SpriteRenderer spriteRenderer;
+    private EnemyHitFeedback2D hitFeedback;
     private Rigidbody2D body;
     private Color originalColor = Color.white;
     private float rootEndTime;
@@ -75,6 +76,12 @@ public sealed class EnemyStatus2D : MonoBehaviour
         SpellVisualEffect2D.CreateProjectileLaunch("Enemy_Knockback_Line", transform.position, direction, 0.9f, new Color(0.4f, 0.9f, 1f, 0.9f), 0.2f, 0.08f);
     }
 
+    public void OnEnemyDataChanged(EnemyData enemyData)
+    {
+        originalColor = enemyData != null ? enemyData.VisualColor : Color.white;
+        UpdateTint();
+    }
+
     private void UpdateTint()
     {
         if (spriteRenderer == null)
@@ -84,34 +91,48 @@ public sealed class EnemyStatus2D : MonoBehaviour
 
         if (IsStunned)
         {
-            spriteRenderer.color = stunTint;
+            spriteRenderer.color = GetFinalTint(stunTint);
         }
         else if (IsRooted)
         {
-            spriteRenderer.color = rootTint;
+            spriteRenderer.color = GetFinalTint(rootTint);
         }
         else
         {
-            spriteRenderer.color = originalColor;
+            spriteRenderer.color = GetFinalTint(originalColor);
         }
+    }
+
+    private Color GetFinalTint(Color baseTint)
+    {
+        if (hitFeedback != null && hitFeedback.IsFlashing)
+        {
+            return Color.Lerp(baseTint, hitFeedback.HitColor, 0.8f);
+        }
+
+        return baseTint;
     }
 
     private void ResolveReferences()
     {
-        if (spriteRenderer != null)
+        if (spriteRenderer == null)
         {
-            return;
-        }
-
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        if (spriteRenderer != null)
-        {
-            originalColor = spriteRenderer.color;
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                EnemyBase enemyBase = GetComponent<EnemyBase>();
+                originalColor = enemyBase != null && enemyBase.Data != null ? enemyBase.Data.VisualColor : Color.white;
+            }
         }
 
         if (body == null)
         {
             body = GetComponent<Rigidbody2D>();
+        }
+
+        if (hitFeedback == null)
+        {
+            hitFeedback = GetComponent<EnemyHitFeedback2D>();
         }
     }
 }

@@ -58,7 +58,7 @@ public sealed class EnemyTelegraph2D : MonoBehaviour
 
             if (blink)
             {
-                float blinkAlpha = Mathf.Lerp(0.2f, 1f, Mathf.PingPong(Time.time * blinkFrequency, 1f));
+                float blinkAlpha = Mathf.Lerp(0.55f, 1f, Mathf.PingPong(Time.time * blinkFrequency, 1f));
                 alpha *= blinkAlpha;
             }
 
@@ -68,7 +68,7 @@ public sealed class EnemyTelegraph2D : MonoBehaviour
 
         if (pulseScale)
         {
-            float pulse = 1f + Mathf.Sin(progress * Mathf.PI) * 0.12f;
+            float pulse = 1f + Mathf.Sin(progress * Mathf.PI) * 0.055f;
             transform.localScale = startScale * pulse;
         }
 
@@ -142,7 +142,7 @@ public sealed class EnemyTelegraph2D : MonoBehaviour
         bool blink = false,
         float blinkFrequency = 8f)
     {
-        EnemyTelegraph2D telegraph = CreateBase(effectName, sprite, position, color, sortingOrder);
+        EnemyTelegraph2D telegraph = CreateBase(effectName, BossRuntimeSprites.Circle, position, color, sortingOrder);
         if (telegraph == null)
         {
             return null;
@@ -165,7 +165,7 @@ public sealed class EnemyTelegraph2D : MonoBehaviour
         int sortingOrder,
         float effectDuration)
     {
-        EnemyTelegraph2D telegraph = CreateBase(effectName, sprite, start, color, sortingOrder);
+        EnemyTelegraph2D telegraph = CreateBase(effectName, BossRuntimeSprites.Square, start, color, sortingOrder);
         if (telegraph == null)
         {
             return null;
@@ -188,7 +188,7 @@ public sealed class EnemyTelegraph2D : MonoBehaviour
         bool blink = false,
         float blinkFrequency = 8f)
     {
-        EnemyTelegraph2D telegraph = CreateBase(effectName, sprite, position, color, sortingOrder);
+        EnemyTelegraph2D telegraph = CreateBase(effectName, BossRuntimeSprites.Circle, position, color, sortingOrder);
         if (telegraph == null)
         {
             return null;
@@ -210,7 +210,7 @@ public sealed class EnemyTelegraph2D : MonoBehaviour
         int sortingOrder,
         float effectDuration)
     {
-        EnemyTelegraph2D telegraph = CreateBase(effectName, sprite, start, color, sortingOrder);
+        EnemyTelegraph2D telegraph = CreateBase(effectName, BossRuntimeSprites.Circle, start, color, sortingOrder);
         if (telegraph == null)
         {
             return null;

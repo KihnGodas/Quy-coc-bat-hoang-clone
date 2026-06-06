@@ -1,0 +1,718 @@
+fileFormatVersion: 2
+guid: 8de856df3c078d0439e0abc0643fa7fd
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: daiLang_Attack1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1344
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e865dbc2cf0f7c90800000000000000
+      internalID: -7169994752432707354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_1
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 1344
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 525ba9e17cb6b2ec0800000000000000
+      internalID: -3590657774941719259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_2
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 1344
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6e2c14c7c8d65010800000000000000
+      internalID: 1177366705104236141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_3
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 1344
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84a2a8f8eb97102d0800000000000000
+      internalID: -3314233991409030584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_4
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 1344
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 840939b98901b9f80800000000000000
+      internalID: -8098861257264492472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1008
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa52dfe714dbc3ed0800000000000000
+      internalID: -2432861609685867089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_6
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 1008
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45260cb2b96f5d250800000000000000
+      internalID: 5968948027463852628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_7
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 1008
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97fb20ba67b501160800000000000000
+      internalID: 6994190786539732857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_8
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 1008
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33e789984854a5990800000000000000
+      internalID: -7396523002456146381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_9
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 1008
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fa0f71feae39d780800000000000000
+      internalID: -8657819887546201352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 672
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24ebc6585014ec2a0800000000000000
+      internalID: -6715358502393692606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_11
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 672
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0db6c69218d6133e0800000000000000
+      internalID: -2075757551727907888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_12
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 672
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f41ff6c0729c80460800000000000000
+      internalID: 7208232373156049231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_13
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 672
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03996d8ee217cf390800000000000000
+      internalID: -7783221609714247376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_14
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 672
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a0412faff24c1be0800000000000000
+      internalID: -1505254509526302554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 336
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be7f8548b21135eb0800000000000000
+      internalID: -4732419904834570261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_16
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 336
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9db253d72369e2bc0800000000000000
+      internalID: -3805939491488322599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_17
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 336
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65632ba08e84f0050800000000000000
+      internalID: 5768909809133958742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_18
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 336
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 727ccf0d3608ab6f0800000000000000
+      internalID: -668080428514752729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_19
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 336
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afeac489b8b8760b0800000000000000
+      internalID: -5735462168761159942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 201d9474bd5c28e50800000000000000
+      internalID: 6810223132122140930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_21
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 0
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f26887b0dfadc4760800000000000000
+      internalID: 7443565064490616367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_22
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 0
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47dc0d0141eff16c0800000000000000
+      internalID: -4170335367786869388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_23
+      rect:
+        serializedVersion: 2
+        x: 2340
+        y: 0
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b63ee9cc97acfb880800000000000000
+      internalID: -8592926939526798485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: daiLang_Attack1_24
+      rect:
+        serializedVersion: 2
+        x: 3120
+        y: 0
+        width: 780
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef436640c017abd20800000000000000
+      internalID: 3295070373802292478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      daiLang_Attack1_0: -7169994752432707354
+      daiLang_Attack1_1: -3590657774941719259
+      daiLang_Attack1_10: -6715358502393692606
+      daiLang_Attack1_11: -2075757551727907888
+      daiLang_Attack1_12: 7208232373156049231
+      daiLang_Attack1_13: -7783221609714247376
+      daiLang_Attack1_14: -1505254509526302554
+      daiLang_Attack1_15: -4732419904834570261
+      daiLang_Attack1_16: -3805939491488322599
+      daiLang_Attack1_17: 5768909809133958742
+      daiLang_Attack1_18: -668080428514752729
+      daiLang_Attack1_19: -5735462168761159942
+      daiLang_Attack1_2: 1177366705104236141
+      daiLang_Attack1_20: 6810223132122140930
+      daiLang_Attack1_21: 7443565064490616367
+      daiLang_Attack1_22: -4170335367786869388
+      daiLang_Attack1_23: -8592926939526798485
+      daiLang_Attack1_24: 3295070373802292478
+      daiLang_Attack1_3: -3314233991409030584
+      daiLang_Attack1_4: -8098861257264492472
+      daiLang_Attack1_5: -2432861609685867089
+      daiLang_Attack1_6: 5968948027463852628
+      daiLang_Attack1_7: 6994190786539732857
+      daiLang_Attack1_8: -7396523002456146381
+      daiLang_Attack1_9: -8657819887546201352
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

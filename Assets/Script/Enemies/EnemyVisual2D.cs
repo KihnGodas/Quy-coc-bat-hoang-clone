@@ -3,6 +3,7 @@ using UnityEngine;
 public sealed class EnemyVisual2D : MonoBehaviour
 {
     private const string VisualPartsRootName = "EnemyVisualParts";
+    private static float globalSizeMultiplier = 1f;
 
     [SerializeField] private EnemyBase enemyBase;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -10,16 +11,41 @@ public sealed class EnemyVisual2D : MonoBehaviour
     [SerializeField] private bool showNameLabel = true;
 
     private Transform visualPartsRoot;
+    private EnemyData currentEnemyData;
+    private Sprite[] activeWalkFrames;
+    private Sprite[] activeAttackFrames;
+    private Sprite[] currentAnimationFrames;
+    private Transform shadowTransform;
+    private Vector3 baseLocalScale = Vector3.one;
+    private int walkFrameIndex;
+    private float walkFrameTimer;
+
+    public static void SetGlobalSizeMultiplier(float sizeMultiplier)
+    {
+        globalSizeMultiplier = Mathf.Max(0.1f, sizeMultiplier);
+    }
 
     private void Awake()
     {
+        baseLocalScale = transform.localScale;
         ResolveReferences();
+        ApplyVisual();
+    }
+
+    private void OnEnable()
+    {
         ApplyVisual();
     }
 
     public void OnEnemyDataChanged(EnemyData enemyData)
     {
         ApplyVisual(enemyData);
+    }
+
+    private void Update()
+    {
+        UpdateWalkAnimation();
+        UpdateFacingDirection();
     }
 
     public void ApplyVisual()
@@ -30,33 +56,227 @@ public sealed class EnemyVisual2D : MonoBehaviour
 
     private void ApplyVisual(EnemyData enemyData)
     {
-        if (enemyData == null)
+        ResolveReferences();
+        ResetAnimationState();
+
+        if (spriteRenderer == null)
         {
             return;
         }
 
-        if (spriteRenderer != null)
+        if (enemyData == null)
         {
-            spriteRenderer.color = enemyData.VisualColor;
+            ApplyFallbackVisual();
+            return;
         }
 
-        Vector2 visualScale = enemyData.VisualScale;
-        if (visualScale.x > 0f && visualScale.y > 0f)
-        {
-            transform.localScale = new Vector3(visualScale.x, visualScale.y, transform.localScale.z);
-        }
+        currentEnemyData = enemyData;
+        activeWalkFrames = enemyData.WalkFrames;
+        activeAttackFrames = enemyData.AttackFrames;
+
+        spriteRenderer.color = enemyData.VisualColor;
 
         if (boxCollider != null)
         {
-            if (enemyData.ColliderSize.x > 0f && enemyData.ColliderSize.y > 0f)
+            Vector2 targetColliderSize = GetEffectiveColliderSize(enemyData);
+            if (targetColliderSize.x > 0f && targetColliderSize.y > 0f)
             {
-                boxCollider.size = enemyData.ColliderSize;
+                boxCollider.size = targetColliderSize;
             }
 
             boxCollider.offset = enemyData.ColliderOffset;
         }
 
+        if (enemyData.HasAnyAnimation)
+        {
+            ClearVisualParts();
+            if (!SetAnimationFrame(GetDefaultFrames(), 0))
+            {
+                ApplyFallbackSprite(enemyData);
+            }
+
+            CreateGroundShadow(enemyData);
+            return;
+        }
+
+        if (spriteRenderer.sprite == null)
+        {
+            ApplyFallbackSprite(enemyData);
+        }
+
+        ApplyVisualSize();
         RebuildRoleSilhouette(enemyData);
+    }
+
+    private void UpdateWalkAnimation()
+    {
+        if (spriteRenderer == null || currentEnemyData == null)
+        {
+            return;
+        }
+
+        Sprite[] targetFrames = GetFramesForState(out bool shouldAnimate, out float frameRate);
+        if (targetFrames == null || targetFrames.Length == 0)
+        {
+            return;
+        }
+
+        if (currentAnimationFrames != targetFrames)
+        {
+            currentAnimationFrames = targetFrames;
+            if (!SetAnimationFrame(targetFrames, 0))
+            {
+                ApplyFallbackSprite(currentEnemyData);
+            }
+
+            walkFrameTimer = 0f;
+        }
+
+        if (!shouldAnimate)
+        {
+            if (!SetAnimationFrame(targetFrames, 0))
+            {
+                ApplyFallbackSprite(currentEnemyData);
+            }
+
+            walkFrameTimer = 0f;
+            return;
+        }
+
+        float frameDuration = 1f / Mathf.Max(0.1f, frameRate);
+        walkFrameTimer += Time.deltaTime;
+
+        while (walkFrameTimer >= frameDuration)
+        {
+            walkFrameTimer -= frameDuration;
+            if (!SetAnimationFrame(targetFrames, walkFrameIndex + 1))
+            {
+                ApplyFallbackSprite(currentEnemyData);
+                return;
+            }
+        }
+    }
+
+    private void UpdateFacingDirection()
+    {
+        if (spriteRenderer == null || !HasAnyActiveAnimation()
+            || enemyBase == null || enemyBase.Target == null)
+        {
+            return;
+        }
+
+        float deltaX = enemyBase.Target.position.x - transform.position.x;
+        if (Mathf.Abs(deltaX) > 0.01f)
+        {
+            spriteRenderer.flipX = deltaX < 0f;
+        }
+    }
+
+    private Sprite[] GetFramesForState(out bool shouldAnimate, out float frameRate)
+    {
+        EnemyState state = enemyBase != null ? enemyBase.State : EnemyState.Idle;
+        if (state == EnemyState.Attack && activeAttackFrames != null && activeAttackFrames.Length > 0)
+        {
+            shouldAnimate = true;
+            frameRate = currentEnemyData.AttackFrameRate;
+            return activeAttackFrames;
+        }
+
+        shouldAnimate = state == EnemyState.Chase;
+        frameRate = currentEnemyData.WalkFrameRate;
+        return GetDefaultFrames();
+    }
+
+    private Sprite[] GetDefaultFrames()
+    {
+        if (activeWalkFrames != null && activeWalkFrames.Length > 0)
+        {
+            return activeWalkFrames;
+        }
+
+        return activeAttackFrames;
+    }
+
+    private bool HasAnyActiveAnimation()
+    {
+        return (activeWalkFrames != null && activeWalkFrames.Length > 0)
+            || (activeAttackFrames != null && activeAttackFrames.Length > 0);
+    }
+
+    private bool SetAnimationFrame(Sprite[] frames, int frameIndex)
+    {
+        if (spriteRenderer == null || frames == null || frames.Length == 0)
+        {
+            return false;
+        }
+
+        walkFrameIndex = frameIndex % frames.Length;
+        Sprite frame = frames[walkFrameIndex];
+        if (frame == null)
+        {
+            return false;
+        }
+
+        spriteRenderer.sprite = frame;
+        ApplyVisualSize();
+        UpdateGroundShadowSize();
+        return true;
+    }
+
+    private void ApplyVisualSize()
+    {
+        if (currentEnemyData == null || spriteRenderer == null || spriteRenderer.sprite == null)
+        {
+            return;
+        }
+
+        Vector2 targetSize = GetEffectiveVisualSize(currentEnemyData);
+        if (targetSize.x <= 0f || targetSize.y <= 0f)
+        {
+            return;
+        }
+
+        Vector2 spriteSize = spriteRenderer.sprite.bounds.size;
+        if (spriteSize.x <= 0f || spriteSize.y <= 0f)
+        {
+            return;
+        }
+
+        float uniformScale = Mathf.Min(targetSize.x / spriteSize.x, targetSize.y / spriteSize.y);
+        transform.localScale = new Vector3(uniformScale, uniformScale, baseLocalScale.z);
+    }
+
+    private void CreateGroundShadow(EnemyData enemyData)
+    {
+        EnsureVisualPartsRoot();
+
+        GameObject shadowObject = new GameObject("EnemyGroundShadow");
+        shadowTransform = shadowObject.transform;
+        shadowTransform.SetParent(visualPartsRoot, false);
+
+        SpriteRenderer shadowRenderer = shadowObject.AddComponent<SpriteRenderer>();
+        shadowRenderer.sprite = BossRuntimeSprites.Circle;
+        shadowRenderer.color = new Color(0f, 0f, 0f, 0.22f);
+        shadowRenderer.sortingLayerID = spriteRenderer != null ? spriteRenderer.sortingLayerID : 0;
+        shadowRenderer.sortingOrder = spriteRenderer != null ? spriteRenderer.sortingOrder - 2 : -2;
+
+        UpdateGroundShadowSize();
+    }
+
+    private void UpdateGroundShadowSize()
+    {
+        if (shadowTransform == null || currentEnemyData == null)
+        {
+            return;
+        }
+
+        float parentScale = Mathf.Max(Mathf.Abs(transform.localScale.x), 0.01f);
+        Vector2 colliderSize = GetEffectiveColliderSize(currentEnemyData);
+        shadowTransform.localPosition = new Vector3(0f, -0.42f / parentScale, 0f);
+        shadowTransform.localScale = new Vector3(
+            Mathf.Max(colliderSize.x * 0.86f, 0.45f) / parentScale,
+            Mathf.Max(colliderSize.y * 0.18f, 0.1f) / parentScale,
+            1f);
     }
 
     private void RebuildRoleSilhouette(EnemyData enemyData)
@@ -167,6 +387,7 @@ public sealed class EnemyVisual2D : MonoBehaviour
         if (existingRoot == null)
         {
             visualPartsRoot = null;
+            shadowTransform = null;
             return;
         }
 
@@ -184,6 +405,7 @@ public sealed class EnemyVisual2D : MonoBehaviour
         }
 
         visualPartsRoot = existingRoot;
+        shadowTransform = null;
     }
 
     private void CreatePart(string partName, Vector2 localPosition, Vector2 localScale, Color color, int sortingOffset)
@@ -251,6 +473,57 @@ public sealed class EnemyVisual2D : MonoBehaviour
         rootObject.transform.localPosition = Vector3.zero;
         rootObject.transform.localScale = Vector3.one;
         visualPartsRoot = rootObject.transform;
+    }
+
+    private void ResetAnimationState()
+    {
+        currentAnimationFrames = null;
+        walkFrameIndex = 0;
+        walkFrameTimer = 0f;
+        activeWalkFrames = null;
+        activeAttackFrames = null;
+    }
+
+    private void ApplyFallbackVisual()
+    {
+        currentEnemyData = null;
+        ClearVisualParts();
+        spriteRenderer.color = Color.white;
+        spriteRenderer.flipX = false;
+
+        if (spriteRenderer.sprite == null)
+        {
+            spriteRenderer.sprite = BossRuntimeSprites.Circle;
+        }
+
+        transform.localScale = new Vector3(0.9f, 0.9f, baseLocalScale.z);
+    }
+
+    private void ApplyFallbackSprite(EnemyData enemyData)
+    {
+        if (spriteRenderer == null)
+        {
+            return;
+        }
+
+        spriteRenderer.sprite = BossRuntimeSprites.Circle;
+        spriteRenderer.color = enemyData != null ? enemyData.VisualColor : Color.white;
+        ApplyVisualSize();
+        UpdateGroundShadowSize();
+    }
+
+    private static Vector2 GetEffectiveVisualSize(EnemyData enemyData)
+    {
+        return enemyData != null
+            ? enemyData.VisualScale * enemyData.VisualFrameScale * globalSizeMultiplier
+            : Vector2.one * globalSizeMultiplier;
+    }
+
+    private static Vector2 GetEffectiveColliderSize(EnemyData enemyData)
+    {
+        return enemyData != null
+            ? enemyData.ColliderSize * globalSizeMultiplier
+            : Vector2.one * globalSizeMultiplier;
     }
 
     private static bool ContainsName(string source, string keyword)

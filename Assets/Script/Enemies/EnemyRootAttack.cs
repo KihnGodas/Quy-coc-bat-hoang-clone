@@ -5,7 +5,6 @@ using UnityEngine;
 public sealed class EnemyRootAttack : EnemyAttackBase
 {
     private bool isCasting;
-    private bool rootedInPlace;
 
     private void Update()
     {
@@ -23,22 +22,14 @@ public sealed class EnemyRootAttack : EnemyAttackBase
 
         EnemyData data = enemyBase.Data;
         float distance = Vector2.Distance(transform.position, enemyBase.Target.position);
-        if (distance > data.RootRange && !rootedInPlace)
+        if (distance > data.RootRange)
         {
             enemyBase.SetMovementLocked(false);
             return;
         }
 
-        if (distance <= data.RootRange)
-        {
-            rootedInPlace = true;
-        }
-
-        if (rootedInPlace)
-        {
-            enemyBase.SetMovementLocked(true);
-            StartCoroutine(RootRoutine(data, enemyBase.Target));
-        }
+        enemyBase.SetMovementLocked(true);
+        StartCoroutine(RootRoutine(data, enemyBase.Target));
     }
 
     private IEnumerator RootRoutine(EnemyData data, Transform target)
@@ -54,7 +45,7 @@ public sealed class EnemyRootAttack : EnemyAttackBase
             sprite,
             targetPosition,
             data.RootRadius,
-            new Color(1f, 0f, 0f, 0.65f),
+            new Color(0.38f, 0.95f, 0.24f, 0.38f),
             sortingOrder,
             Mathf.Max(data.RootWarningTime, 0.1f),
             null,
@@ -76,6 +67,7 @@ public sealed class EnemyRootAttack : EnemyAttackBase
 
         nextAttackTime = Time.time + data.RootCooldown;
         isCasting = false;
+        enemyBase.SetMovementLocked(false);
     }
 
     private void ApplyRoot(Vector2 center, EnemyData data)
@@ -149,7 +141,7 @@ public sealed class EnemyRootAttack : EnemyAttackBase
             sprite,
             position,
             data.RootRadius,
-            new Color(0.25f, 1f, 0.15f, 0.8f),
+            new Color(0.22f, 0.82f, 0.18f, 0.5f),
             sortingOrder + 1,
             Mathf.Max(data.RootDuration, 0.1f),
             null,
@@ -164,7 +156,6 @@ public sealed class EnemyRootAttack : EnemyAttackBase
         }
 
         isCasting = false;
-        rootedInPlace = false;
     }
 
     private void OnDrawGizmosSelected()

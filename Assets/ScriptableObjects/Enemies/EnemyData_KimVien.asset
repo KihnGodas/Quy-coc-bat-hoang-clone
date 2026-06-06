@@ -22,9 +22,64 @@ MonoBehaviour:
   rotateToMoveDirection: 0
   arenaPadding: 0.4
   visualColor: {r: 1, g: 0.86, b: 0, a: 1}
-  visualScale: {x: 0.9, y: 1.05}
-  colliderSize: {x: 1, y: 1}
+  visualScale: {x: 2.05, y: 1.4}
+  visualFrameScale: 1.95
+  colliderSize: {x: 0.82, y: 0.72}
   colliderOffset: {x: 0, y: 0}
+  walkFrames:
+  - {fileID: -1077574236309379748, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: 7177919780124052400, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: 7393446527581499774, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -2707415251555153678, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -832069208825173409, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: 8542000805067301987, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: 5963794543642498311, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: 4553417722668475032, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: 625553679747941474, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: 2582128185073528429, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -419891336950079561, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -674181613408604841, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -2576746486544708541, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -8916067507588479668, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -9115257297687577302, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -538878097582413213, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: 3628309366084462148, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -6998323626195943918, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -7837748099381524819, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -3842293190204387280, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -4599894715004620366, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: 6229043873678975849, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -8155762327586148808, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -7333790395775898895, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  - {fileID: -2874474565211791895, guid: dbdb489b8f76e104b9e2ec783442fcde, type: 3}
+  walkFrameRate: 12
+  attackFrames:
+  - {fileID: -3788681238541567918, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: -9015849371042508211, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 8777402825803231332, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 3265665933435683956, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: -7367274698116145253, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 6559920628572131661, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 393788904754327675, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 7128024184457711565, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: -7465379862843739524, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 513059663360723294, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 810448413536602239, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 5783122390383885061, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: -2914387020976536988, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: -8262477307071172188, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 71990994095176970, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 2307248309960269979, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: -853039508503074344, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 4128922686521960876, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 2591269735164995999, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 3899965419986166614, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 7515629833614499274, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: 6737788773597327024, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: -6640238396277016203, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: -8900552414696594616, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  - {fileID: -347583316941396366, guid: d01177f2b4c9a394ab17b14d437577b3, type: 3}
+  attackFrameRate: 12
   lowHealthThreshold: 0.5
   lowHealthMoveSpeedMultiplier: 1
   lowHealthDamageMultiplier: 1

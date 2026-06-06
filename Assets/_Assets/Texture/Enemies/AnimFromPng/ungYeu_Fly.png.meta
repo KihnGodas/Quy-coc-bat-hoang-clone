@@ -1,0 +1,718 @@
+fileFormatVersion: 2
+guid: ea8bada3daa25e8439bcfc14534d65c5
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ungYeu_Fly_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1920
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0608d1da2d8d7baf0800000000000000
+      internalID: -380597244130394016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_1
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 1920
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96a2e8a29a17fcd80800000000000000
+      internalID: -8228233022805235095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_2
+      rect:
+        serializedVersion: 2
+        x: 1532
+        y: 1920
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a07d7882176379d80800000000000000
+      internalID: -8244060733239208182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_3
+      rect:
+        serializedVersion: 2
+        x: 2298
+        y: 1920
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec53818237a6fbca0800000000000000
+      internalID: -5998959135807752754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_4
+      rect:
+        serializedVersion: 2
+        x: 3064
+        y: 1920
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a79ad8223b9cd9ab0800000000000000
+      internalID: -4999618240095344262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1440
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cdeb7842050b97b0800000000000000
+      internalID: -5216570236014432828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_6
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 1440
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c175663c40ccb110800000000000000
+      internalID: 1278107827829043649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_7
+      rect:
+        serializedVersion: 2
+        x: 1532
+        y: 1440
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8f9693c0fc43e960800000000000000
+      internalID: 7630026790653042575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_8
+      rect:
+        serializedVersion: 2
+        x: 2298
+        y: 1440
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4c29ab2fc1871960800000000000000
+      internalID: 7572664025237498955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_9
+      rect:
+        serializedVersion: 2
+        x: 3064
+        y: 1440
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c168ba66a2c2ace80800000000000000
+      internalID: -8157659214405466596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 960
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bacd683be250b12e0800000000000000
+      internalID: -2154122298628055893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_11
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 960
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8ce221cd10106bf0800000000000000
+      internalID: -333248652445029235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_12
+      rect:
+        serializedVersion: 2
+        x: 1532
+        y: 960
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5d44c6cf49304540800000000000000
+      internalID: 4990051401926462813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_13
+      rect:
+        serializedVersion: 2
+        x: 2298
+        y: 960
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 278f47eb6f46f9860800000000000000
+      internalID: 7538855312161568882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_14
+      rect:
+        serializedVersion: 2
+        x: 3064
+        y: 960
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bcf249468a410860800000000000000
+      internalID: 7494353195536415923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 480
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4baad829ca160cc40800000000000000
+      internalID: 5530527736231996084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_16
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 480
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c200c86b09ad477d0800000000000000
+      internalID: -2921469943183835092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_17
+      rect:
+        serializedVersion: 2
+        x: 1532
+        y: 480
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd1660c7c20eac6e0800000000000000
+      internalID: -1816393018026597925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_18
+      rect:
+        serializedVersion: 2
+        x: 2298
+        y: 480
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 627cc06eedebe1680800000000000000
+      internalID: -8782372358774274266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_19
+      rect:
+        serializedVersion: 2
+        x: 3064
+        y: 480
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06f1f2931c94a3f20800000000000000
+      internalID: 3403113562668736352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fbb2e0139143d1f0800000000000000
+      internalID: -1021400590583677961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_21
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 0
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7452d214c9905d80800000000000000
+      internalID: -8263936248816446341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_22
+      rect:
+        serializedVersion: 2
+        x: 1532
+        y: 0
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e11d2ce035b791890800000000000000
+      internalID: -7486817308866588386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_23
+      rect:
+        serializedVersion: 2
+        x: 2298
+        y: 0
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e34b094e637c2fe00800000000000000
+      internalID: 1077142299471819838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ungYeu_Fly_24
+      rect:
+        serializedVersion: 2
+        x: 3064
+        y: 0
+        width: 766
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43cc625732dcb9110800000000000000
+      internalID: 1268833272207952948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ungYeu_Fly_0: -380597244130394016
+      ungYeu_Fly_1: -8228233022805235095
+      ungYeu_Fly_10: -2154122298628055893
+      ungYeu_Fly_11: -333248652445029235
+      ungYeu_Fly_12: 4990051401926462813
+      ungYeu_Fly_13: 7538855312161568882
+      ungYeu_Fly_14: 7494353195536415923
+      ungYeu_Fly_15: 5530527736231996084
+      ungYeu_Fly_16: -2921469943183835092
+      ungYeu_Fly_17: -1816393018026597925
+      ungYeu_Fly_18: -8782372358774274266
+      ungYeu_Fly_19: 3403113562668736352
+      ungYeu_Fly_2: -8244060733239208182
+      ungYeu_Fly_20: -1021400590583677961
+      ungYeu_Fly_21: -8263936248816446341
+      ungYeu_Fly_22: -7486817308866588386
+      ungYeu_Fly_23: 1077142299471819838
+      ungYeu_Fly_24: 1268833272207952948
+      ungYeu_Fly_3: -5998959135807752754
+      ungYeu_Fly_4: -4999618240095344262
+      ungYeu_Fly_5: -5216570236014432828
+      ungYeu_Fly_6: 1278107827829043649
+      ungYeu_Fly_7: 7630026790653042575
+      ungYeu_Fly_8: 7572664025237498955
+      ungYeu_Fly_9: -8157659214405466596
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

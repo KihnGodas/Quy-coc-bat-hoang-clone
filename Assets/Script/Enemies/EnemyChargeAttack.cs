@@ -62,8 +62,8 @@ public sealed class EnemyChargeAttack : MonoBehaviour
             "DaiLangChargeCircle",
             warningSprite,
             transform.position,
-            0.9f,
-            new Color(1f, 0.18f, 0.05f, 0.75f),
+            0.72f,
+            new Color(1f, 0.45f, 0.08f, 0.38f),
             sortingOrder,
             Mathf.Max(data.ChargeWindup, 0.1f),
             transform,
@@ -91,8 +91,8 @@ public sealed class EnemyChargeAttack : MonoBehaviour
                         start,
                         directionToTarget,
                         data.ChargeDistance,
-                        0.16f,
-                        new Color(1f, 0f, 0f, 0.65f),
+                        0.11f,
+                        new Color(1f, 0.64f, 0.1f, 0.48f),
                         sortingOrder,
                         Mathf.Max(data.ChargeWindup, 0.1f));
                 }
@@ -124,8 +124,8 @@ public sealed class EnemyChargeAttack : MonoBehaviour
             "DaiLangChargeFlash",
             warningSprite,
             transform.position,
-            new Vector2(1.6f, 1.6f),
-            new Color(1f, 0.9f, 0.1f, 0.9f),
+            new Vector2(1.05f, 1.05f),
+            new Color(1f, 0.86f, 0.22f, 0.52f),
             sortingOrder + 1,
             0.15f,
             transform);
