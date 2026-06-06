@@ -54,7 +54,7 @@ public sealed class EnemyRockThrowAttack : EnemyAttackBase
             sprite,
             targetSnapshot,
             data.RockRadius,
-            new Color(1f, 0f, 0f, 0.65f),
+            new Color(1f, 0.62f, 0.12f, 0.42f),
             sortingOrder,
             Mathf.Max(data.RockWarningTime + data.RockFallTime, 0.1f),
             null,
@@ -72,7 +72,7 @@ public sealed class EnemyRockThrowAttack : EnemyAttackBase
             targetSnapshot,
             new Vector2(data.RockRadius * 0.65f, data.RockRadius * 0.65f),
             Mathf.Max(data.RockRadius * 2f, 1.8f),
-            new Color(0.35f, 0.35f, 0.35f, 0.95f),
+            new Color(0.36f, 0.32f, 0.28f, 0.72f),
             sortingOrder + 1,
             Mathf.Max(data.RockFallTime, 0.1f));
 
@@ -85,8 +85,8 @@ public sealed class EnemyRockThrowAttack : EnemyAttackBase
             "KimVienRockImpact",
             sprite,
             targetSnapshot,
-            new Vector2(data.RockRadius * 2f, data.RockRadius * 2f),
-            new Color(1f, 0.7f, 0.2f, 0.85f),
+            new Vector2(data.RockRadius * 1.65f, data.RockRadius * 1.65f),
+            new Color(1f, 0.74f, 0.24f, 0.54f),
             sortingOrder + 2,
             0.2f);
 

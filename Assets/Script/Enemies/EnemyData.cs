@@ -14,9 +14,17 @@ public sealed class EnemyData : ScriptableObject
     [SerializeField, Min(0f)] private float arenaPadding = 0.35f;
     [Header("Visual")]
     [SerializeField] private Color visualColor = Color.white;
+    [Tooltip("Base target world size before imported animation sheet compensation.")]
     [SerializeField] private Vector2 visualScale = Vector2.one;
+    [Tooltip("Visual-only multiplier for imported animation sheets where the character appears small inside the frame.")]
+    [SerializeField, Min(0.1f)] private float visualFrameScale = 1f;
+    [Tooltip("Gameplay hitbox size. Tune after the visual size feels right.")]
     [SerializeField] private Vector2 colliderSize = Vector2.one;
     [SerializeField] private Vector2 colliderOffset = Vector2.zero;
+    [SerializeField] private Sprite[] walkFrames = new Sprite[0];
+    [SerializeField, Min(0.1f)] private float walkFrameRate = 12f;
+    [SerializeField] private Sprite[] attackFrames = new Sprite[0];
+    [SerializeField, Min(0.1f)] private float attackFrameRate = 12f;
     [Header("Low Health")]
     [SerializeField, Range(0.05f, 1f)] private float lowHealthThreshold = 0.5f;
     [SerializeField, Min(0.1f)] private float lowHealthMoveSpeedMultiplier = 1f;
@@ -73,8 +81,16 @@ public sealed class EnemyData : ScriptableObject
     public float ArenaPadding => arenaPadding;
     public Color VisualColor => visualColor;
     public Vector2 VisualScale => visualScale;
+    public float VisualFrameScale => visualFrameScale;
     public Vector2 ColliderSize => colliderSize;
     public Vector2 ColliderOffset => colliderOffset;
+    public Sprite[] WalkFrames => walkFrames;
+    public float WalkFrameRate => walkFrameRate;
+    public bool HasWalkAnimation => walkFrames != null && walkFrames.Length > 0;
+    public Sprite[] AttackFrames => attackFrames;
+    public float AttackFrameRate => attackFrameRate;
+    public bool HasAttackAnimation => attackFrames != null && attackFrames.Length > 0;
+    public bool HasAnyAnimation => HasWalkAnimation || HasAttackAnimation;
     public float LowHealthThreshold => lowHealthThreshold;
     public float LowHealthMoveSpeedMultiplier => lowHealthMoveSpeedMultiplier;
     public float LowHealthDamageMultiplier => lowHealthDamageMultiplier;

@@ -77,12 +77,14 @@ public sealed class EnemyProjectileAttack : EnemyAttackBase
         SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         Sprite sprite = spriteRenderer != null ? spriteRenderer.sprite : null;
         int sortingOrder = spriteRenderer != null ? spriteRenderer.sortingOrder + 3 : 3;
+        Color chargeColor = GetProjectileChargeColor(data);
+        Color lineColor = new Color(chargeColor.r, chargeColor.g, chargeColor.b, 0.42f);
         EnemyTelegraph2D.CreateCircle(
             $"{data.EnemyName}ProjectileCharge",
             sprite,
             transform.position,
-            0.75f,
-            new Color(1f, 0f, 0f, 0.75f),
+            0.62f,
+            chargeColor,
             sortingOrder,
             Mathf.Max(data.ProjectileChargeTime, 0.1f),
             transform,
@@ -109,8 +111,8 @@ public sealed class EnemyProjectileAttack : EnemyAttackBase
                     start,
                     direction,
                     data.ProjectileRange,
-                    0.08f,
-                    new Color(1f, 0.05f, 0.05f, 0.55f),
+                    0.065f,
+                    lineColor,
                     sortingOrder,
                     Mathf.Max(data.ProjectileChargeTime, 0.1f));
             }
@@ -135,13 +137,12 @@ public sealed class EnemyProjectileAttack : EnemyAttackBase
                 $"{data.EnemyName}ProjectileFlash",
                 sprite,
                 transform.position,
-                new Vector2(1.25f, 1.25f),
-                new Color(1f, 1f, 1f, 0.95f),
+                new Vector2(0.95f, 0.95f),
+                new Color(chargeColor.r, chargeColor.g, chargeColor.b, 0.58f),
                 sortingOrder + 1,
                 data.ProjectileFlashTime,
                 transform,
-                true,
-                12f);
+                false);
             yield return new WaitForSeconds(data.ProjectileFlashTime);
         }
 
@@ -223,6 +224,17 @@ public sealed class EnemyProjectileAttack : EnemyAttackBase
     {
         float cooldown = data.ProjectileCooldown > 0f ? data.ProjectileCooldown : enemyBase.AttackCooldown;
         nextAttackTime = Time.time + cooldown;
+    }
+
+    private static Color GetProjectileChargeColor(EnemyData data)
+    {
+        if (data.ProjectilePoisonDuration > 0f || data.ProjectilePoisonTickDamage > 0f)
+        {
+            Color poison = data.ProjectilePoisonTintColor;
+            return new Color(poison.r, poison.g, poison.b, 0.42f);
+        }
+
+        return new Color(0.28f, 0.76f, 1f, 0.4f);
     }
 
     private void OnDisable()

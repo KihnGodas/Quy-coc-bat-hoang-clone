@@ -32,6 +32,7 @@ public sealed class EnemySpawner : MonoBehaviour
     [SerializeField] private bool spawningEnabled = true;
     [SerializeField] private CombatManager combatManager;
     [SerializeField, Min(0f)] private float spawnLockBeforeCombatEnd = 0.5f;
+    [SerializeField, Min(0.1f)] private float enemySizeMultiplier = 1f;
 
     private float nextSpawnTime;
     private float runtimeSpawnInterval = -1f;
@@ -62,6 +63,16 @@ public sealed class EnemySpawner : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        ApplyEnemySizeMultiplier();
+    }
+
+    private void OnValidate()
+    {
+        ApplyEnemySizeMultiplier();
+    }
+
     public void SetSpawningEnabled(bool enabled)
     {
         spawningEnabled = enabled;
@@ -85,6 +96,7 @@ public sealed class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        ApplyEnemySizeMultiplier();
         FindPlayerIfNeeded();
         FindCombatManagerIfNeeded();
         nextSpawnTime = Time.time + EffectiveSpawnInterval;
@@ -147,19 +159,23 @@ public sealed class EnemySpawner : MonoBehaviour
         }
 
         EnemyChaseAI2D legacyEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        EnemyBase enemyBase = legacyEnemy.GetComponent<EnemyBase>();
+
+        if (enemyBase != null)
+        {
+            EnsureEnemyRuntimeComponents(enemyBase);
+            if (selectedData != null)
+            {
+                enemyBase.SetData(selectedData);
+            }
+        }
+
         if (player != null)
         {
             legacyEnemy.SetTarget(player);
 
-            EnemyBase enemyBase = legacyEnemy.GetComponent<EnemyBase>();
             if (enemyBase != null)
             {
-                EnsureEnemyRuntimeComponents(enemyBase);
-                if (selectedData != null)
-                {
-                    enemyBase.SetData(selectedData);
-                }
-
                 enemyBase.SetTarget(player);
             }
         }
@@ -276,6 +292,11 @@ public sealed class EnemySpawner : MonoBehaviour
         AddComponentIfMissing<EnemyRockThrowAttack>(enemyObject);
         AddComponentIfMissing<EnemyRootAttack>(enemyObject);
         AddComponentIfMissing<EnemyExperienceDropper>(enemyObject);
+    }
+
+    private void ApplyEnemySizeMultiplier()
+    {
+        EnemyVisual2D.SetGlobalSizeMultiplier(enemySizeMultiplier);
     }
 
     private static void AddComponentIfMissing<T>(GameObject gameObject) where T : Component

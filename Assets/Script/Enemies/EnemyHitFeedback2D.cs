@@ -5,8 +5,8 @@ using UnityEngine;
 public sealed class EnemyHitFeedback2D : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer targetRenderer;
-    [SerializeField] private Color hitColor = Color.white;
-    [SerializeField, Min(0f)] private float flashDuration = 0.08f;
+    [SerializeField] private Color hitColor = new Color(1f, 0.15f, 0.1f, 1f);
+    [SerializeField, Min(0f)] private float flashDuration = 0.12f;
     [SerializeField, Min(0f)] private float knockbackSpeed = 3.5f;
     [SerializeField, Min(0f)] private float knockbackDuration = 0.08f;
 
@@ -17,11 +17,16 @@ public sealed class EnemyHitFeedback2D : MonoBehaviour
     private float flashEndTime;
     private float knockbackEndTime;
     private bool hasDefaultColor;
+    private EnemyStatus2D enemyStatus;
+
+    public bool IsFlashing => Time.time < flashEndTime;
+    public Color HitColor => hitColor;
 
     private void Awake()
     {
         health = GetComponent<SimpleHealth>();
         body = GetComponent<Rigidbody2D>();
+        enemyStatus = GetComponent<EnemyStatus2D>();
 
         if (targetRenderer == null)
         {
@@ -51,6 +56,13 @@ public sealed class EnemyHitFeedback2D : MonoBehaviour
         RestoreColor();
     }
 
+    public void OnEnemyDataChanged(EnemyData enemyData)
+    {
+        defaultColor = enemyData != null ? enemyData.VisualColor : Color.white;
+        hasDefaultColor = true;
+        RestoreColor();
+    }
+
     private void Update()
     {
         if (targetRenderer == null || !hasDefaultColor)
@@ -58,7 +70,17 @@ public sealed class EnemyHitFeedback2D : MonoBehaviour
             return;
         }
 
-        targetRenderer.color = Time.time < flashEndTime ? hitColor : defaultColor;
+        if (enemyStatus == null)
+        {
+            enemyStatus = GetComponent<EnemyStatus2D>();
+        }
+
+        if (enemyStatus != null)
+        {
+            return;
+        }
+
+        targetRenderer.color = IsFlashing ? hitColor : defaultColor;
     }
 
     private void FixedUpdate()
@@ -90,7 +112,8 @@ public sealed class EnemyHitFeedback2D : MonoBehaviour
             return;
         }
 
-        defaultColor = targetRenderer.color;
+        EnemyBase enemyBase = GetComponent<EnemyBase>();
+        defaultColor = enemyBase != null && enemyBase.Data != null ? enemyBase.Data.VisualColor : Color.white;
         hasDefaultColor = true;
     }
 

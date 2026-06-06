@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 914000000000000001}
   - component: {fileID: 914000000000000002}
   - component: {fileID: 914000000000000003}
+  - component: {fileID: 914000000000000004}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -91,7 +92,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
-  m_Color: {r: 0.8627452, g: 0.1921569, b: 0.1960784, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -123,7 +124,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -236,8 +237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHitFeedback2D
   targetRenderer: {fileID: 5273053792194162434}
-  hitColor: {r: 1, g: 1, b: 1, a: 1}
-  flashDuration: 0.08
+  hitColor: {r: 1, g: 0.15, b: 0.1, a: 1}
+  flashDuration: 0.12
   knockbackSpeed: 3.5
   knockbackDuration: 0.08
 --- !u!114 &914000000000000001
@@ -288,3 +289,19 @@ MonoBehaviour:
   enemyBase: {fileID: 914000000000000001}
   enemyStatus: {fileID: 0}
   targetTag: Player
+--- !u!114 &914000000000000004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8370132824292442968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea07630e83770d34b926f4b35489448b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyVisual2D
+  enemyBase: {fileID: 914000000000000001}
+  spriteRenderer: {fileID: 5273053792194162434}
+  boxCollider: {fileID: 2243915101876763260}
+  showNameLabel: 1

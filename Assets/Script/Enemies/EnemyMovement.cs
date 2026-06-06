@@ -12,6 +12,7 @@ public sealed class EnemyMovement : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         body.gravityScale = 0f;
+        body.interpolation = RigidbodyInterpolation2D.Interpolate;
         ResolveReferences();
     }
 
@@ -21,6 +22,7 @@ public sealed class EnemyMovement : MonoBehaviour
         if (enemyBody != null)
         {
             enemyBody.gravityScale = 0f;
+            enemyBody.interpolation = RigidbodyInterpolation2D.Interpolate;
         }
     }
 

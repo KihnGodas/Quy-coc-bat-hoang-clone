@@ -173,7 +173,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 848361170983661050, guid: df31fc83800c0134f81dd2a176e08e77, type: 3}
   enemyBasePrefab: {fileID: 914000000000000001, guid: df31fc83800c0134f81dd2a176e08e77, type: 3}
   spawnMode: 0
-  testEnemyData: {fileID: 11400000, guid: efc6cd34448f4c0ca610d3dc265cefb0, type: 2}
+  testEnemyData: {fileID: 11400000, guid: 85cb17f55c314f73b9df3f7fd4c6247f, type: 2}
   enemySpawnTable:
   - enemyData: {fileID: 11400000, guid: 85cb17f55c314f73b9df3f7fd4c6247f, type: 2}
     unlockTime: 0
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70d31d351ef24b6eb7fce1b38a564fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatManager
-  combatMode: 1
+  combatMode: 0
   normalCombatDuration: 30
   autoStart: 1
   controlEnemySpawner: 1
@@ -360,6 +360,8 @@ MonoBehaviour:
   activeBoss: {fileID: 0}
   spawnPrototypeBoss: 1
   useAct1WoodBossPrototype: 1
+  prototypeBossType: 1
+  useBossTypeDefaultStats: 1
   prototypeBossName: Boss Prototype - Co Thu Ton Gia
   prototypeBossHP: 4500
   prototypeBossDamage: 60
@@ -744,8 +746,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7e31b65a7741a293d25f0f4b78485d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth2D
-  maxHealth: 200
-  currentHealth: 200
+  maxHealth: 1000
+  currentHealth: 1000
   disableControlsOnDeath: 1
   playerStats: {fileID: 300011}
   usePlayerStats: 1
@@ -887,7 +889,7 @@ MonoBehaviour:
   autoAttackRangePadding: 0.45
   autoTargetShapeTolerance: 0.45
   autoTargetRefreshInterval: 0.12
-  currentWeapon: 0
+  currentWeapon: 3
   disableLegacyCombatOnAwake: 1
   weapons: []
 --- !u!114 &300016

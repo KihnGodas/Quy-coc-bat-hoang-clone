@@ -21,10 +21,40 @@ MonoBehaviour:
   attackCooldown: 1
   rotateToMoveDirection: 0
   arenaPadding: 0.35
-  visualColor: {r: 1, g: 0.08, b: 0.08, a: 1}
-  visualScale: {x: 1, y: 0.7}
-  colliderSize: {x: 1, y: 1}
+  visualColor: {r: 1, g: 1, b: 1, a: 1}
+  visualScale: {x: 2.15, y: 1.35}
+  visualFrameScale: 2.2
+  colliderSize: {x: 0.8, y: 0.6}
   colliderOffset: {x: 0, y: 0}
+  walkFrames:
+  - {fileID: 8021881630007088686, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -968118579449052236, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -7223183998672999173, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -3002695706227944188, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -986014369620990946, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -1737036646965606970, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -5434540863058274653, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -8601162499666963651, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -3797546878230848769, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -3904205914201733023, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: 3764682048450595897, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -3760786781210333865, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: 4797721578334927627, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -8473717100585635792, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: 8637431644938315926, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -7715160526460282032, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -3400992887602864456, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: 7873102027909792161, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -1001233043661403556, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -541350124200934311, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: 7900652970433340022, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -156006634745192619, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: -2029306555168228603, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: 613723594242429463, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  - {fileID: 6439698859694204233, guid: 3c0a35cc25d83de468dcfde01806fbd1, type: 3}
+  walkFrameRate: 12
+  attackFrames:
+  attackFrameRate: 12
   lowHealthThreshold: 0.5
   lowHealthMoveSpeedMultiplier: 1
   lowHealthDamageMultiplier: 1

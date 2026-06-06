@@ -55,6 +55,18 @@ public sealed class BossHealthUI : MonoBehaviour
                 : new Color(1f, 0.85f, 0.25f, 1f);
             string shieldText = woodBoss.IsShieldActive ? "Shield: ACTIVE" : "Shield: OPEN";
             GUI.Label(stateRect, $"{shieldText} | Roots Left: {woodBoss.RemainingRootCount}", labelStyle);
+            return;
+        }
+
+        Act2FireBossController fireBoss = boss.GetComponent<Act2FireBossController>();
+        if (fireBoss != null)
+        {
+            Rect stateRect = new Rect(screenOffset.x, screenOffset.y + height + 4f, width, height);
+            labelStyle.normal.textColor = fireBoss.IsEnraged
+                ? new Color(1f, 0.25f, 0.08f, 1f)
+                : new Color(1f, 0.72f, 0.22f, 1f);
+            string stateText = fireBoss.IsEnraged ? "State: ENRAGED" : "State: NORMAL";
+            GUI.Label(stateRect, $"{stateText} | Skill: {fireBoss.CurrentSkillName}", labelStyle);
         }
     }
 
