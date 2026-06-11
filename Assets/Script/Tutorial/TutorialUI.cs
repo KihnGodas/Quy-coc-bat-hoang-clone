@@ -85,10 +85,10 @@ public sealed class TutorialUI : MonoBehaviour
             GUI.Label(new Rect(x + 20f, y + 52f, instructionWidth, 25f), hint, subtitleStyle);
         }
 
-        DrawProgressBar(panelWidth, panelY: y);
+        DrawProgressBar(panelWidth, panelY: y, step);
     }
 
-    private void DrawProgressBar(float panelWidth, float panelY)
+    private void DrawProgressBar(float panelWidth, float panelY, int step)
     {
         float barWidth = 260f;
         float barHeight = 5f;
@@ -105,10 +105,10 @@ public sealed class TutorialUI : MonoBehaviour
         GUI.DrawTexture(new Rect(x, y, barWidth * fill, barHeight), whiteTexture);
         GUI.color = Color.white;
 
-        int step = (int)tutorialManager.CurrentStep + 1;
-        int total = 6;
+        int displayStep = step + 1;
+        int total = InstructionTexts.Length;
         progressStyle.normal.textColor = progressColor;
-        GUI.Label(new Rect(x + barWidth + 8f, y - 4f, 40f, barHeight + 8f), $"{step}/{total}", progressStyle);
+        GUI.Label(new Rect(x + barWidth + 8f, y - 4f, 40f, barHeight + 8f), $"{displayStep}/{total}", progressStyle);
     }
 
     private void DrawCompletionScreen()

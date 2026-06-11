@@ -65,6 +65,9 @@ public sealed class WeaponController : MonoBehaviour
 
     private void Update()
     {
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsPlaying)
+            return;
+
         UpdateAutoTarget();
         UpdateWeaponVisual();
 

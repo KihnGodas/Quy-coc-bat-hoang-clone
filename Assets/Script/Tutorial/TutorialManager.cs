@@ -26,6 +26,14 @@ public sealed class TutorialManager : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private EnemySpawner enemySpawner;
 
+    [Header("Prologue")]
+    [SerializeField] private PrologueController prologueController;
+
+    [Header("Background")]
+    [SerializeField] private Sprite tutorialBackgroundSprite;
+    [SerializeField] private string tutorialBgResourcePath = "Tutorial/bg";
+    [SerializeField] private int backgroundSortingOrder = 0;
+
     [Header("Dialogue")]
     [SerializeField] private DialogueSO prologueNightDialogue;
     [SerializeField] private DialogueSO prologueCeremonyDialogue;
@@ -45,6 +53,8 @@ public sealed class TutorialManager : MonoBehaviour
     private bool allCompleted;
     private bool isPlayingChainDialogue;
     private int openingChainIndex;
+    private GameObject tutorialBackgroundGO;
+    private Transform tutorialBgTransform;
 
     private Vector3 movementStartPosition;
     private Vector2 previousMousePosition;
@@ -70,9 +80,20 @@ public sealed class TutorialManager : MonoBehaviour
     private void Start()
     {
         ResolveReferences();
+
         EnsurePlayerReadyForTutorial();
 
-        PlayOpeningDialogueChain();
+        if (prologueController != null)
+        {
+            prologueController.ShowPrologue(() =>
+            {
+                PlayOpeningDialogueChain();
+            });
+        }
+        else
+        {
+            PlayOpeningDialogueChain();
+        }
     }
 
     private void Update()
@@ -97,6 +118,18 @@ public sealed class TutorialManager : MonoBehaviour
         }
 
         TryCompleteStep();
+    }
+
+    private void LateUpdate()
+    {
+        if (tutorialBgTransform == null) return;
+
+        Camera cam = Camera.main;
+        if (cam != null)
+        {
+            Vector3 camPos = cam.transform.position;
+            tutorialBgTransform.position = new Vector3(camPos.x, camPos.y, 1f);
+        }
     }
 
     private bool ReferencesResolved()
@@ -136,11 +169,6 @@ public sealed class TutorialManager : MonoBehaviour
         if (cultivationState != null)
         {
             cultivationState.SetRealms(CultivationRealm.KimDan, CultivationRealm.KimDan);
-        }
-
-        if (playerMovement != null)
-        {
-            playerMovement.CanMove = true;
         }
     }
 
@@ -281,6 +309,68 @@ public sealed class TutorialManager : MonoBehaviour
         }
     }
 
+    // ---- BACKGROUND ----
+
+    private void CreateTutorialBackground()
+    {
+        DestroyTutorialBackground();
+
+        tutorialBackgroundGO = new GameObject("TutorialBackground", typeof(SpriteRenderer));
+        tutorialBgTransform = tutorialBackgroundGO.transform;
+        SpriteRenderer sr = tutorialBackgroundGO.GetComponent<SpriteRenderer>();
+        sr.sortingOrder = backgroundSortingOrder;
+        if (sr.sortingOrder < -5) sr.sortingOrder = -5;
+
+        Sprite usedSprite = tutorialBackgroundSprite;
+        if (usedSprite == null && !string.IsNullOrEmpty(tutorialBgResourcePath))
+        {
+            usedSprite = Resources.Load<Sprite>(tutorialBgResourcePath);
+            if (usedSprite != null)
+                Debug.Log($"TutorialManager: loaded background from Resources path '{tutorialBgResourcePath}'");
+        }
+        if (usedSprite == null)
+        {
+            Debug.LogWarning("TutorialManager: tutorialBackgroundSprite is null and Resources.Load failed, using magenta fallback.");
+            Texture2D fb = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+            fb.SetPixel(0, 0, Color.magenta);
+            fb.Apply();
+            usedSprite = Sprite.Create(fb, new Rect(0, 0, 1, 1), Vector2.one * 0.5f, 1f);
+        }
+        sr.sprite = usedSprite;
+        Debug.Log($"TutorialManager: background sprite = {(tutorialBackgroundSprite != null ? tutorialBackgroundSprite.name : (usedSprite != null ? usedSprite.name : "FALLBACK"))}, sortingOrder = {sr.sortingOrder}");
+
+        Camera cam = Camera.main;
+        if (cam != null)
+        {
+            Vector3 camPos = cam.transform.position;
+            tutorialBackgroundGO.transform.position = new Vector3(camPos.x, camPos.y, 1f);
+
+            float worldHeight = cam.orthographicSize * 2f;
+            float worldWidth = worldHeight * cam.aspect;
+
+            float spriteWidth = sr.sprite.bounds.size.x;
+            float spriteHeight = sr.sprite.bounds.size.y;
+
+            if (spriteWidth > 0f && spriteHeight > 0f)
+            {
+                float scaleX = worldWidth / spriteWidth;
+                float scaleY = worldHeight / spriteHeight;
+                float scale = Mathf.Max(scaleX, scaleY);
+                tutorialBackgroundGO.transform.localScale = new Vector3(scale, scale, 1f);
+            }
+        }
+    }
+
+    private void DestroyTutorialBackground()
+    {
+        if (tutorialBackgroundGO != null)
+        {
+            Destroy(tutorialBackgroundGO);
+            tutorialBackgroundGO = null;
+            tutorialBgTransform = null;
+        }
+    }
+
     // ---- DIALOGUE CHAIN ----
 
     private void PlayOpeningDialogueChain()
@@ -314,13 +404,47 @@ public sealed class TutorialManager : MonoBehaviour
             dm.OnDialogueEnd -= HandleChainDialogueEnd;
             isPlayingChainDialogue = false;
 
-            if (playerMovement != null)
-                playerMovement.CanMove = true;
-            OnStepChanged?.Invoke(currentStep);
+            if (prologueController != null && prologueController.IsShowing)
+            {
+                prologueController.HidePrologue(OnPrologueHidden);
+            }
+            else
+            {
+                OnPrologueHidden();
+            }
             return;
         }
 
         PlayCurrentChainDialogue(dm);
+    }
+
+    private void OnPrologueHidden()
+    {
+        Debug.Log("TutorialManager.OnPrologueHidden CALLED");
+        CreateTutorialBackground();
+        ResolveReferences();
+
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = true;
+            playerMovement.CanMove = true;
+        }
+        else
+        {
+            PlayerMovement2D pm = FindComponentInScene<PlayerMovement2D>();
+            if (pm != null)
+            {
+                pm.enabled = true;
+                pm.CanMove = true;
+            }
+        }
+
+        currentStep = Step.Movement;
+        stepCompleted = false;
+        stepCompleteTime = 0f;
+        movementStartPosition = playerTransform != null ? playerTransform.position : Vector3.zero;
+
+        OnStepChanged?.Invoke(currentStep);
     }
 
     private bool HasChainDialogueAtIndex(int index)
