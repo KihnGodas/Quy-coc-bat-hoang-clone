@@ -93,6 +93,11 @@ public sealed class Health : MonoBehaviour, IDamageable
         isInvulnerable = invulnerable;
     }
 
+    public void SetDamageTakenMultiplier(float multiplier)
+    {
+        damageTakenMultiplier = Mathf.Max(0f, multiplier);
+    }
+
     private void Die()
     {
         OnDeath?.Invoke();

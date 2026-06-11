@@ -6,7 +6,8 @@ public sealed class CombatManager : MonoBehaviour
     public enum CombatMode
     {
         NormalCombat,
-        BossCombat
+        BossCombat,
+        TutorialBossCombat
     }
 
     public enum CombatState

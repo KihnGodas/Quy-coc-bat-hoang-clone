@@ -380,6 +380,9 @@ MonoBehaviour:
   prototypeBossHP: 4500
   prototypeBossDamage: 60
   spawnPosition: {x: 0, y: 0}
+  repositionPlayerForBossCombat: 1
+  bossCombatPlayerSpawnPosition: {x: -7, y: 0}
+  minPlayerDistanceFromBoss: 3
   prototypeBossColor: {r: 0.18, g: 0.95, b: 0.35, a: 1}
   prototypeBossScale: {x: 2.2, y: 2.2}
   bossPreDialogue: {fileID: 0}

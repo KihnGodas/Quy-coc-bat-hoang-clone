@@ -343,6 +343,41 @@ public sealed class CombatHUD2D : MonoBehaviour
             : $"Ult: {playerUltimate.UltimateCooldownRemaining:0.0}s";
     }
 
+    private string FormatCombatTimeText()
+    {
+        if (combatManager == null)
+        {
+            return "Time Left: Missing CombatManager";
+        }
+
+        if (combatManager.Mode == CombatManager.CombatMode.TutorialBossCombat)
+        {
+            return $"Tutorial Trial: {combatManager.State}";
+        }
+
+        if (combatManager.Mode != CombatManager.CombatMode.NormalCombat)
+        {
+            return $"Boss Stage: {combatManager.State}";
+        }
+
+        if (combatManager.State == CombatManager.CombatState.ClearingEnemies)
+        {
+            return $"Clear Enemies: {combatManager.RemainingEnemyCount}";
+        }
+
+        if (combatManager.State == CombatManager.CombatState.Running)
+        {
+            return $"Time Left: {combatManager.RemainingTime:0.0}s";
+        }
+
+        if (combatManager.State == CombatManager.CombatState.NotStarted)
+        {
+            return $"Time Left: {combatManager.Duration:0.0}s";
+        }
+
+        return $"Combat: {combatManager.State}";
+    }
+
     private Color GetSkillTextColor()
     {
         if (weaponController != null)
