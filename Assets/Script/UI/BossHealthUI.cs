@@ -23,6 +23,9 @@ public sealed class BossHealthUI : MonoBehaviour
 
     private void OnGUI()
     {
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsPlaying)
+            return;
+
         ResolveReferences();
         if (combatManager == null || combatManager.Mode != CombatManager.CombatMode.BossCombat)
         {

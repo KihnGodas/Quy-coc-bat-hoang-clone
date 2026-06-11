@@ -20,9 +20,14 @@ public sealed class CombatBootstrap : MonoBehaviour
     [SerializeField] private bool ensureCombatDifficultyScaler = true;
     [SerializeField] private bool ensureCombatResultUi = true;
     [SerializeField] private bool ensurePlayerExperience = true;
+    [SerializeField] private bool ensurePlayerAnimatorSetup = true;
+    [SerializeField] private bool ensureStageBackground = true;
+    [SerializeField] private int backgroundSortingOrder = -10;
+    [SerializeField] private string backgroundResourcePath = "Combat/bg";
     [SerializeField] private bool ensurePlayerCultivationState = true;
     [SerializeField] private bool ensurePlayerSpellController = true;
     [SerializeField] private bool ensurePlayerUltimateController = true;
+    [SerializeField] private bool ensureTranThienKhiHud = true;
     [SerializeField] private bool logBootstrap = true;
 
     public ArenaBounds ArenaBounds => arenaBounds;
@@ -39,6 +44,7 @@ public sealed class CombatBootstrap : MonoBehaviour
     {
         ResolveReferences();
         ApplyStageConfiguration();
+        EnsureStageBackground();
         EnsureRuntimePlayerComponents();
         RestorePlayerProgression();
         EnsureRuntimeCombatComponents();
@@ -97,6 +103,40 @@ public sealed class CombatBootstrap : MonoBehaviour
         {
             Debug.Log($"Stage configured: {stageData.StageName} ({stageData.CombatMode})");
         }
+    }
+
+    private void EnsureStageBackground()
+    {
+        if (!ensureStageBackground) return;
+
+        if (arenaBounds == null) return;
+
+        Sprite bgSprite = Resources.Load<Sprite>(backgroundResourcePath);
+        if (bgSprite == null)
+        {
+            Debug.LogWarning($"Stage background sprite not found at: {backgroundResourcePath}");
+            return;
+        }
+
+        GameObject bgGO = new GameObject("StageBackground", typeof(SpriteRenderer));
+        bgGO.transform.SetParent(arenaBounds.transform.parent);
+
+        SpriteRenderer sr = bgGO.GetComponent<SpriteRenderer>();
+        sr.sprite = bgSprite;
+        sr.sortingOrder = backgroundSortingOrder;
+
+        Vector2 arenaCenter = arenaBounds.Center;
+        Vector2 arenaSize = arenaBounds.Size;
+        bgGO.transform.position = new Vector3(arenaCenter.x, arenaCenter.y, 0f);
+
+        float spriteWidth = bgSprite.bounds.size.x;
+        float spriteHeight = bgSprite.bounds.size.y;
+        float scaleX = arenaSize.x / spriteWidth;
+        float scaleY = arenaSize.y / spriteHeight;
+        bgGO.transform.localScale = new Vector3(scaleX, scaleY, 1f);
+
+        if (logBootstrap)
+            Debug.Log($"Stage background created: {bgSprite.name}, scale=({scaleX:F2}, {scaleY:F2})");
     }
 
     private void RestorePlayerProgression()
@@ -201,6 +241,39 @@ public sealed class CombatBootstrap : MonoBehaviour
         {
             player.gameObject.AddComponent<PlayerUltimateController>();
         }
+
+        if (ensurePlayerAnimatorSetup)
+        {
+            SetupPlayerAnimator();
+        }
+    }
+
+    private void SetupPlayerAnimator()
+    {
+        if (player == null) return;
+
+        Animator animator = player.GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = player.gameObject.AddComponent<Animator>();
+        }
+
+        string controllerPath = GameManager.Instance != null &&
+                                GameManager.Instance.SelectedCharacter == CharacterType.Female
+            ? "Animations/PlayerFemale"
+            : "Animations/PlayerMale";
+
+        RuntimeAnimatorController controller = Resources.Load<RuntimeAnimatorController>(controllerPath);
+        if (controller != null)
+        {
+            animator.runtimeAnimatorController = controller;
+        }
+
+        SpriteRenderer sr = player.GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            sr.color = Color.white;
+        }
     }
 
     private void EnsureRuntimeCombatComponents()
@@ -218,6 +291,11 @@ public sealed class CombatBootstrap : MonoBehaviour
         if (ensureCombatDifficultyScaler && combatDifficultyScaler == null)
         {
             combatDifficultyScaler = gameObject.AddComponent<CombatDifficultyScaler>();
+        }
+
+        if (ensureTranThienKhiHud && GetComponent<TranThienKhiHUD>() == null)
+        {
+            gameObject.AddComponent<TranThienKhiHUD>();
         }
 
         if (!ensureCombatResultUi)

@@ -16,6 +16,11 @@ public sealed class SkillIconHUD : MonoBehaviour
     [SerializeField] private int cooldownFontSize = 16;
     [SerializeField] private int keyFontSize = 10;
 
+    [Header("Icons")]
+    [SerializeField] private Texture2D[] weaponSkillIcons = new Texture2D[4];
+    [SerializeField] private Texture2D[] spellIcons = new Texture2D[5];
+    [SerializeField] private Texture2D[] ultimateIcons = new Texture2D[5];
+
     [Header("Colors")]
     [SerializeField] private Color dashColor = new Color(0.3f, 0.7f, 1f, 1f);
     [SerializeField] private Color weaponSkillColor = new Color(1f, 0.6f, 0.1f, 1f);
@@ -38,6 +43,7 @@ public sealed class SkillIconHUD : MonoBehaviour
     {
         ResolveReferences();
         InitializeWhiteTexture();
+        EnsureFallbackIcons();
     }
 
     private void Update()
@@ -68,6 +74,9 @@ public sealed class SkillIconHUD : MonoBehaviour
 
     private void OnGUI()
     {
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsPlaying)
+            return;
+
         EnsureStyles();
         float totalWidth = iconSize * 4f + iconGap * 3f;
         float startX = (Screen.width - totalWidth) * 0.5f;
@@ -102,7 +111,8 @@ public sealed class SkillIconHUD : MonoBehaviour
         float cdRemaining = weaponController != null ? weaponController.SkillCooldownRemaining : 0f;
         float cdTotal = weaponController != null ? weaponController.CurrentSkillCooldown : 1f;
 
-        DrawIconBase(x, y, weaponSkillColor, ready, "Skill", "Q", cdRemaining, cdTotal, true);
+        Texture2D icon = GetWeaponSkillIcon();
+        DrawIconBaseWithTexture(x, y, weaponSkillColor, ready, "Skill", "Q", cdRemaining, cdTotal, true, icon);
     }
 
     private void DrawSpellIcon(float x, float y)
@@ -117,7 +127,8 @@ public sealed class SkillIconHUD : MonoBehaviour
         float cdTotal = spellController.GetCurrentSpellTotalCooldown();
 
         string label = GetSpellAbbreviation(data.SpellType);
-        DrawIconBase(x, y, data.VisualColor, ready, label, "E", cdRemainingRaw, cdTotal, true);
+        Texture2D icon = GetSpellIcon(data.SpellType);
+        DrawIconBaseWithTexture(x, y, data.VisualColor, ready, label, "E", cdRemainingRaw, cdTotal, true, icon);
     }
 
     private void DrawUltimateIcon(float x, float y)
@@ -127,7 +138,8 @@ public sealed class SkillIconHUD : MonoBehaviour
         float cdRemaining = playerUltimate != null ? playerUltimate.UltimateCooldownRemaining : 0f;
         float cdTotal = playerUltimate != null ? playerUltimate.CurrentUltimateCooldown : 1f;
 
-        DrawIconBase(x, y, ultColor, ready, "Ult", "R", cdRemaining, cdTotal, unlocked);
+        Texture2D icon = GetUltimateIcon();
+        DrawIconBaseWithTexture(x, y, ultColor, ready, "Ult", "R", cdRemaining, cdTotal, unlocked, icon);
     }
 
     private void DrawIconBase(float x, float y, Color baseColor, bool isReady, string label, string keyText,
@@ -204,6 +216,171 @@ public sealed class SkillIconHUD : MonoBehaviour
         GUI.DrawTexture(new Rect(rect.x, rect.y, t, rect.height), whiteTexture);
         GUI.DrawTexture(new Rect(rect.x + rect.width - t, rect.y, t, rect.height), whiteTexture);
         GUI.color = Color.white;
+    }
+
+    private void DrawIconBaseWithTexture(float x, float y, Color baseColor, bool isReady, string label, string keyText,
+        float cdRemaining, float cdTotal, bool isUnlocked, Texture2D iconTexture)
+    {
+        Rect iconRect = new Rect(x, y, iconSize, iconSize);
+
+        float cdProgress = cdTotal > 0f ? Mathf.Clamp01(cdRemaining / cdTotal) : 0f;
+
+        if (!isUnlocked)
+        {
+            GUI.color = lockedColor;
+            if (iconTexture != null)
+                GUI.DrawTexture(iconRect, iconTexture);
+            else
+                GUI.DrawTexture(iconRect, whiteTexture);
+            GUI.color = Color.white;
+        }
+        else if (isReady)
+        {
+            if (iconTexture != null)
+            {
+                GUI.DrawTexture(iconRect, iconTexture);
+                DrawBorder(iconRect, readyBorderColor);
+            }
+            else
+            {
+                GUI.color = baseColor;
+                GUI.DrawTexture(iconRect, whiteTexture);
+                GUI.color = Color.white;
+                DrawBorder(iconRect, readyBorderColor);
+            }
+        }
+        else
+        {
+            if (iconTexture != null)
+            {
+                GUI.DrawTexture(iconRect, iconTexture);
+                DrawBorder(iconRect, cooldownBorderColor);
+            }
+            else
+            {
+                GUI.color = baseColor;
+                GUI.DrawTexture(iconRect, whiteTexture);
+                GUI.color = Color.white;
+                DrawBorder(iconRect, cooldownBorderColor);
+            }
+
+            if (cdProgress > 0f)
+            {
+                GUI.color = cooldownOverlayColor;
+                float overlayHeight = iconSize * cdProgress;
+                GUI.DrawTexture(new Rect(x, y, iconSize, overlayHeight), whiteTexture);
+                GUI.color = Color.white;
+            }
+        }
+
+        if (!isUnlocked)
+        {
+            iconStyle.normal.textColor = new Color(0.5f, 0.5f, 0.5f, 0.6f);
+            GUI.Label(iconRect, label, iconStyle);
+            iconStyle.normal.textColor = textColor;
+        }
+        else if (isReady)
+        {
+            iconStyle.normal.textColor = textColor;
+            GUI.Label(iconRect, label, iconStyle);
+        }
+        else
+        {
+            iconStyle.normal.textColor = cooldownTextColor;
+            GUI.Label(iconRect, label, iconStyle);
+
+            string cdText = $"{Mathf.Max(0f, cdRemaining):0.0}";
+            cooldownStyle.normal.textColor = cooldownTextColor;
+            GUI.Label(iconRect, cdText, cooldownStyle);
+
+            iconStyle.normal.textColor = textColor;
+        }
+
+        keyStyle.normal.textColor = isUnlocked ? new Color(1f, 1f, 1f, 0.8f) : new Color(0.5f, 0.5f, 0.5f, 0.5f);
+        GUI.Label(new Rect(x + 2f, y + 2f, iconSize, keyFontSize + 2f), keyText, keyStyle);
+    }
+
+    private Texture2D GetWeaponSkillIcon()
+    {
+        if (weaponController == null) return null;
+        WeaponType type = weaponController.CurrentWeapon;
+        int index = (int)type;
+        if (index >= 0 && index < weaponSkillIcons.Length && weaponSkillIcons[index] != null)
+            return weaponSkillIcons[index];
+        return null;
+    }
+
+    private Texture2D GetSpellIcon(SpellType spellType)
+    {
+        int index = (int)spellType;
+        if (index >= 0 && index < spellIcons.Length && spellIcons[index] != null)
+            return spellIcons[index];
+        return null;
+    }
+
+    private Texture2D GetUltimateIcon()
+    {
+        if (playerUltimate == null) return null;
+        int index = (int)playerUltimate.CurrentUltimateType;
+        if (index >= 0 && index < ultimateIcons.Length && ultimateIcons[index] != null)
+            return ultimateIcons[index];
+        return null;
+    }
+
+    private void EnsureFallbackIcons()
+    {
+        for (int i = 0; i < weaponSkillIcons.Length; i++)
+        {
+            if (weaponSkillIcons[i] == null)
+            {
+                string name = ((WeaponType)i) switch
+                {
+                    WeaponType.Sword => "iconKiem",
+                    WeaponType.Spear => "iconThuong",
+                    WeaponType.Axe => "iconRiu",
+                    WeaponType.FlyingSword => "iconPhiKiem",
+                    _ => null
+                };
+                if (name != null)
+                    weaponSkillIcons[i] = Resources.Load<Texture2D>("UI/IconSkill/" + name);
+            }
+        }
+
+        for (int i = 0; i < spellIcons.Length; i++)
+        {
+            if (spellIcons[i] == null)
+            {
+                string name = ((SpellType)i) switch
+                {
+                    SpellType.WoodVine => "iconMoc",
+                    SpellType.Fireball => "iconHoa",
+                    SpellType.EarthSpike => "iconTho",
+                    SpellType.WaterArrows => "iconThuy",
+                    SpellType.MetalBlade => "iconKim",
+                    _ => null
+                };
+                if (name != null)
+                    spellIcons[i] = Resources.Load<Texture2D>("UI/CongPhap/" + name);
+            }
+        }
+
+        for (int i = 0; i < ultimateIcons.Length; i++)
+        {
+            if (ultimateIcons[i] == null)
+            {
+                string name = ((UltimateType)i) switch
+                {
+                    UltimateType.WoodGrandRoots => "iconUltiMoc",
+                    UltimateType.FireNova => "iconUltiHoa",
+                    UltimateType.EarthQuake => "iconUltiTho",
+                    UltimateType.WaterStorm => "iconUltiThuy",
+                    UltimateType.MetalJudgement => "iconUltiKim",
+                    _ => null
+                };
+                if (name != null)
+                    ultimateIcons[i] = Resources.Load<Texture2D>("UI/Ultimate/" + name);
+            }
+        }
     }
 
     private static string GetSpellAbbreviation(SpellType type)

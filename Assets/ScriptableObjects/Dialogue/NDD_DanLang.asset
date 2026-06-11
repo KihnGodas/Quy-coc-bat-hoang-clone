@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed7f65f9b1d94674ab202e0efa2a6f67, type: 3}
   m_Name: NDD_DanLang
   m_EditorClassIdentifier: Assembly-CSharp::SpeakerSO
-  speakerName: "NPC D\xE2n L\xE0ng"
+  speakerName: "D\xE2n L\xE0ng"
   portrait: {fileID: 0}
   highlightColor: {r: 0.7, g: 0.65, b: 0.5, a: 1}
   dimColor: {r: 0.7, g: 0.65, b: 0.5, a: 0.3}

@@ -170,12 +170,36 @@ public sealed class CombatManager : MonoBehaviour
 
         if (combatResult == CombatResult.Victory)
         {
+            GrantTranThienKhiReward();
             OnCombatVictory?.Invoke();
         }
         else if (combatResult == CombatResult.Defeat)
         {
             OnCombatDefeat?.Invoke();
         }
+    }
+
+    private void GrantTranThienKhiReward()
+    {
+        if (GameManager.Instance == null) return;
+
+        TranThienKhiType reward = GetTranThienKhiForStage(GameManager.Instance.CurrentStageIndex);
+        if (reward != TranThienKhiType.None)
+        {
+            GameManager.Instance.CollectTranThienKhi(reward);
+        }
+    }
+
+    private static TranThienKhiType GetTranThienKhiForStage(int stageIndex)
+    {
+        return stageIndex switch
+        {
+            6 => TranThienKhiType.Moc,
+            7 => TranThienKhiType.Hoa,
+            8 => TranThienKhiType.Kim,
+            9 => TranThienKhiType.Thuy,
+            _ => TranThienKhiType.None
+        };
     }
 
     public void SetBossHealth(Health newBossHealth)

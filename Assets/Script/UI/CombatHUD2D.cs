@@ -49,20 +49,13 @@ public sealed class CombatHUD2D : MonoBehaviour
 
     private void OnGUI()
     {
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsPlaying)
+            return;
+
         EnsureStyle();
         EnsureCenterStyle();
 
         DrawCenterTopInfo();
-
-        float y = screenOffset.y;
-
-        DrawLine(FormatProgressionText(), GetProgressionTextColor(), y);
-        y += lineHeight;
-
-        DrawLine(FormatActionText(), GetActionTextColor(), y);
-        y += lineHeight;
-
-        DrawLine(FormatUltimateText(), GetUltimateTextColor(), y);
 
         DrawBottomBars();
     }

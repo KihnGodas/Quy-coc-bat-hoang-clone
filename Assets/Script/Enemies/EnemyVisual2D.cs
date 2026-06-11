@@ -4,6 +4,7 @@ public sealed class EnemyVisual2D : MonoBehaviour
 {
     private const string VisualPartsRootName = "EnemyVisualParts";
     private static float globalSizeMultiplier = 1f;
+    private const float IdleAnimSpeedMultiplier = 0.3f;
 
     [SerializeField] private EnemyBase enemyBase;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -182,8 +183,10 @@ public sealed class EnemyVisual2D : MonoBehaviour
             return activeAttackFrames;
         }
 
-        shouldAnimate = state == EnemyState.Chase;
+        shouldAnimate = state == EnemyState.Chase || state == EnemyState.Idle;
         frameRate = currentEnemyData.WalkFrameRate;
+        if (state == EnemyState.Idle)
+            frameRate *= IdleAnimSpeedMultiplier;
         return GetDefaultFrames();
     }
 

@@ -537,7 +537,7 @@ public sealed class WeaponController : MonoBehaviour
         }
     }
 
-    private static List<WeaponData> CreateDefaultWeaponData()
+    public static List<WeaponData> CreateDefaultWeaponData()
     {
         return new List<WeaponData>
         {

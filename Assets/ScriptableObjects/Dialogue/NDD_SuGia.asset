@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: NDD_SuGia
   m_EditorClassIdentifier: Assembly-CSharp::SpeakerSO
   speakerName: "S\u1EE9 Gi\u1EA3 Th\xE1i Th\u01B0\u1EE3ng \u0110\u1EA1o Vi\u1EC7n"
-  portrait: {fileID: 0}
+  portrait: {fileID: 2800000, guid: 5fbbb477a43c4e04e8c71e9f488fe6cd, type: 3}
   highlightColor: {r: 1, g: 0.2, b: 0.2, a: 1}
   dimColor: {r: 1, g: 0.2, b: 0.2, a: 0.3}

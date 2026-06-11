@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum CharacterType { Male, Female }
+
 public sealed class GameManager : MonoBehaviour
 {
     [SerializeField] private StageProgression stageProgression;
@@ -15,8 +17,12 @@ public sealed class GameManager : MonoBehaviour
     private int savedLevel = 1;
     private float savedExperience;
     private bool tutorialCompleted;
+    private readonly HashSet<TranThienKhiType> collectedTranThienKhi = new HashSet<TranThienKhiType>();
 
     public static GameManager Instance { get; private set; }
+    public CharacterType SelectedCharacter { get; set; }
+    public string PlayerName { get; set; }
+    public WeaponType SelectedWeapon { get; set; }
 
     public StageProgression StageProgression => stageProgression;
     public int CurrentStageIndex => currentStageIndex;
@@ -121,6 +127,24 @@ public sealed class GameManager : MonoBehaviour
         {
             UnlockStage(nextIndex);
         }
+    }
+
+    public void CollectTranThienKhi(TranThienKhiType type)
+    {
+        if (type != TranThienKhiType.None)
+        {
+            collectedTranThienKhi.Add(type);
+        }
+    }
+
+    public bool HasTranThienKhi(TranThienKhiType type)
+    {
+        return collectedTranThienKhi.Contains(type);
+    }
+
+    public HashSet<TranThienKhiType>.Enumerator GetAllTranThienKhi()
+    {
+        return collectedTranThienKhi.GetEnumerator();
     }
 
     public static bool TutorialCompleted => Instance != null && Instance.tutorialCompleted;

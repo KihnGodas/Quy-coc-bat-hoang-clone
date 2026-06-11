@@ -36,6 +36,9 @@ public sealed class DebugCombatUI : MonoBehaviour
             return;
         }
 
+        if (DialogueManager.Instance != null && DialogueManager.Instance.IsPlaying)
+            return;
+
         EnsureStyle();
 
         float y = screenOffset.y;

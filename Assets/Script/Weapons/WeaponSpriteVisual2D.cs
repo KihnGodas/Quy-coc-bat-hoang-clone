@@ -13,6 +13,7 @@ public sealed class WeaponSpriteVisual2D : MonoBehaviour
     [SerializeField] private SpriteRenderer secondaryPartRenderer;
     [SerializeField] private SpriteRenderer accentPartRenderer;
     [SerializeField, Min(0f)] private float holdDistance = 0.72f;
+    [SerializeField] private float handHeight = 0.35f;
     [SerializeField, Min(0f)] private float idleBobAmplitude = 0.08f;
     [SerializeField, Min(0f)] private float idleBobFrequency = 4.5f;
     [SerializeField, Min(0f)] private float idleSwayAngle = 7f;
@@ -25,6 +26,7 @@ public sealed class WeaponSpriteVisual2D : MonoBehaviour
     [SerializeField] private Color flyingSwordColor = new Color(0.55f, 0.85f, 1f, 1f);
     [SerializeField] private Color handleColor = new Color(0.52f, 0.34f, 0.18f, 1f);
     [SerializeField] private Color metalAccentColor = new Color(0.95f, 0.98f, 1f, 1f);
+    [SerializeField] private bool hideWeapon;
 
     private Coroutine attackRoutine;
     private Transform owner;
@@ -42,7 +44,7 @@ public sealed class WeaponSpriteVisual2D : MonoBehaviour
     {
         if (!isAnimating)
         {
-            ApplyPose(aimDirection, 0f, 0f, 1f, 1f);
+            ApplyPose(aimDirection, 0f, 0f, 1f, hideWeapon ? 0f : 1f);
         }
     }
 
@@ -63,6 +65,11 @@ public sealed class WeaponSpriteVisual2D : MonoBehaviour
         {
             aimDirection = direction.normalized;
         }
+    }
+
+    public void SetVisible(bool visible)
+    {
+        hideWeapon = !visible;
     }
 
     public void PlayAttack(WeaponType weaponType, Vector2 direction, bool isSkill)
@@ -92,12 +99,12 @@ public sealed class WeaponSpriteVisual2D : MonoBehaviour
             float extension = Mathf.Lerp(0.05f, GetAttackExtension(isSkill), eased);
             float angleOffset = GetAttackAngleOffset(progress, isSkill);
             float scaleMultiplier = 1f + eased * GetAttackScaleBoost(isSkill);
-            ApplyPose(aimDirection, extension, angleOffset, scaleMultiplier, 1f);
+            ApplyPose(aimDirection, extension, angleOffset, scaleMultiplier, hideWeapon ? 0f : 1f);
             yield return null;
         }
 
         isAnimating = false;
-        ApplyPose(aimDirection, 0f, 0f, 1f, 1f);
+        ApplyPose(aimDirection, 0f, 0f, 1f, hideWeapon ? 0f : 1f);
         attackRoutine = null;
     }
 
@@ -117,10 +124,9 @@ public sealed class WeaponSpriteVisual2D : MonoBehaviour
         ResolveReferences();
         direction = direction.sqrMagnitude > 0.0001f ? direction.normalized : Vector2.right;
 
-        Vector3 basePosition = owner != null ? owner.position : transform.position;
         Vector2 side = Vector2.Perpendicular(direction);
         float idleBob = !isAnimating ? Mathf.Sin(Time.time * idleBobFrequency) * idleBobAmplitude : 0f;
-        transform.position = basePosition + (Vector3)(direction * (holdDistance + extension) + side * idleBob);
+        transform.localPosition = (Vector3)(direction * (holdDistance + extension) + side * idleBob) + new Vector3(0f, handHeight, 0f);
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         float idleAngle = !isAnimating ? Mathf.Sin(Time.time * idleBobFrequency * 0.72f) * idleSwayAngle : 0f;
