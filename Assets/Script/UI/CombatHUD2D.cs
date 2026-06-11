@@ -32,6 +32,9 @@ public sealed class CombatHUD2D : MonoBehaviour
     [SerializeField] private Color expBarBorderColor = new Color(0.4f, 0.4f, 0.4f, 1f);
     [SerializeField] private Color expBarColor = new Color(0.35f, 0.55f, 1f);
 
+    [Header("Tutorial Mode")]
+    public bool tutorialMode = false;
+
     private GUIStyle labelStyle;
     private GUIStyle centerStyle;
     private Texture2D whiteTexture;
@@ -55,7 +58,10 @@ public sealed class CombatHUD2D : MonoBehaviour
         EnsureStyle();
         EnsureCenterStyle();
 
-        DrawCenterTopInfo();
+        if (!tutorialMode)
+        {
+            DrawCenterTopInfo();
+        }
 
         DrawBottomBars();
     }
@@ -190,12 +196,11 @@ public sealed class CombatHUD2D : MonoBehaviour
         float labelHeight = 18f;
         float spacing = 4f;
 
-        float totalWidth = healthBarWidth + expBarGap + expBarWidth;
+        float totalWidth = tutorialMode ? healthBarWidth : healthBarWidth + expBarGap + expBarWidth;
         float startX = (Screen.width - totalWidth) * 0.5f;
         float barY = Screen.height - healthBarHeight - healthBarBottomOffset;
         float labelY = barY - spacing - labelHeight;
 
-        // Đã thêm (float) vào trước playerHealth.CurrentHealth
         DrawSingleBar(
             startX, barY, labelY, healthBarWidth, healthBarHeight, labelHeight,
             playerHealth != null ? Mathf.Clamp01((float)playerHealth.CurrentHealth / playerHealth.MaxHealth) : 0f,
@@ -206,9 +211,10 @@ public sealed class CombatHUD2D : MonoBehaviour
                 : ""
         );
 
+        if (tutorialMode) return;
+
         float expX = startX + healthBarWidth + expBarGap;
         
-        // Đã thêm (float) vào trước playerExperience.CurrentExperience
         DrawSingleBar(
             expX, barY, labelY, expBarWidth, expBarHeight, labelHeight,
             playerExperience != null ? Mathf.Clamp01((float)playerExperience.CurrentExperience / playerExperience.ExperienceToNextLevel) : 0f,

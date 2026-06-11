@@ -110,7 +110,7 @@ public sealed class DialogueUI : MonoBehaviour
 
         if (!textFullyRevealed)
         {
-            typewriterTimer += Time.deltaTime * typewriterSpeed;
+            typewriterTimer += Time.unscaledDeltaTime * typewriterSpeed;
             if (line.text != null && typewriterIndex < line.text.Length)
             {
                 typewriterIndex = Mathf.Min(typewriterIndex + Mathf.FloorToInt(typewriterTimer), line.text.Length);

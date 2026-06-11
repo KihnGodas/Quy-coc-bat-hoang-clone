@@ -32,7 +32,7 @@ public sealed class DialogueManager : MonoBehaviour
     private void Update()
     {
         if (!IsPlaying || !waitingAutoAdvance) return;
-        autoAdvanceTimer -= Time.deltaTime;
+        autoAdvanceTimer -= Time.unscaledDeltaTime;
         if (autoAdvanceTimer <= 0f)
             AdvanceLine();
     }
@@ -45,10 +45,16 @@ public sealed class DialogueManager : MonoBehaviour
             return;
         }
 
+        bool wasPlaying = IsPlaying;
+
         CurrentDialogue = dialogue;
         CurrentLineIndex = 0;
         IsPlaying = true;
         waitingAutoAdvance = false;
+
+        if (!wasPlaying)
+            Time.timeScale = 0f;
+
         OnDialogueStart?.Invoke();
         FireLineEvents(CurrentLine.onStartEvent);
         OnDialogueLineChanged?.Invoke();
@@ -89,6 +95,9 @@ public sealed class DialogueManager : MonoBehaviour
         CurrentLineIndex = 0;
         waitingAutoAdvance = false;
         OnDialogueEnd?.Invoke();
+
+        if (!IsPlaying)
+            Time.timeScale = 1f;
     }
 
     public void SetAutoAdvance(float delay)

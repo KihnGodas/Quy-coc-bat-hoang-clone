@@ -10,6 +10,9 @@ public sealed class TutorialBootstrap : MonoBehaviour
     [SerializeField] private bool ensurePlayerSpellController = true;
     [SerializeField] private bool ensurePlayerUltimateController = true;
     [SerializeField] private bool ensureDialogueSystem = true;
+    [SerializeField] private bool ensureBossController = true;
+    [SerializeField] private bool ensureCombatHUD2D = true;
+    [SerializeField] private bool ensureBossHealthUI = true;
     [SerializeField] private bool logBootstrap = true;
 
     private void Awake()
@@ -17,6 +20,41 @@ public sealed class TutorialBootstrap : MonoBehaviour
         ResolveReferences();
         EnsureRuntimePlayerComponents();
         EnsureDialogueInfrastructure();
+        EnsureBossController();
+        EnsureTutorialHUD();
+    }
+
+    private void EnsureBossController()
+    {
+        if (!ensureBossController) return;
+        if (FindComponentInScene<BossController>() == null)
+        {
+            gameObject.AddComponent<BossController>();
+            if (logBootstrap)
+                Debug.Log("TutorialBootstrap: created BossController runtime.");
+        }
+    }
+
+    private void EnsureTutorialHUD()
+    {
+        if (ensureCombatHUD2D && FindComponentInScene<CombatHUD2D>() == null)
+        {
+            CombatHUD2D hud = gameObject.AddComponent<CombatHUD2D>();
+            hud.tutorialMode = true;
+            hud.enabled = false;
+            if (logBootstrap)
+                Debug.Log("TutorialBootstrap: created CombatHUD2D (tutorialMode, disabled).");
+        }
+
+        if (ensureBossHealthUI && FindComponentInScene<BossHealthUI>() == null)
+        {
+            BossHealthUI bossUI = gameObject.AddComponent<BossHealthUI>();
+            bossUI.allowAnyMode = true;
+            bossUI.centerOnScreen = true;
+            bossUI.enabled = false;
+            if (logBootstrap)
+                Debug.Log("TutorialBootstrap: created BossHealthUI (allowAnyMode, centered, disabled).");
+        }
     }
 
     private void Start()

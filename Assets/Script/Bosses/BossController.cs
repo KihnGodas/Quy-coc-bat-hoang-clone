@@ -135,6 +135,28 @@ public sealed class BossController : MonoBehaviour
         }
     }
 
+    public BossBase SpawnPrototypeBossOfType(PrototypeBossType type, Vector2 position)
+    {
+        ResolveReferences();
+        prototypeBossType = type;
+        spawnPosition = position;
+        useBossTypeDefaultStats = true;
+        spawnPrototypeBoss = true;
+
+        if (HasActiveBoss) return activeBoss;
+
+        PrototypeStats stats = GetPrototypeStats();
+        activeBoss = CreatePrototypeBoss(stats);
+        activeBoss.Initialize(stats.Name, stats.HP, stats.Damage, player);
+
+        if (combatManager != null)
+        {
+            combatManager.SetBossHealth(activeBoss.Health);
+        }
+
+        return activeBoss;
+    }
+
     private void HandleBossDeathForPostDialogue()
     {
         if (activeBoss != null && activeBoss.Health != null)

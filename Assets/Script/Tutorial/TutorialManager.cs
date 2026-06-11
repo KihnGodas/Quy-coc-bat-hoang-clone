@@ -25,6 +25,10 @@ public sealed class TutorialManager : MonoBehaviour
     [SerializeField] private PlayerCultivationState cultivationState;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private EnemySpawner enemySpawner;
+    [SerializeField] private BossController bossController;
+    [SerializeField] private CombatHUD2D combatHUD;
+    [SerializeField] private BossHealthUI bossHealthUI;
+    [SerializeField] private float bossSpawnDistance = 8f;
 
     [Header("Prologue")]
     [SerializeField] private PrologueController prologueController;
@@ -134,7 +138,7 @@ public sealed class TutorialManager : MonoBehaviour
 
     private bool ReferencesResolved()
     {
-        return playerMovement != null && playerTransform != null;
+        return playerMovement != null && playerTransform != null && bossController != null;
     }
 
     private void ResolveReferences()
@@ -157,6 +161,17 @@ public sealed class TutorialManager : MonoBehaviour
             playerTransform = playerMovement.transform;
         if (enemySpawner == null)
             enemySpawner = FindComponentInScene<EnemySpawner>();
+        if (bossController == null)
+            bossController = FindComponentInScene<BossController>();
+        if (bossController == null)
+        {
+            GameObject bossCtrlGO = new GameObject("BossController");
+            bossController = bossCtrlGO.AddComponent<BossController>();
+        }
+        if (combatHUD == null)
+            combatHUD = FindComponentInScene<CombatHUD2D>();
+        if (bossHealthUI == null)
+            bossHealthUI = FindComponentInScene<BossHealthUI>();
     }
 
     private void EnsurePlayerReadyForTutorial()
@@ -306,6 +321,36 @@ public sealed class TutorialManager : MonoBehaviour
         if (enemySpawner != null)
         {
             enemySpawner.SetSpawningEnabled(true);
+        }
+        SpawnTutorialBoss();
+    }
+
+    private void SpawnTutorialBoss()
+    {
+        if (bossController == null) return;
+
+        DestroyTutorialTargets();
+        EnableBossHUD();
+
+        Vector3 playerPos = playerTransform != null ? playerTransform.position : Vector3.zero;
+        Vector2 spawnPos = new Vector2(playerPos.x + bossSpawnDistance, playerPos.y);
+        bossController.SpawnPrototypeBossOfType(BossController.PrototypeBossType.TutorialMessenger, spawnPos);
+    }
+
+    private void EnableBossHUD()
+    {
+        if (combatHUD != null)
+            combatHUD.enabled = true;
+        if (bossHealthUI != null)
+            bossHealthUI.enabled = true;
+    }
+
+    private void DestroyTutorialTargets()
+    {
+        TutorialTarget target = FindComponentInScene<TutorialTarget>();
+        if (target != null)
+        {
+            Destroy(target.gameObject);
         }
     }
 

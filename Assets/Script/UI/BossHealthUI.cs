@@ -12,6 +12,8 @@ public sealed class BossHealthUI : MonoBehaviour
     [SerializeField] private Color fillColor = new Color(0.2f, 0.9f, 0.35f, 0.95f);
     [SerializeField] private Color lowFillColor = new Color(1f, 0.25f, 0.15f, 0.95f);
     [SerializeField] private Color textColor = Color.white;
+    public bool allowAnyMode = false;
+    public bool centerOnScreen = true;
 
     private GUIStyle labelStyle;
     private Texture2D whiteTexture;
@@ -27,7 +29,7 @@ public sealed class BossHealthUI : MonoBehaviour
             return;
 
         ResolveReferences();
-        if (combatManager == null || combatManager.Mode != CombatManager.CombatMode.BossCombat)
+        if (!allowAnyMode && (combatManager == null || combatManager.Mode != CombatManager.CombatMode.BossCombat))
         {
             return;
         }
@@ -40,8 +42,9 @@ public sealed class BossHealthUI : MonoBehaviour
 
         EnsureResources();
         float hp01 = boss.MaxHP > 0f ? Mathf.Clamp01(boss.CurrentHP / boss.MaxHP) : 0f;
-        Rect frameRect = new Rect(screenOffset.x, screenOffset.y, width, height);
-        Rect fillRect = new Rect(screenOffset.x + 2f, screenOffset.y + 2f, (width - 4f) * hp01, height - 4f);
+        float posX = centerOnScreen ? (Screen.width - width) * 0.5f : screenOffset.x;
+        Rect frameRect = new Rect(posX, screenOffset.y, width, height);
+        Rect fillRect = new Rect(posX + 2f, screenOffset.y + 2f, (width - 4f) * hp01, height - 4f);
 
         DrawRect(frameRect, frameColor);
         DrawRect(fillRect, Color.Lerp(lowFillColor, fillColor, hp01));
@@ -49,10 +52,11 @@ public sealed class BossHealthUI : MonoBehaviour
         labelStyle.normal.textColor = textColor;
         GUI.Label(frameRect, $"{boss.BossName}: {Mathf.CeilToInt(boss.CurrentHP)} / {Mathf.CeilToInt(boss.MaxHP)}", labelStyle);
 
+        float posXState = centerOnScreen ? (Screen.width - width) * 0.5f : screenOffset.x;
         Act1WoodBossController woodBoss = boss.GetComponent<Act1WoodBossController>();
         if (woodBoss != null)
         {
-            Rect stateRect = new Rect(screenOffset.x, screenOffset.y + height + 4f, width, height);
+            Rect stateRect = new Rect(posXState, screenOffset.y + height + 4f, width, height);
             labelStyle.normal.textColor = woodBoss.IsShieldActive
                 ? new Color(0.55f, 1f, 0.65f, 1f)
                 : new Color(1f, 0.85f, 0.25f, 1f);
@@ -64,7 +68,7 @@ public sealed class BossHealthUI : MonoBehaviour
         Act2FireBossController fireBoss = boss.GetComponent<Act2FireBossController>();
         if (fireBoss != null)
         {
-            Rect stateRect = new Rect(screenOffset.x, screenOffset.y + height + 4f, width, height);
+            Rect stateRect = new Rect(posXState, screenOffset.y + height + 4f, width, height);
             labelStyle.normal.textColor = fireBoss.IsEnraged
                 ? new Color(1f, 0.25f, 0.08f, 1f)
                 : new Color(1f, 0.72f, 0.22f, 1f);
@@ -76,7 +80,7 @@ public sealed class BossHealthUI : MonoBehaviour
         TutorialBossController tutorialBoss = boss.GetComponent<TutorialBossController>();
         if (tutorialBoss != null)
         {
-            Rect stateRect = new Rect(screenOffset.x, screenOffset.y + height + 4f, width, height);
+            Rect stateRect = new Rect(posXState, screenOffset.y + height + 4f, width, height);
             labelStyle.normal.textColor = tutorialBoss.IsEnding
                 ? new Color(1f, 0.85f, 0.35f, 1f)
                 : new Color(0.68f, 0.9f, 1f, 1f);
